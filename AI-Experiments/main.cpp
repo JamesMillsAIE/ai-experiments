@@ -6,7 +6,7 @@ int main()
 {
     AiGame* game = new AiGame;
 
-    game->Run("AI Playground", 1080, 720, false);
+    game->Run("AI Playground", 1088, 768, false);
 
     delete game;
 

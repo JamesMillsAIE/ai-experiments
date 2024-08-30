@@ -34,6 +34,18 @@
     <Filter Include="Project\Source Files\Agents">
       <UniqueIdentifier>{2329fe93-1b4e-46be-92b6-f9e5e8b14065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Source Files\AI">
+      <UniqueIdentifier>{24639bfe-e17f-41a5-8454-b869ba1a3795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\AI">
+      <UniqueIdentifier>{174f6d3d-95eb-4cf3-b013-75a35d0d827c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\AI\Locomotion">
+      <UniqueIdentifier>{1c8c7e28-5147-4497-8bb2-0347cc742890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\AI\Locomotion">
+      <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -69,6 +81,9 @@
     <ClCompile Include="source\Core\Random.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\AI\Locomotion\AStar.cpp">
+      <Filter>Project\Source Files\AI\Locomotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -102,6 +117,12 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Global.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Locomotion\AStar.h">
+      <Filter>Project\Header Files\AI\Locomotion</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\PriorityHeap.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

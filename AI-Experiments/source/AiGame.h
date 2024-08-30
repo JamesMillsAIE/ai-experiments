@@ -2,7 +2,12 @@
 
 #include <Core/Game.h>
 
-class Font;
+namespace Pathfinding
+{
+	class Graph;
+}
+
+using Pathfinding::Graph;
 
 class AiGame final : public Game
 {
@@ -17,6 +22,6 @@ public:
 	void Render() override;
 
 private:
-	Font* m_font;
+	Graph* m_graph;
 
 };

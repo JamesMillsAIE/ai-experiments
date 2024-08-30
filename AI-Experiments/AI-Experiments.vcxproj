@@ -176,22 +176,29 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Agents\Agent.cpp" />
+    <ClCompile Include="source\Agents\AgentManager.cpp" />
     <ClCompile Include="source\AiGame.cpp" />
     <ClCompile Include="source\Core\Font.cpp" />
     <ClCompile Include="source\Core\Game.cpp" />
     <ClCompile Include="source\Core\Input.cpp" />
+    <ClCompile Include="source\Core\Random.cpp" />
     <ClCompile Include="source\Core\Renderer2D.cpp" />
     <ClCompile Include="source\Core\Texture.cpp" />
     <ClCompile Include="source\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Agents\Agent.h" />
+    <ClInclude Include="source\Agents\AgentManager.h" />
     <ClInclude Include="source\AiGame.h" />
     <ClInclude Include="source\Core\Font.h" />
     <ClInclude Include="source\Core\Game.h" />
     <ClInclude Include="source\Core\Input.h" />
+    <ClInclude Include="source\Core\Random.h" />
     <ClInclude Include="source\Core\Renderer2D.h" />
     <ClInclude Include="source\Core\Texture.h" />
     <ClInclude Include="source\Core\Window.h" />
+    <ClInclude Include="source\Global.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\font\consolas.ttf" />

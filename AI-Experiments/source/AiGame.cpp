@@ -3,7 +3,9 @@
 #include <string>
 
 #include <Core/Font.h>
-#include <Core/Renderer2D.h>
+
+#include "Agents/Agent.h"
+#include "Agents/AgentManager.h"
 
 using std::string;
 
@@ -20,6 +22,11 @@ AiGame::~AiGame()
 bool AiGame::Startup()
 {
 	m_font = new Font("resources/font/consolas.ttf", 20);
+
+	for (size_t i = 0; i < 50; i++)
+	{
+		m_agentManager->Spawn(new Agent);
+	}
 
 	return true;
 }

@@ -28,6 +28,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Project\Header Files\Agents">
+      <UniqueIdentifier>{d59909a0-a2ed-4e01-adb2-f26471c6f400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\Agents">
+      <UniqueIdentifier>{2329fe93-1b4e-46be-92b6-f9e5e8b14065}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -54,6 +60,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="source\Agents\AgentManager.cpp">
+      <Filter>Project\Source Files\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Agents\Agent.cpp">
+      <Filter>Project\Source Files\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Core\Random.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -75,6 +90,18 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Core\Texture.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Agents\AgentManager.h">
+      <Filter>Project\Header Files\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Agents\Agent.h">
+      <Filter>Project\Header Files\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\Random.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Global.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

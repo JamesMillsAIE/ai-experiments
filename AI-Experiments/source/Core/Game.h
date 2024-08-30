@@ -1,6 +1,8 @@
 #pragma once
 
 class Window;
+class AgentManager;
+class Random;
 
 class Game
 {
@@ -33,6 +35,8 @@ public:
 
 protected:
 	Window* m_window;
+	AgentManager* m_agentManager;
+	Random* m_random;
 
 	unsigned int m_fps;
 

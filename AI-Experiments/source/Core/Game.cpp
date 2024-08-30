@@ -7,14 +7,23 @@
 #include <glm/glm.hpp>
 
 #include "Input.h"
+#include "Random.h"
 #include "Window.h"
 
+#include "Agents/AgentManager.h"
+
 Game::Game()
-	: m_window{ nullptr }, m_fps{ 0 }
+	: m_window{ nullptr }, m_random{ new Random }, m_fps{ 0 }
 {
+	m_agentManager = new AgentManager(m_random);
 }
 
-Game::~Game() = default;
+Game::~Game()
+{
+	delete m_agentManager;
+	delete m_window;
+	delete m_random;
+}
 
 void Game::Run(const char* title, const int width, const int height, const bool fullscreen)
 {
@@ -23,6 +32,8 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 	// start game loop if successfully initialised
 	if (m_window->Open() && Startup())
 	{
+		m_random->Seed("");
+
 		Input::Create();
 
 		// variables for timing
@@ -64,9 +75,11 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 			}
 
 			Tick(static_cast<float>(deltaTime));
+			m_agentManager->Tick(static_cast<float>(deltaTime));
 
 			m_window->NewFrame();
 
+			m_agentManager->Render();
 			Render();
 
 			m_window->EndFrame();

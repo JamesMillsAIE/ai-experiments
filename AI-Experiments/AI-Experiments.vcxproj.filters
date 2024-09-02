@@ -46,6 +46,9 @@
     <Filter Include="Project\Header Files\AI\Locomotion">
       <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Resource Files\Tiled">
+      <UniqueIdentifier>{c5425d3e-067e-43f1-a967-13fc728d9d78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -130,5 +133,15 @@
     <Font Include="resources\font\consolas.ttf">
       <Filter>Project\Resource Files\Font</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\tiled\roguelikeSheet_transparent.png">
+      <Filter>Project\Resource Files\Tiled</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\tiled\world_map.tmx">
+      <Filter>Project\Resource Files\Tiled</Filter>
+    </None>
   </ItemGroup>
 </Project>

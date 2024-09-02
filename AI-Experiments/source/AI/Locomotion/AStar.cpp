@@ -82,11 +82,8 @@ namespace Pathfinding
 		{
 			for (uint x = 0; x < m_width; ++x)
 			{
-				if (rand() % 4 > 1)
-				{
-					m_graph[y][x] = new Node;
-					m_graph[y][x]->position = { x, y };
-				}
+				m_graph[y][x] = new Node;
+				m_graph[y][x]->position = { x, y };
 			}
 		}
 	}

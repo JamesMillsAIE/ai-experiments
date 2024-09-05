@@ -40,12 +40,6 @@
     <Filter Include="Project\Header Files\AI">
       <UniqueIdentifier>{174f6d3d-95eb-4cf3-b013-75a35d0d827c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Source Files\AI\Locomotion">
-      <UniqueIdentifier>{1c8c7e28-5147-4497-8bb2-0347cc742890}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\Header Files\AI\Locomotion">
-      <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Resource Files\Textures">
       <UniqueIdentifier>{376eba35-92f2-42fd-bb8c-50a4ae2f0645}</UniqueIdentifier>
     </Filter>
@@ -76,6 +70,12 @@
     <Filter Include="Core\Header Files\Rendering">
       <UniqueIdentifier>{115c1f40-a3d8-465b-a155-568855f1e01f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Source Files\AI\Pathfinding">
+      <UniqueIdentifier>{1c8c7e28-5147-4497-8bb2-0347cc742890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\AI\Pathfinding">
+      <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -98,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="source\Agents\Agent.cpp">
       <Filter>Project\Source Files\Agents</Filter>
-    </ClCompile>
-    <ClCompile Include="source\AI\Locomotion\AStar.cpp">
-      <Filter>Project\Source Files\AI\Locomotion</Filter>
     </ClCompile>
     <ClCompile Include="source\Core\GameTime.cpp">
       <Filter>Core\Source Files</Filter>
@@ -144,6 +141,9 @@
     <ClCompile Include="source\Core\Structures\Random.cpp">
       <Filter>Core\Source Files\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\AStar.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -166,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="source\Global.h">
       <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\AI\Locomotion\AStar.h">
-      <Filter>Project\Header Files\AI\Locomotion</Filter>
     </ClInclude>
     <ClInclude Include="source\Core\GameTime.h">
       <Filter>Core\Header Files</Filter>
@@ -220,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="source\Core\Structures\Random.h">
       <Filter>Core\Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\AStar.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 #include "Agents/Agent.h"
 #include "Agents/AgentManager.h"
 
-#include "AI/Locomotion/AStar.h"
+#include "AI/Pathfinding/AStar.h"
 
 using Debugging::Debugger;
 using Pathfinding::AStar;

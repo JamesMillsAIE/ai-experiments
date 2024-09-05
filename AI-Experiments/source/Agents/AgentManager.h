@@ -2,7 +2,7 @@
 
 #include <list>
 
-#include "Core/IDebugHandler.h"
+#include <Core/Debugging/IDebugHandler.h>
 
 using std::list;
 using std::pair;

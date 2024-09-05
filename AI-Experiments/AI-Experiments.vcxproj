@@ -187,15 +187,15 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Agents\AgentManager.cpp" />
     <ClCompile Include="source\AiGame.cpp" />
     <ClCompile Include="source\AI\Locomotion\AStar.cpp" />
-    <ClCompile Include="source\Core\Debugger.cpp" />
-    <ClCompile Include="source\Core\Font.cpp" />
+    <ClCompile Include="source\Core\Debugging\Debugger.cpp" />
+    <ClCompile Include="source\Core\Debugging\IDebugHandler.cpp" />
     <ClCompile Include="source\Core\Game.cpp" />
     <ClCompile Include="source\Core\GameTime.cpp" />
-    <ClCompile Include="source\Core\IDebugHandler.cpp" />
     <ClCompile Include="source\Core\Input.cpp" />
-    <ClCompile Include="source\Core\Random.cpp" />
-    <ClCompile Include="source\Core\Renderer2D.cpp" />
-    <ClCompile Include="source\Core\Texture.cpp" />
+    <ClCompile Include="source\Core\Rendering\Font.cpp" />
+    <ClCompile Include="source\Core\Rendering\Renderer2D.cpp" />
+    <ClCompile Include="source\Core\Rendering\Texture.cpp" />
+    <ClCompile Include="source\Core\Structures\Random.cpp" />
     <ClCompile Include="source\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,17 +211,17 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Agents\AgentManager.h" />
     <ClInclude Include="source\AiGame.h" />
     <ClInclude Include="source\AI\Locomotion\AStar.h" />
-    <ClInclude Include="source\Core\Debugger.h" />
-    <ClInclude Include="source\Core\Font.h" />
+    <ClInclude Include="source\Core\Debugging\Debugger.h" />
+    <ClInclude Include="source\Core\Debugging\IDebugHandler.h" />
     <ClInclude Include="source\Core\Game.h" />
     <ClInclude Include="source\Core\GameTime.h" />
-    <ClInclude Include="source\Core\IDebugHandler.h" />
     <ClInclude Include="source\Core\Input.h" />
-    <ClInclude Include="source\Core\MultiValueStruct.h" />
-    <ClInclude Include="source\Core\PriorityHeap.h" />
-    <ClInclude Include="source\Core\Random.h" />
-    <ClInclude Include="source\Core\Renderer2D.h" />
-    <ClInclude Include="source\Core\Texture.h" />
+    <ClInclude Include="source\Core\Rendering\Font.h" />
+    <ClInclude Include="source\Core\Rendering\Renderer2D.h" />
+    <ClInclude Include="source\Core\Rendering\Texture.h" />
+    <ClInclude Include="source\Core\Structures\MultiValueStruct.h" />
+    <ClInclude Include="source\Core\Structures\PriorityHeap.h" />
+    <ClInclude Include="source\Core\Structures\Random.h" />
     <ClInclude Include="source\Core\Window.h" />
     <ClInclude Include="source\Global.h" />
   </ItemGroup>

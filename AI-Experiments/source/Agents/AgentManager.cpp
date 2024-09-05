@@ -1,13 +1,13 @@
 #include "AgentManager.h"
 
+#include <Core/Input.h>
+#include <Core/Rendering/Renderer2D.h>
+#include <Core/Structures/Random.h>
+
 #include <glm/geometric.hpp>
 #include <glm/gtc/round.hpp>
 
 #include "Agent.h"
-
-#include "Core/Input.h"
-#include "Core/Random.h"
-#include "Core/Renderer2D.h"
 
 void AgentManager::Spawn(Agent* agent)
 {

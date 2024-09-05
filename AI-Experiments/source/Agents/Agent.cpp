@@ -1,10 +1,10 @@
 #include "Agent.h"
 
+#include <Core/Rendering/Renderer2D.h>
+
 #include <glm/detail/func_geometric.inl>
 
 #include "AgentManager.h"
-
-#include "Core/Renderer2D.h"
 
 Agent::Agent()
 	: m_position{ 0 }, m_scale{ 12.f, 0.f }, m_rotation{ 0 }, m_random{ nullptr }, m_owner{ nullptr }

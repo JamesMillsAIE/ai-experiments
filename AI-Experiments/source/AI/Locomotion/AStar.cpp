@@ -2,14 +2,13 @@
 
 #include <iostream>
 
-#include <Core/PriorityHeap.h>
+#include <Core/Rendering/Renderer2D.h>
+#include <Core/Rendering/Texture.h>
+#include <Core/Structures/PriorityHeap.h>
 
 #include <glm/detail/func_geometric.inl>
 
-#include "imgui_internal.h"
-
-#include "Core/Renderer2D.h"
-#include "Core/Texture.h"
+#include <imgui.h>
 
 namespace Pathfinding
 {

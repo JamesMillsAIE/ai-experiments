@@ -3,12 +3,12 @@
 #include <functional>
 #include <list>
 
+#include <Core/Debugging/IDebugHandler.h>
+
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 
 #include "Global.h"
-
-#include "Core/IDebugHandler.h"
 
 using std::function;
 using std::list;

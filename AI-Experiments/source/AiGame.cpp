@@ -1,13 +1,13 @@
 #include "AiGame.h"
 
+#include <Core/Input.h>
+#include <Core/Rendering/Renderer2D.h>
+#include <Core/Rendering/Texture.h>
+
 #include "Agents/Agent.h"
 #include "Agents/AgentManager.h"
 
 #include "AI/Locomotion/AStar.h"
-
-#include "Core/Input.h"
-#include "Core/Renderer2D.h"
-#include "Core/Texture.h"
 
 using Debugging::Debugger;
 using Pathfinding::AStar;

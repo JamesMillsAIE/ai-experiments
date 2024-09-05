@@ -220,6 +220,15 @@ void Input::GetMouseXY(int* x, int* y) const
 	}
 }
 
+vec2i Input::GetMousePos()
+{
+	return
+	{
+		m_mouseX,
+		m_mouseY
+	};
+}
+
 int Input::GetMouseDeltaX() const
 {
 	return m_mouseX - m_oldMouseX;

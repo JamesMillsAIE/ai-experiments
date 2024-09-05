@@ -174,7 +174,7 @@ void Renderer2D::Begin()
 
 	glUseProgram(m_shader);
 
-	auto projection = glm::ortho(m_cameraX, m_cameraX + static_cast<float>(width), 
+	auto projection = glm::ortho(m_cameraX, m_cameraX + static_cast<float>(width),
 		m_cameraY, m_cameraY + static_cast<float>(height), 1.0f, -101.0f);
 	glUniformMatrix4fv(glGetUniformLocation(m_shader, "projectionMatrix"), 1, false, &projection[0][0]);
 
@@ -198,13 +198,12 @@ void Renderer2D::End()
 	m_renderBegun = false;
 }
 
-void Renderer2D::DrawBox(const float xPos, const float yPos, const float width,
-	const float height, const float rotation, const float depth)
+void Renderer2D::DrawBox(vec2 pos, vec2 size, const float rotation, const float depth)
 {
-	DrawSprite(nullptr, xPos, yPos, width, height, rotation, depth);
+	DrawSprite(nullptr, pos, size, rotation, depth);
 }
 
-void Renderer2D::DrawCircle(const float xPos, const float yPos, const float radius, const float depth)
+void Renderer2D::DrawCircle(vec2 pos, const float radius, const float depth)
 {
 	if (ShouldFlush(33, 96))
 	{
@@ -216,8 +215,8 @@ void Renderer2D::DrawCircle(const float xPos, const float yPos, const float radi
 	const short startIndex = m_currentVertex;
 
 	// centre vertex
-	m_vertices[m_currentVertex].pos[0] = xPos;
-	m_vertices[m_currentVertex].pos[1] = yPos;
+	m_vertices[m_currentVertex].pos[0] = pos.x;
+	m_vertices[m_currentVertex].pos[1] = pos.y;
 	m_vertices[m_currentVertex].pos[2] = depth;
 	m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
 	m_vertices[m_currentVertex].color[0] = m_r;
@@ -241,8 +240,8 @@ void Renderer2D::DrawCircle(const float xPos, const float yPos, const float radi
 
 		const float iF = static_cast<float>(i);
 
-		m_vertices[m_currentVertex].pos[0] = glm::sin(rotDelta * iF) * radius + xPos;
-		m_vertices[m_currentVertex].pos[1] = glm::cos(rotDelta * iF) * radius + yPos;
+		m_vertices[m_currentVertex].pos[0] = glm::sin(rotDelta * iF) * radius + pos.x;
+		m_vertices[m_currentVertex].pos[1] = glm::cos(rotDelta * iF) * radius + pos.y;
 		m_vertices[m_currentVertex].pos[2] = depth;
 		m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
 		m_vertices[m_currentVertex].color[0] = m_r;
@@ -268,7 +267,7 @@ void Renderer2D::DrawCircle(const float xPos, const float yPos, const float radi
 	}
 }
 
-void Renderer2D::DrawCircleLines(float xPos, float yPos, float radius, float thickness, float depth)
+void Renderer2D::DrawCircleLines(vec2 pos, float radius, float thickness, float depth)
 {
 	const unsigned int textureID = PushTexture(m_nullTexture);
 
@@ -287,18 +286,22 @@ void Renderer2D::DrawCircleLines(float xPos, float yPos, float radius, float thi
 		const float iFNext = static_cast<float>(i + 1);
 
 		DrawLine(
-			glm::sin(rotDelta * iF) * radius + xPos, 
-			glm::cos(rotDelta * iF) * radius + yPos,
-			glm::sin(rotDelta * iFNext) * radius + xPos,
-			glm::cos(rotDelta * iFNext) * radius + yPos,
-			thickness, 
+			{
+				glm::sin(rotDelta * iF) * radius + pos.x,
+				glm::cos(rotDelta * iF) * radius + pos.y
+			},
+			{
+				glm::sin(rotDelta * iFNext) * radius + pos.x,
+				glm::cos(rotDelta * iFNext) * radius + pos.y
+			},
+			thickness,
 			depth
 		);
 	}
 }
 
-void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos, float width, float height,
-                            const float rotation, const float depth, const float xOrigin, const float yOrigin)
+void Renderer2D::DrawSprite(Texture* texture, vec2 pos, vec2 size, const float rotation, const float depth,
+	const float xOrigin, const float yOrigin)
 {
 	if (texture == nullptr)
 	{
@@ -312,24 +315,24 @@ void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos
 
 	const unsigned int textureID = PushTexture(texture);
 
-	if (width == 0.0f)
+	if (size.x == 0.0f)
 	{
-		width = static_cast<float>(texture->GetWidth());
+		size.x = static_cast<float>(texture->GetWidth());
 	}
 
-	if (height == 0.0f)
+	if (size.y == 0.0f)
 	{
-		height = static_cast<float>(texture->GetHeight());
+		size.y = static_cast<float>(texture->GetHeight());
 	}
 
-	float tlX = (0.0f - xOrigin) * width;
-	float tlY = (0.0f - yOrigin) * height;
-	float trX = (1.0f - xOrigin) * width;
-	float trY = (0.0f - yOrigin) * height;
-	float brX = (1.0f - xOrigin) * width;
-	float brY = (1.0f - yOrigin) * height;
-	float blX = (0.0f - xOrigin) * width;
-	float blY = (1.0f - yOrigin) * height;
+	float tlX = (0.0f - xOrigin) * size.x;
+	float tlY = (0.0f - yOrigin) * size.y;
+	float trX = (1.0f - xOrigin) * size.x;
+	float trY = (0.0f - yOrigin) * size.y;
+	float brX = (1.0f - xOrigin) * size.x;
+	float brY = (1.0f - yOrigin) * size.y;
+	float blX = (0.0f - xOrigin) * size.x;
+	float blY = (1.0f - yOrigin) * size.y;
 
 	if (rotation != 0.0f)
 	{
@@ -344,20 +347,20 @@ void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos
 
 	const short index = m_currentVertex;
 
-	m_vertices[m_currentVertex].pos[0] = xPos + tlX;
-	m_vertices[m_currentVertex].pos[1] = yPos + tlY;
+	m_vertices[m_currentVertex].pos[0] = pos.x + tlX;
+	m_vertices[m_currentVertex].pos[1] = pos.y + tlY;
 	m_vertices[m_currentVertex].pos[2] = depth;
 	m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
-	m_vertices[m_currentVertex].color[0] =m_r;
-	m_vertices[m_currentVertex].color[1] =m_g;
-	m_vertices[m_currentVertex].color[2] =m_b;
-	m_vertices[m_currentVertex].color[3] =m_a;
+	m_vertices[m_currentVertex].color[0] = m_r;
+	m_vertices[m_currentVertex].color[1] = m_g;
+	m_vertices[m_currentVertex].color[2] = m_b;
+	m_vertices[m_currentVertex].color[3] = m_a;
 	m_vertices[m_currentVertex].texCoord[0] = m_uvX;
 	m_vertices[m_currentVertex].texCoord[1] = m_uvY + m_uvH;
 	m_currentVertex++;
 
-	m_vertices[m_currentVertex].pos[0] = xPos + trX;
-	m_vertices[m_currentVertex].pos[1] = yPos + trY;
+	m_vertices[m_currentVertex].pos[0] = pos.x + trX;
+	m_vertices[m_currentVertex].pos[1] = pos.y + trY;
 	m_vertices[m_currentVertex].pos[2] = depth;
 	m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
 	m_vertices[m_currentVertex].color[0] = m_r;
@@ -368,8 +371,8 @@ void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos
 	m_vertices[m_currentVertex].texCoord[1] = m_uvY + m_uvH;
 	m_currentVertex++;
 
-	m_vertices[m_currentVertex].pos[0] = xPos + brX;
-	m_vertices[m_currentVertex].pos[1] = yPos + brY;
+	m_vertices[m_currentVertex].pos[0] = pos.x + brX;
+	m_vertices[m_currentVertex].pos[1] = pos.y + brY;
 	m_vertices[m_currentVertex].pos[2] = depth;
 	m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
 	m_vertices[m_currentVertex].color[0] = m_r;
@@ -380,8 +383,8 @@ void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos
 	m_vertices[m_currentVertex].texCoord[1] = m_uvY;
 	m_currentVertex++;
 
-	m_vertices[m_currentVertex].pos[0] = xPos + blX;
-	m_vertices[m_currentVertex].pos[1] = yPos + blY;
+	m_vertices[m_currentVertex].pos[0] = pos.x + blX;
+	m_vertices[m_currentVertex].pos[1] = pos.y + blY;
 	m_vertices[m_currentVertex].pos[2] = depth;
 	m_vertices[m_currentVertex].pos[3] = static_cast<float>(textureID);
 	m_vertices[m_currentVertex].color[0] = m_r;
@@ -626,11 +629,10 @@ void Renderer2D::DrawSpriteTransformed4x4(Texture* texture, float* transformMat4
 	m_indices[m_currentIndex++] = (index + 2);
 }
 
-void Renderer2D::DrawLine(const float x1, const float y1, const float x2, const float y2,
-	const float thickness, const float depth)
+void Renderer2D::DrawLine(vec2 start, vec2 end, const float thickness, const float depth)
 {
-	const float xDiff = x2 - x1;
-	const float yDiff = y2 - y1;
+	const float xDiff = end.x - start.x;
+	const float yDiff = end.y - start.y;
 	const float len = glm::sqrt(xDiff * xDiff + yDiff * yDiff);
 	const float xDir = xDiff / len;
 	const float yDir = yDiff / len;
@@ -644,12 +646,12 @@ void Renderer2D::DrawLine(const float x1, const float y1, const float x2, const 
 
 	SetUVRect(0.0f, 0.0f, 1.0f, 1.0f);
 
-	DrawSprite(m_nullTexture, x1, y1, len, thickness, rot, depth, 0.0f, 0.5f);
+	DrawSprite(m_nullTexture, start, { len, thickness }, rot, depth, 0.0f, 0.5f);
 
 	SetUVRect(uvX, uvY, uvW, uvH);
 }
 
-void Renderer2D::DrawText(Font* font, const char* text, float xPos, float yPos, const float depth)
+void Renderer2D::DrawText(Font* font, const char* text, vec2 pos, const float depth)
 {
 	if (font == nullptr || font->m_glHandle == 0)
 	{
@@ -672,7 +674,7 @@ void Renderer2D::DrawText(Font* font, const char* text, float xPos, float yPos, 
 	int w = 0, h = 0;
 	glfwGetWindowSize(glfwGetCurrentContext(), &w, &h);
 
-	yPos = static_cast<float>(h) - yPos;
+	pos = static_cast<float>(h) - pos;
 
 	while (*text != 0)
 	{
@@ -687,7 +689,7 @@ void Renderer2D::DrawText(Font* font, const char* text, float xPos, float yPos, 
 		}
 
 		stbtt_GetBakedQuad(static_cast<stbtt_bakedchar*>(font->m_glyphData), font->m_textureWidth,
-			font->m_textureHeight, static_cast<unsigned char>(*text), &xPos, &yPos, &q, 1);
+			font->m_textureHeight, static_cast<unsigned char>(*text), &pos.x, &pos.y, &q, 1);
 
 		const short index = m_currentVertex;
 
@@ -833,6 +835,14 @@ void Renderer2D::SetRenderColour(float r, float g, float b, float a)
 	m_a = a;
 }
 
+void Renderer2D::SetRenderColour(vec3 rgb, float a)
+{
+	m_r = rgb.r;
+	m_g = rgb.g;
+	m_b = rgb.b;
+	m_a = a;
+}
+
 void Renderer2D::SetRenderColour(const unsigned int colour)
 {
 	m_r = ((colour & 0xFF000000) >> 24) / 255.0f;  // NOLINT(bugprone-narrowing-conversions)
@@ -863,7 +873,7 @@ void Renderer2D::GetCameraPos(float& x, float& y)
 
 void Renderer2D::Create()
 {
-	if(!m_instance)
+	if (!m_instance)
 	{
 		m_instance = new Renderer2D;
 	}
@@ -871,7 +881,7 @@ void Renderer2D::Create()
 
 void Renderer2D::Destroy()
 {
-	if(m_instance)
+	if (m_instance)
 	{
 		delete m_instance;
 		m_instance = nullptr;
@@ -879,7 +889,7 @@ void Renderer2D::Destroy()
 }
 
 void Renderer2D::RotateAround(const float inX, const float inY, float& outX, float& outY,
-                              const float sin, const float cos) const
+	const float sin, const float cos) const
 {
 	outX = inX * cos - inY * sin;
 	outY = inX * sin + inY * cos;

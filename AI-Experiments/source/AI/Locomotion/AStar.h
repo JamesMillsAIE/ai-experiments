@@ -17,6 +17,7 @@ using glm::vec2;
 using glm::vec3;
 
 using Debugging::IDebugHandler;
+using Debugging::Debugger;
 using Debugging::EVerbosity;
 
 class Renderer2D;
@@ -25,9 +26,15 @@ class Texture;
 namespace Pathfinding
 {
 	class Edge;
+	class Graph;
 
 	class Node
 	{
+	public:
+		static string walkableColorId;
+		static string notWalkableColorId;
+		static string connectionColorId;
+
 	public:
 		vec2 position;
 
@@ -66,11 +73,9 @@ namespace Pathfinding
 
 	};
 
-	class Graph : public IDebugHandler
+	class Graph final : public IDebugHandler
 	{
-	public:
-		Graph(uint width, uint height, float spacing);
-		~Graph() override;
+		friend class AStar;
 
 	public:
 		void Build() const;
@@ -88,8 +93,11 @@ namespace Pathfinding
 
 		void ForEach(function<void(Node* node, uint x, uint y)> predicate) const;
 
+		string DebugCategory() override;
+
 	protected:
-		void OnRenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
+		void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
+		void HandleImGui(EVerbosity verbosity) override;
 
 	private:
 		Node*** m_graph;
@@ -99,6 +107,10 @@ namespace Pathfinding
 
 		float m_spacing;
 
+	private:
+		Graph(uint width, uint height, float spacing);
+		~Graph() override;
+
 	};
 
 	typedef float(*Heuristic)(Node*, Node*, Graph*);
@@ -106,7 +118,12 @@ namespace Pathfinding
 	class AStar
 	{
 	public:
-		static bool FindPath(vec2 start, vec2 end, Graph* graph, Heuristic heuristic, list<Node*>& path);
+		static bool FindPath(vec2 start, vec2 end, Heuristic heuristic, list<Node*>& path);
+
+		static void InitialiseFrom(float spacing, const string& texture, bool isObstacleMap = false);
+
+	private:
+		static Graph* m_graph;
 
 	};
 }

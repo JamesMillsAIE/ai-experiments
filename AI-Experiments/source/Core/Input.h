@@ -4,11 +4,15 @@
 #include <map>
 #include <vector>
 
+#include <glm/vec2.hpp>
+
 using std::function;
 using std::map;
 using std::vector;
 
 struct GLFWwindow;
+
+typedef glm::vec<2, int> vec2i;
 
 constexpr int MOUSE_BUTTON_COUNT = 8;
 
@@ -184,6 +188,7 @@ public:
 	int GetMouseX() const;
 	int GetMouseY() const;
 	void GetMouseXY(int* x, int* y) const;
+	vec2i GetMousePos();
 
 	// query mouse movement
 	int GetMouseDeltaX() const;

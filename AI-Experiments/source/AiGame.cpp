@@ -1,52 +1,47 @@
 #include "AiGame.h"
 
-#include <imgui/imgui.h>
+#include "Agents/Agent.h"
+#include "Agents/AgentManager.h"
 
 #include "AI/Locomotion/AStar.h"
 
 #include "Core/Input.h"
 #include "Core/Renderer2D.h"
 #include "Core/Texture.h"
-#include "Core/Window.h"
 
 using Debugging::Debugger;
+using Pathfinding::AStar;
 
 constexpr float CELL_SIZE = 16.f;
 
 AiGame::AiGame()
-	: m_graph{ nullptr }, m_background{ nullptr }, m_worldScaleFactor{ 1.5f }
+	: m_agentManager{ nullptr }, m_background{ nullptr }, m_worldScaleFactor{ 1.5f }
 {
 }
 
-AiGame::~AiGame()
-{
-	delete m_graph;
-}
+AiGame::~AiGame() = default;
 
 bool AiGame::Startup()
 {
-	const Texture* obstacleMap = new Texture("resources/textures/obstacle_map.png");
-
-	const float spacing = CELL_SIZE * m_worldScaleFactor;
-
-	m_graph = new Graph(obstacleMap->GetWidth(), obstacleMap->GetHeight(), spacing);
-	m_graph->BuildFrom(obstacleMap, true);
+	AStar::InitialiseFrom(CELL_SIZE * m_worldScaleFactor, "resources/textures/obstacle_map.png", true);
 
 	m_background = new Texture("resources/textures/world_map.png");
 
-	delete obstacleMap;
+	m_agentManager = new AgentManager(m_random);
+	m_agentManager->Spawn(new Agent);
 
 	return true;
 }
 
 void AiGame::Shutdown()
 {
-	
+	delete m_agentManager;
+	m_agentManager = nullptr;
 }
 
 void AiGame::Tick()
 {
-	
+	m_agentManager->Tick();
 }
 
 void AiGame::Render()
@@ -63,7 +58,9 @@ void AiGame::Render()
 				static_cast<float>(m_background->GetHeight()) * m_worldScaleFactor,
 			};
 
-			renderer->DrawSprite(m_background, 0, 0, backgroundSize.x, backgroundSize.y, 0.f, 0.f, 0.f, 0.f);
+			renderer->DrawSprite(m_background, { 0, 0 }, backgroundSize, 0.f, 0.f, 0.f, 0.f);
 		}
 	}
+
+	m_agentManager->Render();
 }

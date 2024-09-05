@@ -49,6 +49,33 @@
     <Filter Include="Project\Resource Files\Textures">
       <UniqueIdentifier>{376eba35-92f2-42fd-bb8c-50a4ae2f0645}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{57b2eb21-cff7-4be2-9c4e-f91e4a2decda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui\Header Files">
+      <UniqueIdentifier>{e13ff132-4aa8-4438-b36d-bfa305c3cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui\Source Files">
+      <UniqueIdentifier>{42631023-1b4e-4026-bf2e-78a535f4e234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Header Files\Debugging">
+      <UniqueIdentifier>{b2c5f4d0-382d-4351-8add-7e70c930aabc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Source Files\Debugging">
+      <UniqueIdentifier>{1719f9a1-5bf5-4f56-b913-c0b3d885b042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Source Files\Rendering">
+      <UniqueIdentifier>{44c16777-c726-4884-996c-cd82eaf8899a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Source Files\Structures">
+      <UniqueIdentifier>{01710f13-2d94-4578-851a-2215a0446280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Header Files\Structures">
+      <UniqueIdentifier>{f118eb45-d9f5-49f5-a0c7-a5fd64088919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Header Files\Rendering">
+      <UniqueIdentifier>{115c1f40-a3d8-465b-a155-568855f1e01f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -95,6 +122,27 @@
     </ClCompile>
     <ClCompile Include="source\Core\GameTime.cpp">
       <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>ImGui\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>ImGui\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +192,33 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Core\GameTime.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_glfw.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>ImGui\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\MultiValueStruct.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

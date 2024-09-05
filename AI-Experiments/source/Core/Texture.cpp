@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 
 #define STB_IMAGE_IMPLEMENTATION
+#include <iostream>
+
 #include <stb/stb_image.h>
 
 Texture::Texture()

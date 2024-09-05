@@ -2,10 +2,7 @@
 
 #include <glm/vec2.hpp>
 
-#include "Global.h"
-
 class Window;
-class AgentManager;
 class Random;
 class Font;
 
@@ -36,7 +33,6 @@ public:
 
 protected:
 	Window* m_window;
-	AgentManager* m_agentManager;
 	Random* m_random;
 
 };

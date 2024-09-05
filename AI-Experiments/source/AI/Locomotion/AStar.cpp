@@ -1,17 +1,26 @@
 #include "AStar.h"
 
+#include <iostream>
+
 #include <Core/PriorityHeap.h>
 
 #include <glm/detail/func_geometric.inl>
+
+#include "imgui_internal.h"
 
 #include "Core/Renderer2D.h"
 #include "Core/Texture.h"
 
 namespace Pathfinding
 {
+	string Node::walkableColorId;
+	string Node::notWalkableColorId;
+	string Node::connectionColorId;
+
 	Node::Node()
 		: position{ 0, 0 }, gScore{ 0 }, hScore{ 0 }, isWalkable{ true }, previous{ nullptr }
 	{
+		
 	}
 
 	Node::~Node()
@@ -39,34 +48,35 @@ namespace Pathfinding
 
 	void Node::Render(Renderer2D* renderer) const
 	{
+		vec3 walkableColor = { .9f, .9f, .9f };
+		if (!Debugger::Get(walkableColorId, walkableColor))
+		{
+			std::cout << walkableColorId << " not found!\n";
+		}
+
+		vec3 notWalkableColor = { .9f, 0.f, 0.f };
+		if (!Debugger::Get(notWalkableColorId, notWalkableColor))
+		{
+			std::cout << notWalkableColorId << " not found!\n";
+		}
+
 		if (isWalkable)
 		{
-			renderer->SetRenderColour(.9f, .9f, .9f, 1.f);
+			renderer->SetRenderColour(walkableColor);
 		}
 		else
 		{
-			renderer->SetRenderColour(.9f, 0.f, 0.f, 1.f);
+			renderer->SetRenderColour(notWalkableColor);
 		}
 
-		renderer->DrawCircle(position.x, position.y, 6.f);
-
-		/*if (isWalkable)
-		{
-			renderer->SetRenderColour(.5f, .5f, .5f, 1.f);
-		}
-		else
-		{
-			renderer->SetRenderColour(.5f, 0.f, 0.f, 1.f);
-		}
-
-		renderer->DrawCircleLines(position.x, position.y, 6.f);*/
+		renderer->DrawCircle(position, 6.f);
 	}
 
 	void Node::RenderConnections(Renderer2D* renderer) const
 	{
 		for (const auto& connection : m_edges)
 		{
-			renderer->DrawLine(position.x, position.y, connection->endPoint->position.x, connection->endPoint->position.y);
+			renderer->DrawLine(position, connection->endPoint->position);
 		}
 	}
 
@@ -87,6 +97,14 @@ namespace Pathfinding
 				m_graph[y][x] = nullptr;
 			}
 		}
+
+		Node::walkableColorId = MakeId(Graph::DebugCategory(), { "node", "walkable", "color" });
+		Node::notWalkableColorId = MakeId(Graph::DebugCategory(), { "node", "not", "walkable", "color" });
+		Node::connectionColorId = MakeId(Graph::DebugCategory(), { "node", "connection", "color" });
+
+		Debugger::Set(Node::walkableColorId, vec3{ .9f, .9f, .9f });
+		Debugger::Set(Node::notWalkableColorId, vec3{ .9f, 0.f, 0.f });
+		Debugger::Set(Node::connectionColorId, vec3{ 0.f, 0.f, 0.f });
 	}
 
 	Graph::~Graph()
@@ -173,7 +191,7 @@ namespace Pathfinding
 			return nullptr;
 		}
 
-		return m_graph[static_cast<uint>(location.y)][static_cast<uint>(location.x)];
+		return m_graph[static_cast<uint>(location.y / m_spacing)][static_cast<uint>(location.x / m_spacing)];
 	}
 
 	uint Graph::Width() const
@@ -227,11 +245,22 @@ namespace Pathfinding
 		}
 	}
 
-	void Graph::OnRenderDebuggingTools(Renderer2D* renderer, const EVerbosity verbosity)
+	string Graph::DebugCategory()
 	{
-		if(verbosity == EVerbosity::Advanced)
+		return "AStar";
+	}
+
+	void Graph::RenderDebuggingTools(Renderer2D* renderer, const EVerbosity verbosity)
+	{
+		if (verbosity == EVerbosity::Advanced)
 		{
-			renderer->SetRenderColour(.1f, .1f, .1f);
+			vec3 connectionColor = { .9f, .9f, .9f };
+			if (!Debugger::Get(Node::connectionColorId, connectionColor))
+			{
+				std::cout << Node::connectionColorId << " not found!\n";
+			}
+
+			renderer->SetRenderColour(connectionColor);
 
 			ForEach([renderer](const Node* node, uint, uint)
 				{
@@ -245,6 +274,46 @@ namespace Pathfinding
 		}
 	}
 
+	void Graph::HandleImGui(EVerbosity verbosity)
+	{
+		// ReSharper disable CppTooWideScopeInitStatement
+		vec3 walkableColor;
+		if (Debugger::Get(Node::walkableColorId, walkableColor))
+		{
+			float colArray[] = { walkableColor.r, walkableColor.g, walkableColor.b };
+
+			if (ImGui::ColorEdit3("Walkable Color", colArray))
+			{
+				Debugger::Set(Node::walkableColorId, vec3(colArray[0], colArray[1], colArray[2]));
+			}
+		}
+
+		vec3 notWalkableColor;
+		if (Debugger::Get(Node::notWalkableColorId, notWalkableColor))
+		{
+			float colArray[] = { notWalkableColor.r, notWalkableColor.g, notWalkableColor.b };
+
+			if (ImGui::ColorEdit3("Not Walkable Color", colArray))
+			{
+				Debugger::Set(Node::notWalkableColorId, vec3(colArray[0], colArray[1], colArray[2]));
+			}
+		}
+
+		vec3 connectionColor;
+		if (Debugger::Get(Node::connectionColorId, connectionColor))
+		{
+			float colArray[] = { connectionColor.r, connectionColor.g, connectionColor.b };
+
+			if (ImGui::ColorEdit3("Connection Color", colArray))
+			{
+				Debugger::Set(Node::connectionColorId, vec3(colArray[0], colArray[1], colArray[2]));
+			}
+		}
+		// ReSharper restore CppTooWideScopeInitStatement
+	}
+
+	Graph* AStar::m_graph = nullptr;
+
 	struct NodeComparator
 	{
 	public:
@@ -255,16 +324,15 @@ namespace Pathfinding
 
 	};
 
-	bool AStar::FindPath(const vec2 start, const vec2 end, Graph* graph,
-		const Heuristic heuristic, list<Node*>& path)
+	bool AStar::FindPath(const vec2 start, const vec2 end,const Heuristic heuristic, list<Node*>& path)
 	{
-		if (!graph)
+		if (!m_graph)
 		{
 			return false;
 		}
 
-		Node* startNode = graph->FindNode(start);
-		Node* endNode = graph->FindNode(end);
+		Node* startNode = m_graph->FindNode(start);
+		Node* endNode = m_graph->FindNode(end);
 
 		if (!startNode || !endNode)
 		{
@@ -294,7 +362,7 @@ namespace Pathfinding
 				if (std::ranges::find(closedList, connection->endPoint) == closedList.end())
 				{
 					const float gScore = current->gScore + connection->cost;
-					const float hScore = heuristic(current, connection->endPoint, graph);
+					const float hScore = heuristic(current, connection->endPoint, m_graph);
 					const float fScore = gScore + hScore;
 
 					if (openList.find(connection->endPoint) == openList.end())
@@ -316,6 +384,8 @@ namespace Pathfinding
 
 		if (found)
 		{
+			path.clear();
+
 			Node* current = endNode;
 			while (current)
 			{
@@ -328,5 +398,18 @@ namespace Pathfinding
 		}
 
 		return found;
+	}
+
+	void AStar::InitialiseFrom(float spacing, const string& texture, bool isObstacleMap)
+	{
+		if (!m_graph)
+		{
+			Texture* nodeMap = new Texture(texture);
+
+			m_graph = new Graph(nodeMap->GetWidth(), nodeMap->GetHeight(), spacing);
+			m_graph->BuildFrom(nodeMap, isObstacleMap);
+
+			delete nodeMap;
+		}
 	}
 }

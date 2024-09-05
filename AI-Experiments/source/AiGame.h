@@ -11,6 +11,7 @@ using Pathfinding::Graph;
 
 class Texture;
 class Font;
+class AgentManager;
 
 class AiGame final : public Game
 {
@@ -25,7 +26,7 @@ public:
 	void Render() override;
 
 private:
-	Graph* m_graph;
+	AgentManager* m_agentManager;
 
 	Texture* m_background;
 

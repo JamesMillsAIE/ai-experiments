@@ -1,5 +1,13 @@
 #pragma once
 
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+
+using glm::vec2;
+using glm::vec3;
+using glm::vec4;
+
 class Texture;
 class Font;
 
@@ -20,26 +28,27 @@ public:
 	void End();
 
 	// simple shape rendering
-	void DrawBox(float xPos, float yPos, float width, float height, float rotation = 0.0f, float depth = 0.0f);
-	void DrawCircle(float xPos, float yPos, float radius, float depth = 0.0f);
-	void DrawCircleLines(float xPos, float yPos, float radius, float thickness = 1.0f, float depth = 0.0f);
+	void DrawBox(vec2 pos, vec2 size, float rotation = 0.0f, float depth = 0.0f);
+	void DrawCircle(vec2 pos, float radius, float depth = 0.0f);
+	void DrawCircleLines(vec2 pos, float radius, float thickness = 1.0f, float depth = 0.0f);
 
 	// if texture is nullptr then it renders a coloured sprite
 	// depth is in the range [0,100] with lower being closer to the viewer
-	void DrawSprite(Texture* texture, float xPos, float yPos, float width = 0.0f, float height = 0.0f, float rotation = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);
+	void DrawSprite(Texture* texture, vec2 pos, vec2 size, float rotation = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);
 	void DrawSpriteTransformed3x3(Texture* texture, float* transformMat3X3, float width = 0.0f, float height = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);
 	void DrawSpriteTransformed4x4(Texture* texture, float* transformMat4x4, float width = 0.0f, float height = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);
 
 	// draws a simple coloured line with a given thickness
 	// depth is in the range [0,100] with lower being closer to the viewer
-	void DrawLine(float x1, float y1, float x2, float y2, float thickness = 1.0f, float depth = 0.0f);
+	void DrawLine(vec2 start, vec2 end, float thickness = 1.0f, float depth = 0.0f);
 
 	// draws simple text on the screen horizontally
 	// depth is in the range [0,100] with lower being closer to the viewer
-	void DrawText(Font* font, const char* text, float xPos, float yPos, float depth = 0.0f);
+	void DrawText(Font* font, const char* text, vec2 pos, float depth = 0.0f);
 
 	// sets the tint colour for all subsequent draw calls
 	void SetRenderColour(float r, float g, float b, float a = 1.0f);
+	void SetRenderColour(vec3 rgb, float a = 1.0f);
 	void SetRenderColour(unsigned int colour);
 
 	// can be used to set the texture coordinates of sprites using textures

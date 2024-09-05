@@ -21,10 +21,4 @@ namespace Debugging
 		return false;
 #endif // _DEBUG
 	}
-
-	void IDebugHandler::RenderDebuggingTools(Renderer2D* renderer, const EVerbosity verbosity)
-	{
-		OnRenderDebuggingTools(renderer, verbosity);
-	}
-
 }

@@ -93,18 +93,17 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui_d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
-copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,7 +115,7 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Com
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,12 +123,11 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Com
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
-copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -139,18 +137,17 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui_d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
-copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,7 +159,7 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Com
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,15 +167,21 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Com
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
-copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Agents\Agent.cpp" />
     <ClCompile Include="source\Agents\AgentManager.cpp" />
@@ -196,6 +199,14 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command
     <ClCompile Include="source\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="source\Agents\Agent.h" />
     <ClInclude Include="source\Agents\AgentManager.h" />
     <ClInclude Include="source\AiGame.h" />
@@ -206,6 +217,7 @@ copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command
     <ClInclude Include="source\Core\GameTime.h" />
     <ClInclude Include="source\Core\IDebugHandler.h" />
     <ClInclude Include="source\Core\Input.h" />
+    <ClInclude Include="source\Core\MultiValueStruct.h" />
     <ClInclude Include="source\Core\PriorityHeap.h" />
     <ClInclude Include="source\Core\Random.h" />
     <ClInclude Include="source\Core\Renderer2D.h" />

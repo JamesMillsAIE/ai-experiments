@@ -42,7 +42,7 @@ void GameTime::Init()
 	m_prevTime = static_cast<float>(glfwGetTime());
 	m_fpsInterval = 0.f;
 
-	m_fpsFont = new Font("resources/font/consolas.ttf", 25.f);
+	m_fpsFont = new Font("resources/font/consolas.ttf", 25);
 }
 
 void GameTime::Tick()
@@ -65,7 +65,7 @@ void GameTime::Tick()
 void GameTime::RenderFPS(Renderer2D* renderer)
 {
 	renderer->SetRenderColour(0.f, 0.f, 0.f);
-	renderer->DrawText(m_fpsFont, std::to_string(m_fps).c_str(), 10, 10);
+	renderer->DrawText(m_fpsFont, std::to_string(m_fps).c_str(), { 10, 10 });
 }
 
 void GameTime::Shutdown()

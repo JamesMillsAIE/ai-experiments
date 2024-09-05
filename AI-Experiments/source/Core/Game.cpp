@@ -7,26 +7,21 @@
 #include <glm/glm.hpp>
 
 #include "Debugger.h"
-#include "Font.h"
 #include "GameTime.h"
 #include "Input.h"
 #include "Random.h"
 #include "Renderer2D.h"
 #include "Window.h"
 
-#include "Agents/AgentManager.h"
-
 using Debugging::Debugger;
 
 Game::Game()
 	: m_window{ nullptr }, m_random{ new Random }
 {
-	m_agentManager = new AgentManager(m_random);
 }
 
 Game::~Game()
 {
-	delete m_agentManager;
 	delete m_window;
 	delete m_random;
 }
@@ -44,6 +39,8 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 
 		Input::Create();
 		GameTime::Init();
+
+		m_window->InitImGui();
 
 		// loop while game is running
 		while (m_window->IsOpen())
@@ -63,11 +60,9 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 			GameTime::Tick();
 
 			Tick();
-			m_agentManager->Tick();
 
 			m_window->NewFrame();
 
-			m_agentManager->Render();
 			Render();
 
 			if (Debugger* debugger = Debugger::m_instance)

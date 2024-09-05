@@ -2,19 +2,29 @@
 
 #include <list>
 
+#include "Core/IDebugHandler.h"
+
 using std::list;
 using std::pair;
 
 class Agent;
 class Random;
 
-class AgentManager
+using Debugging::IDebugHandler;
+using Debugging::EVerbosity;
+
+class AgentManager final : public IDebugHandler
 {
-	friend class Game;
+	friend class AiGame;
 
 public:
 	void Spawn(Agent* agent);
 	void Destroy(Agent* agent);
+
+protected:
+	string DebugCategory() override;
+	void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
+	void HandleImGui(EVerbosity verbosity) override;
 
 private:
 	typedef void(AgentManager::* ListChange)(Agent*);
@@ -25,9 +35,11 @@ private:
 
 	Random* m_random;
 
+	Agent* m_selected;
+
 private:
 	AgentManager(Random* random);
-	~AgentManager();
+	~AgentManager() override;
 
 private:
 	void Tick();

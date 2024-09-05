@@ -1,13 +1,20 @@
 #include "AiGame.h"
 
+#include <imgui/imgui.h>
+
 #include "AI/Locomotion/AStar.h"
 
+#include "Core/Input.h"
 #include "Core/Renderer2D.h"
+#include "Core/Texture.h"
+#include "Core/Window.h"
 
-using Pathfinding::Node;
+using Debugging::Debugger;
+
+constexpr float CELL_SIZE = 16.f;
 
 AiGame::AiGame()
-	: m_graph{ nullptr }
+	: m_graph{ nullptr }, m_background{ nullptr }, m_worldScaleFactor{ 1.5f }
 {
 }
 
@@ -18,10 +25,16 @@ AiGame::~AiGame()
 
 bool AiGame::Startup()
 {
-	float spacing = 64.f;
+	const Texture* obstacleMap = new Texture("resources/textures/obstacle_map.png");
 
-	m_graph = new Graph(17, 12, spacing);
-	m_graph->Build();
+	const float spacing = CELL_SIZE * m_worldScaleFactor;
+
+	m_graph = new Graph(obstacleMap->GetWidth(), obstacleMap->GetHeight(), spacing);
+	m_graph->BuildFrom(obstacleMap, true);
+
+	m_background = new Texture("resources/textures/world_map.png");
+
+	delete obstacleMap;
 
 	return true;
 }
@@ -31,7 +44,7 @@ void AiGame::Shutdown()
 	
 }
 
-void AiGame::Tick(float deltaTime)
+void AiGame::Tick()
 {
 	
 }
@@ -40,20 +53,17 @@ void AiGame::Render()
 {
 	if (Renderer2D* renderer = Renderer2D::Get())
 	{
-		renderer->SetRenderColour(1.f, 0.f, 0.f);
-
-		for (uint y = 0; y < m_graph->Height(); y++)
+		if (!Debugger::IsDebuggingEnabled())
 		{
-			for (uint x = 0; x < m_graph->Width(); x++)
+			renderer->SetRenderColour(1.f, 1.f, 1.f);
+
+			const vec2 backgroundSize =
 			{
-				if (Node* node = m_graph->FindNode(x, y))
-				{
-					renderer->DrawCircle(
-						((float)x * m_graph->Spacing()) + 32.f, 
-						((float)y * m_graph->Spacing()) + 32.f,
-						6.f);
-				}
-			}
+				static_cast<float>(m_background->GetWidth()) * m_worldScaleFactor,
+				static_cast<float>(m_background->GetHeight()) * m_worldScaleFactor,
+			};
+
+			renderer->DrawSprite(m_background, 0, 0, backgroundSize.x, backgroundSize.y, 0.f, 0.f, 0.f, 0.f);
 		}
 	}
 }

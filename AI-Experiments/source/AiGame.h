@@ -9,6 +9,9 @@ namespace Pathfinding
 
 using Pathfinding::Graph;
 
+class Texture;
+class Font;
+
 class AiGame final : public Game
 {
 public:
@@ -18,10 +21,14 @@ public:
 public:
 	bool Startup() override;
 	void Shutdown() override;
-	void Tick(float deltaTime) override;
+	void Tick() override;
 	void Render() override;
 
 private:
 	Graph* m_graph;
+
+	Texture* m_background;
+
+	float m_worldScaleFactor;
 
 };

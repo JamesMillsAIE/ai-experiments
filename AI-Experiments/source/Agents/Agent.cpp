@@ -11,7 +11,7 @@ Agent::Agent()
 
 Agent::~Agent() = default;
 
-void Agent::Tick(float deltaTime)
+void Agent::Tick()
 {
 }
 

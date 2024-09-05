@@ -1,28 +1,14 @@
-//#include <cstdlib>
-//
-//#include "AiGame.h"
-//
-//int main()
-//{
-//    AiGame* game = new AiGame;
-//
-//    game->Run("AI Playground", 1088, 768, false);
-//
-//    delete game;
-//
-//    return EXIT_SUCCESS;
-//}
+#include <cstdlib>
 
-#include <tmx/tmx.h>
+#include "AiGame.h"
 
 int main()
 {
-	tmx_map* map = tmx_load("resources/tiled/world_map.tmx");
-	if (map == nullptr) 
-	{
-		tmx_perror("Cannot load map");
-		return 1;
-	}
+    AiGame* game = new AiGame;
 
-	return 0;
+    game->Run("AI Playground", 912, 840, false);
+
+    delete game;
+
+    return EXIT_SUCCESS;
 }

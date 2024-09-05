@@ -22,6 +22,7 @@ public:
 	// simple shape rendering
 	void DrawBox(float xPos, float yPos, float width, float height, float rotation = 0.0f, float depth = 0.0f);
 	void DrawCircle(float xPos, float yPos, float radius, float depth = 0.0f);
+	void DrawCircleLines(float xPos, float yPos, float radius, float thickness = 1.0f, float depth = 0.0f);
 
 	// if texture is nullptr then it renders a coloured sprite
 	// depth is in the range [0,100] with lower being closer to the viewer

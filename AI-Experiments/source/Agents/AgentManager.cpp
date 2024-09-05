@@ -28,7 +28,7 @@ AgentManager::~AgentManager()
 	}
 }
 
-void AgentManager::Tick(float deltaTime)
+void AgentManager::Tick()
 {
 	for(auto& [change, agent] : m_changes)
 	{
@@ -39,7 +39,7 @@ void AgentManager::Tick(float deltaTime)
 
 	for(auto& agent : m_agents)
 	{
-		agent->Tick(deltaTime);
+		agent->Tick();
 	}
 }
 

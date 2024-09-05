@@ -46,8 +46,8 @@
     <Filter Include="Project\Header Files\AI\Locomotion">
       <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Resource Files\Tiled">
-      <UniqueIdentifier>{c5425d3e-067e-43f1-a967-13fc728d9d78}</UniqueIdentifier>
+    <Filter Include="Project\Resource Files\Textures">
+      <UniqueIdentifier>{376eba35-92f2-42fd-bb8c-50a4ae2f0645}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="source\AI\Locomotion\AStar.cpp">
       <Filter>Project\Source Files\AI\Locomotion</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Core\IDebugHandler.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Core\Debugger.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Core\GameTime.cpp">
+      <Filter>Core\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +137,15 @@
     <ClInclude Include="source\Core\PriorityHeap.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\Core\IDebugHandler.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\Debugger.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\GameTime.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\font\consolas.ttf">
@@ -135,13 +153,14 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\tiled\roguelikeSheet_transparent.png">
-      <Filter>Project\Resource Files\Tiled</Filter>
+    <Image Include="resources\textures\node_map.png">
+      <Filter>Project\Resource Files\Textures</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\tiled\world_map.tmx">
-      <Filter>Project\Resource Files\Tiled</Filter>
-    </None>
+    <Image Include="resources\textures\obstacle_map.png">
+      <Filter>Project\Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="resources\textures\world_map.png">
+      <Filter>Project\Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

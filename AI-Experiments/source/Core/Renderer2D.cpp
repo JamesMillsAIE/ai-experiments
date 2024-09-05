@@ -268,8 +268,37 @@ void Renderer2D::DrawCircle(const float xPos, const float yPos, const float radi
 	}
 }
 
+void Renderer2D::DrawCircleLines(float xPos, float yPos, float radius, float thickness, float depth)
+{
+	const unsigned int textureID = PushTexture(m_nullTexture);
+
+	constexpr float rotDelta = glm::pi<float>() * 2 / 32;
+
+	constexpr int segmentCount = 32;
+	// 32 segment sphere
+	for (int i = 0; i < segmentCount; ++i)
+	{
+		if (ShouldFlush())
+		{
+			FlushBatch();
+		}
+
+		const float iF = static_cast<float>(i);
+		const float iFNext = static_cast<float>(i + 1);
+
+		DrawLine(
+			glm::sin(rotDelta * iF) * radius + xPos, 
+			glm::cos(rotDelta * iF) * radius + yPos,
+			glm::sin(rotDelta * iFNext) * radius + xPos,
+			glm::cos(rotDelta * iFNext) * radius + yPos,
+			thickness, 
+			depth
+		);
+	}
+}
+
 void Renderer2D::DrawSprite(Texture* texture, const float xPos, const float yPos, float width, float height,
-	const float rotation, const float depth, const float xOrigin, const float yOrigin)
+                            const float rotation, const float depth, const float xOrigin, const float yOrigin)
 {
 	if (texture == nullptr)
 	{

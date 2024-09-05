@@ -74,6 +74,7 @@ bool Window::Open()
 	}
 
 	glfwMakeContextCurrent(m_context);
+	glfwSwapInterval(0);
 
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
@@ -112,10 +113,10 @@ void Window::Close() const
 
 void Window::NewFrame() const
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
 	// clear ImGui
 	ImGuiNewFrame();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	Renderer2D::Get()->Begin();
 }

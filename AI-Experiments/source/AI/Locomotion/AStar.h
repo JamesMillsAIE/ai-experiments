@@ -1,16 +1,26 @@
 #pragma once
 
+#include <functional>
 #include <list>
 
 #include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
 
 #include "Global.h"
 
+#include "Core/IDebugHandler.h"
+
+using std::function;
 using std::list;
 
-using glm::vec;
+using glm::vec2;
+using glm::vec3;
 
-typedef vec<2, uint> vec2i;
+using Debugging::IDebugHandler;
+using Debugging::EVerbosity;
+
+class Renderer2D;
+class Texture;
 
 namespace Pathfinding
 {
@@ -19,10 +29,11 @@ namespace Pathfinding
 	class Node
 	{
 	public:
-		vec2i position;
+		vec2 position;
 
 		float gScore;
 		float hScore;
+		bool isWalkable;
 
 		Node* previous;
 
@@ -36,6 +47,9 @@ namespace Pathfinding
 
 		void ConnectTo(Node* other, float cost);
 
+		void Render(Renderer2D* renderer) const;
+		void RenderConnections(Renderer2D* renderer) const;
+
 	private:
 		list<Edge*> m_edges;
 
@@ -44,32 +58,38 @@ namespace Pathfinding
 	class Edge
 	{
 	public:
-		Edge(Node* endPoint, float cost);
+		Node* endPoint;
+		float cost;
 
 	public:
-		Node* EndPoint() const;
-		float Cost() const;
-
-	private:
-		Node* m_endPoint;
-		float m_cost;
+		Edge(Node* endPoint, float cost);
 
 	};
 
-	class Graph
+	class Graph : public IDebugHandler
 	{
 	public:
 		Graph(uint width, uint height, float spacing);
-		~Graph();
+		~Graph() override;
 
 	public:
-		void Build();
+		void Build() const;
+		void BuildFrom(const Texture* texture, bool isObstacleMap = false) const;
+		void BuildConnections() const;
 
-		Node* FindNode(uint x, uint y) const;
+		Node* FindNode(vec2 location) const;
 
 		uint Width() const;
 		uint Height() const;
 		float Spacing() const;
+		bool InsideBounds(vec2 location) const;
+
+		int GetNearbyNodes(vec2 location, list<Node*>& nodes, float searchRadius = 100.f) const;
+
+		void ForEach(function<void(Node* node, uint x, uint y)> predicate) const;
+
+	protected:
+		void OnRenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
 
 	private:
 		Node*** m_graph;
@@ -86,7 +106,7 @@ namespace Pathfinding
 	class AStar
 	{
 	public:
-		static bool FindPath(vec2i start, vec2i end, Graph* graph, Heuristic heuristic, list<Node*>& path);
+		static bool FindPath(vec2 start, vec2 end, Graph* graph, Heuristic heuristic, list<Node*>& path);
 
 	};
 }

@@ -1,8 +1,15 @@
 #pragma once
 
+#include <glm/vec2.hpp>
+
+#include "Global.h"
+
 class Window;
 class AgentManager;
 class Random;
+class Font;
+
+using glm::vec2;
 
 class Game
 {
@@ -18,7 +25,7 @@ public:
 	// these functions must be implemented by a derived class
 	virtual bool Startup() = 0;
 	virtual void Shutdown() = 0;
-	virtual void Tick(float deltaTime) = 0;
+	virtual void Tick() = 0;
 	virtual void Render() = 0;
 
 	// show or hide the OS cursor
@@ -27,17 +34,9 @@ public:
 	// sets m_gameOver to true which will close the application safely when the frame ends
 	void Quit() const;
 
-	// returns the frames-per-second that the loop is running at
-	unsigned int GetFPS() const { return m_fps; }
-
-	// returns time since application started
-	float GetTime() const;
-
 protected:
 	Window* m_window;
 	AgentManager* m_agentManager;
 	Random* m_random;
-
-	unsigned int m_fps;
 
 };

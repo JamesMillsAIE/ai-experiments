@@ -6,14 +6,20 @@
 
 #include <glm/glm.hpp>
 
+#include "Debugger.h"
+#include "Font.h"
+#include "GameTime.h"
 #include "Input.h"
 #include "Random.h"
+#include "Renderer2D.h"
 #include "Window.h"
 
 #include "Agents/AgentManager.h"
 
+using Debugging::Debugger;
+
 Game::Game()
-	: m_window{ nullptr }, m_random{ new Random }, m_fps{ 0 }
+	: m_window{ nullptr }, m_random{ new Random }
 {
 	m_agentManager = new AgentManager(m_random);
 }
@@ -29,31 +35,19 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 {
 	m_window = new Window(width, height, title, { 1.f, 1.f, 1.f, 1.f });
 
+	Debugger::Create();
+
 	// start game loop if successfully initialised
 	if (m_window->Open() && Startup())
 	{
 		m_random->Seed("");
 
 		Input::Create();
-
-		// variables for timing
-		double prevTime = glfwGetTime();
-		unsigned int frames = 0;
-		double fpsInterval = 0;
+		GameTime::Init();
 
 		// loop while game is running
 		while (m_window->IsOpen())
 		{
-			// Tick delta time
-			const double currTime = glfwGetTime();
-			double deltaTime = currTime - prevTime;
-			if (deltaTime > 0.1f)
-			{
-				deltaTime = 0.1f;
-			}
-
-			prevTime = currTime;
-
 			// clear input
 			Input::Get()->ClearStatus();
 
@@ -62,35 +56,38 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 
 			// skip if minimised
 			if (glfwGetWindowAttrib(*m_window, GLFW_ICONIFIED) != 0)
-				continue;
-
-			// Tick fps every second
-			frames++;
-			fpsInterval += deltaTime;
-			if (fpsInterval >= 1.0f)
 			{
-				m_fps = frames;
-				frames = 0;
-				fpsInterval -= 1.0f;
+				continue;
 			}
 
-			Tick(static_cast<float>(deltaTime));
-			m_agentManager->Tick(static_cast<float>(deltaTime));
+			GameTime::Tick();
+
+			Tick();
+			m_agentManager->Tick();
 
 			m_window->NewFrame();
 
 			m_agentManager->Render();
 			Render();
 
+			if (Debugger* debugger = Debugger::m_instance)
+			{
+				debugger->Tick();
+				debugger->Render(Renderer2D::Get());
+			}
+
 			m_window->EndFrame();
 		}
 
+		GameTime::Shutdown();
 		Input::Destroy();
 		m_window->Close();
 	}
 
 	// cleanup
 	Shutdown();
+
+	Debugger::Destroy();
 }
 
 void Game::Quit() const
@@ -101,9 +98,4 @@ void Game::Quit() const
 void Game::SetShowCursor(const bool visible) const
 {
 	glfwSetInputMode(*m_window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
-}
-
-float Game::GetTime() const
-{
-	return static_cast<float>(glfwGetTime());
 }

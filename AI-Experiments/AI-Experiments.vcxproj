@@ -99,11 +99,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;ImGui.lib;assimp-vc143-mt.lib;tmx.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui_d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
+copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,11 +124,12 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;ImGui.lib;assimp-vc143-mt.lib;tmx.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
+copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,11 +145,12 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;ImGui.lib;assimp-vc143-mt.lib;tmx.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui_d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
+copy /Y "$(SolutionDir)Dependencies\lib\ImGui_d.dll" "$(OutDir)ImGui_d.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -167,11 +170,12 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;ImGui.lib;assimp-vc143-mt.lib;tmx.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;ImGui.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"
+copy /Y "$(SolutionDir)Dependencies\lib\ImGui.dll" "$(OutDir)ImGui.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -180,8 +184,11 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Agents\AgentManager.cpp" />
     <ClCompile Include="source\AiGame.cpp" />
     <ClCompile Include="source\AI\Locomotion\AStar.cpp" />
+    <ClCompile Include="source\Core\Debugger.cpp" />
     <ClCompile Include="source\Core\Font.cpp" />
     <ClCompile Include="source\Core\Game.cpp" />
+    <ClCompile Include="source\Core\GameTime.cpp" />
+    <ClCompile Include="source\Core\IDebugHandler.cpp" />
     <ClCompile Include="source\Core\Input.cpp" />
     <ClCompile Include="source\Core\Random.cpp" />
     <ClCompile Include="source\Core\Renderer2D.cpp" />
@@ -193,8 +200,11 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Agents\AgentManager.h" />
     <ClInclude Include="source\AiGame.h" />
     <ClInclude Include="source\AI\Locomotion\AStar.h" />
+    <ClInclude Include="source\Core\Debugger.h" />
     <ClInclude Include="source\Core\Font.h" />
     <ClInclude Include="source\Core\Game.h" />
+    <ClInclude Include="source\Core\GameTime.h" />
+    <ClInclude Include="source\Core\IDebugHandler.h" />
     <ClInclude Include="source\Core\Input.h" />
     <ClInclude Include="source\Core\PriorityHeap.h" />
     <ClInclude Include="source\Core\Random.h" />
@@ -207,10 +217,9 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <Font Include="resources\font\consolas.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\tiled\roguelikeSheet_transparent.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\tiled\world_map.tmx" />
+    <Image Include="resources\textures\node_map.png" />
+    <Image Include="resources\textures\obstacle_map.png" />
+    <Image Include="resources\textures\world_map.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

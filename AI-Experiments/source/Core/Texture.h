@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Global.h"
+
 using std::string;
 
 // a class for wrapping up an opengl texture image
@@ -18,19 +20,19 @@ public:
 
 public:
 	Texture();
-	Texture(const char* filename);
+	Texture(const string& filename);
 	Texture(unsigned int width, unsigned int height, EFormat format, const unsigned char* pixels = nullptr);
 	virtual ~Texture();
 
 public:
 	// load a jpg, bmp, png or tga
-	bool Load(const char* filename);
+	bool Load(string filename);
 
 	// creates a texture that can be filled in with pixels
 	void Create(unsigned int width, unsigned int height, EFormat format, const unsigned char* pixels = nullptr);
 
 	// returns the filename or "none" if not loaded from a file
-	const char* GetFilename() const;
+	string GetFilename() const;
 
 	// binds the texture to the specified slot
 	void Bind(unsigned int slot) const;
@@ -43,8 +45,10 @@ public:
 	unsigned int GetFormat() const;
 	const unsigned char* GetPixels() const;
 
+	uint GetPixelAt(uint x, uint y) const;
+
 protected:
-	char* m_filename;
+	string m_filename;
 	unsigned int m_width;
 	unsigned int m_height;
 	unsigned int m_glHandle;

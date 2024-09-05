@@ -11,8 +11,8 @@ Texture::Texture()
 {
 }
 
-Texture::Texture(const char* filename)
-	: m_filename{ nullptr }, m_width{ 0 }, m_height{ 0 }, m_glHandle{ 0 }, m_format{ 0 },
+Texture::Texture(const string& filename)
+	: m_width{ 0 }, m_height{ 0 }, m_glHandle{ 0 }, m_format{ 0 },
 	m_loadedPixels{ nullptr }
 {
 	Load(filename);
@@ -35,11 +35,9 @@ Texture::~Texture()
 		stbi_image_free(m_loadedPixels);
 		m_loadedPixels = nullptr;
 	}
-
-	delete[] m_filename;
 }
 
-bool Texture::Load(const char* filename)
+bool Texture::Load(string filename)
 {
 	if (m_glHandle != 0)
 	{
@@ -51,7 +49,7 @@ bool Texture::Load(const char* filename)
 	}
 
 	int x = 0, y = 0, comp = 0;
-	m_loadedPixels = stbi_load(filename, &x, &y, &comp, STBI_default);
+	m_loadedPixels = stbi_load(filename.c_str(), &x, &y, &comp, STBI_default);
 
 	if (m_loadedPixels != nullptr)
 	{
@@ -97,8 +95,7 @@ bool Texture::Load(const char* filename)
 		m_width = static_cast<unsigned int>(x);
 		m_height = static_cast<unsigned int>(y);
 
-		m_filename = new char[strlen(filename)];
-		strcpy_s(m_filename, strlen(filename) + 1, filename);
+		m_filename = std::move(filename);
 
 		return true;
 	}
@@ -159,7 +156,7 @@ void Texture::Create(unsigned int width, unsigned int height, EFormat format, co
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-const char* Texture::GetFilename() const
+string Texture::GetFilename() const
 {
 	return m_filename;
 }
@@ -193,4 +190,18 @@ unsigned int Texture::GetFormat() const
 const unsigned char* Texture::GetPixels() const
 {
 	return m_loadedPixels;
+}
+
+uint Texture::GetPixelAt(const uint x, const uint y) const
+{
+	const uint correctedY = m_height - y - 1;
+
+	const uint bytePerPixel = m_format;
+	const byte* pixelOffset = m_loadedPixels + (x + m_width * correctedY) * bytePerPixel;
+	const byte r = pixelOffset[0];
+	const byte g = pixelOffset[1];
+	const byte b = pixelOffset[2];
+	const byte a = m_format >= 4 ? pixelOffset[3] : 0xff;
+
+	return r << 24 | g << 16 | b << 8 | a << 0;
 }

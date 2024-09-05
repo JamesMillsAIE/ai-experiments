@@ -15,7 +15,7 @@ public:
 	~Agent();
 
 public:
-	void Tick(float deltaTime);
+	void Tick();
 	void Render();
 
 private:

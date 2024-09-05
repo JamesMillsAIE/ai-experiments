@@ -30,7 +30,7 @@ private:
 	~AgentManager();
 
 private:
-	void Tick(float deltaTime);
+	void Tick();
 	void Render() const;
 
 	void AddAgent(Agent* agent);

@@ -1,16 +1,17 @@
 #include "Game.h"
 
+#include <Core/Debugging/Debugger.h>
+#include <Core/Rendering/Renderer2D.h>
+#include <Core/Structures/Random.h>
+
 #include <GL/glew.h>
 
 #include <glfw/glfw3.h>
 
 #include <glm/glm.hpp>
 
-#include "Debugger.h"
 #include "GameTime.h"
 #include "Input.h"
-#include "Random.h"
-#include "Renderer2D.h"
 #include "Window.h"
 
 using Debugging::Debugger;

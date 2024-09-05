@@ -1,15 +1,16 @@
 #include "Window.h"
 
-#include <GL/glew.h>
-
-#include <glfw/glfw3.h>
-
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+#include <Core/Rendering/Renderer2D.h>
+
+#include <GL/glew.h>
+
+#include <glfw/glfw3.h>
+
 #include "Input.h"
-#include "Renderer2D.h"
 
 int Window::GetWidth() const
 {

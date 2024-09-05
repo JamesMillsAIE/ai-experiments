@@ -1,13 +1,13 @@
 #include "Debugger.h"
 
 #include <imgui.h>
-
-#include "GameTime.h"
-#include "IDebugHandler.h"
-#include "Input.h"
-#include "MultiValueStruct.h"
-
 #include <sstream>
+
+#include <Core/GameTime.h>
+#include <Core/Input.h>
+#include <Core/Structures/MultiValueStruct.h>
+
+#include "IDebugHandler.h"
 
 using std::stringstream;
 

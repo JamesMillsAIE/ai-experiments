@@ -2,13 +2,11 @@
 
 #include <string>
 
+#include <Core/Debugging/Debugger.h>
+#include <Core/Rendering/Font.h>
+#include <Core/Rendering/Renderer2D.h>
+
 #include <GLFW/glfw3.h>
-
-#include "Debugger.h"
-#include "Font.h"
-#include "Renderer2D.h"
-
-using Debugging::Debugger;
 
 float GameTime::m_prevTime;
 float GameTime::m_currTime;

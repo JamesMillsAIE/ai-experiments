@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "MultiValueStruct.h"
+#include <Core/Structures/MultiValueStruct.h>
 
 using std::list;
 using std::map;

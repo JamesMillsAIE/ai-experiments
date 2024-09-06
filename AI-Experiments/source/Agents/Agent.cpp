@@ -4,7 +4,7 @@
 
 #include <glm/detail/func_geometric.inl>
 
-#include "AgentManager.h"
+#include "imgui_internal.h"
 #include "NameGenerator.h"
 
 Agent::Agent()
@@ -34,7 +34,17 @@ void Agent::Initialise(vec2 position, Random* random, AgentManager* owner)
 	m_name = NameGenerator::NewName(random);
 }
 
-void Agent::RenderDebug(Renderer2D* renderer)
+void Agent::RenderDebug(Renderer2D* renderer, EVerbosity verbosity)
 {
 	
+}
+
+void Agent::HandleImGui(EVerbosity verbosity)
+{
+	ImGui::Text("Name: %s", m_name.c_str());
+}
+
+vec2 Agent::GetPosition() const
+{
+	return m_position;
 }

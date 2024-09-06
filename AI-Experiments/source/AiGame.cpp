@@ -30,7 +30,7 @@ bool AiGame::Startup()
 
 	m_background = new Texture("resources/textures/world_map.png");
 
-	m_agentManager = new AgentManager(m_random);
+	m_agentManager = new AgentManager(m_random, m_window);
 	m_agentManager->Spawn(new Agent);
 
 	return true;

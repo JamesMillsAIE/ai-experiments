@@ -10,6 +10,8 @@
 #include "Agent.h"
 #include "imgui_internal.h"
 
+#include "Core/Window.h"
+
 void AgentManager::Spawn(Agent* agent)
 {
 	m_changes.emplace_back(&AgentManager::AddAgent, agent);
@@ -20,8 +22,8 @@ void AgentManager::Destroy(Agent* agent)
 	m_changes.emplace_back(&AgentManager::RemoveAgent, agent);
 }
 
-AgentManager::AgentManager(Random* random)
-	: m_random{ random }, m_selected{ nullptr }
+AgentManager::AgentManager(Random* random, Window* window)
+	: m_random{ random }, m_window{ window }, m_selected{ nullptr }
 {
 
 }
@@ -64,15 +66,7 @@ void AgentManager::AddAgent(Agent* agent)
 		return;
 	}
 
-	agent->Initialise(glm::roundMultiple(
-		{
-			m_random->Range(0.f, 912.f),
-			m_random->Range(0.f, 840.f),
-		},
-		vec2(12.f)), 
-		m_random, 
-		this
-	);
+	InitialiseAgent(agent);
 
 	m_agents.emplace_back(agent);
 }
@@ -87,6 +81,22 @@ void AgentManager::RemoveAgent(Agent* agent)
 	m_agents.remove(agent);
 }
 
+void AgentManager::InitialiseAgent(Agent* agent)
+{
+	agent->Initialise(
+		glm::roundMultiple(
+			vec2
+			{
+				m_random->Range(0.f, static_cast<float>(m_window->GetWidth())),
+				m_random->Range(0.f, static_cast<float>(m_window->GetHeight()))
+			},
+			vec2(24.f)
+		),
+		m_random,
+		this
+	);
+}
+
 string AgentManager::DebugCategory()
 {
 	return "Agents";
@@ -97,9 +107,9 @@ void AgentManager::RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosi
 	if(m_selected)
 	{
 		renderer->SetRenderColour(vec3(0));
-		renderer->DrawCircleLines(m_selected->m_position, 12.f, 2.f);
+		renderer->DrawCircleLines(m_selected->GetPosition(), 12.f, 2.f);
 
-		m_selected->RenderDebug(renderer);
+		m_selected->RenderDebug(renderer, verbosity);
 	}
 }
 
@@ -113,7 +123,7 @@ void AgentManager::HandleImGui(EVerbosity verbosity)
 
 			for (auto& agent : m_agents)
 			{
-				if (glm::distance(agent->m_position, vec2(input->GetMousePos())) < 12)
+				if (glm::distance(agent->GetPosition(), vec2(input->GetMousePos())) < 12)
 				{
 					m_selected = agent;
 
@@ -125,6 +135,6 @@ void AgentManager::HandleImGui(EVerbosity verbosity)
 
 	if(m_selected)
 	{
-		ImGui::Text("Name: %s", m_selected->m_name.c_str());
+		m_selected->HandleImGui(verbosity);
 	}
 }

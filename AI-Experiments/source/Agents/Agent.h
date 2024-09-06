@@ -5,6 +5,8 @@
 
 #include <glm/vec2.hpp>
 
+#include "AgentManager.h"
+
 using std::list;
 using std::string;
 
@@ -12,12 +14,9 @@ using glm::vec2;
 
 class Renderer2D;
 class Random;
-class AgentManager;
 
 class Agent
 {
-	friend class AgentManager;
-
 public:
 	Agent();
 	~Agent();
@@ -26,7 +25,12 @@ public:
 	void Tick();
 	void Render();
 
-private:
+	void RenderDebug(Renderer2D* renderer, EVerbosity verbosity);
+	void HandleImGui(EVerbosity verbosity);
+
+	vec2 GetPosition() const;
+
+protected:
 	vec2 m_position;
 	vec2 m_scale;
 	float m_rotation;
@@ -37,8 +41,9 @@ private:
 	string m_name;
 
 private:
-	void Initialise(vec2 position, Random* random, AgentManager* owner);
+	friend void AgentManager::InitialiseAgent(Agent* agent);
 
-	void RenderDebug(Renderer2D* renderer);
+private:
+	void Initialise(vec2 position, Random* random, AgentManager* owner);
 
 };

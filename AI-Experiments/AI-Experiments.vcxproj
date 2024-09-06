@@ -199,6 +199,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Core\Input.cpp" />
     <ClCompile Include="source\Core\Rendering\Font.cpp" />
     <ClCompile Include="source\Core\Rendering\Renderer2D.cpp" />
+    <ClCompile Include="source\Core\Rendering\Sprite.cpp" />
     <ClCompile Include="source\Core\Rendering\Texture.cpp" />
     <ClCompile Include="source\Core\Structures\Random.cpp" />
     <ClCompile Include="source\Core\Window.cpp" />
@@ -229,6 +230,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Core\Input.h" />
     <ClInclude Include="source\Core\Rendering\Font.h" />
     <ClInclude Include="source\Core\Rendering\Renderer2D.h" />
+    <ClInclude Include="source\Core\Rendering\Sprite.h" />
     <ClInclude Include="source\Core\Rendering\Texture.h" />
     <ClInclude Include="source\Core\Structures\MultiValueStruct.h" />
     <ClInclude Include="source\Core\Structures\PriorityHeap.h" />
@@ -240,6 +242,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <Font Include="resources\font\consolas.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\textures\characters.png" />
     <Image Include="resources\textures\node_map.png" />
     <Image Include="resources\textures\obstacle_map.png" />
     <Image Include="resources\textures\world_map.png" />

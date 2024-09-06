@@ -13,10 +13,8 @@
 using Debugging::Debugger;
 using Pathfinding::AStar;
 
-constexpr float CELL_SIZE = 16.f;
-
 AiGame::AiGame()
-	: m_agentManager{ nullptr }, m_background{ nullptr }, m_worldScaleFactor{ 1.5f }
+	: m_agentManager{ nullptr }, m_background{ nullptr }
 {
 }
 
@@ -26,7 +24,7 @@ bool AiGame::Startup()
 {
 	NameGenerator::Load();
 
-	AStar::InitialiseFrom(CELL_SIZE * m_worldScaleFactor, "resources/textures/obstacle_map.png", true);
+	AStar::InitialiseFrom(WORLD_CELL_SIZE * WORLD_SCALE_FACTOR, "resources/textures/obstacle_map.png", true);
 
 	m_background = new Texture("resources/textures/world_map.png");
 
@@ -57,8 +55,8 @@ void AiGame::Render()
 
 			const vec2 backgroundSize =
 			{
-				static_cast<float>(m_background->GetWidth()) * m_worldScaleFactor,
-				static_cast<float>(m_background->GetHeight()) * m_worldScaleFactor,
+				static_cast<float>(m_background->GetWidth()) * WORLD_SCALE_FACTOR,
+				static_cast<float>(m_background->GetHeight()) * WORLD_SCALE_FACTOR,
 			};
 
 			renderer->DrawSprite(m_background, { 0, 0 }, backgroundSize, 0.f, 0.f, 0.f, 0.f);

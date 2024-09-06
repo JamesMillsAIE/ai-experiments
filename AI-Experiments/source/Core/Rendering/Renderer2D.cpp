@@ -203,6 +203,34 @@ void Renderer2D::DrawBox(vec2 pos, vec2 size, const float rotation, const float 
 	DrawSprite(nullptr, pos, size, rotation, depth);
 }
 
+void Renderer2D::DrawBoxLines(vec2 pos, vec2 size, float rotation, float thickness, float depth)
+{
+	float tlX = (0.f - .5f) * size.x;
+	float tlY = (0.f - .5f) * size.y;
+	float trX = (1.f - .5f) * size.x;
+	float trY = (0.f - .5f) * size.y;
+	float brX = (1.f - .5f) * size.x;
+	float brY = (1.f - .5f) * size.y;
+	float blX = (0.f - .5f) * size.x;
+	float blY = (1.f - .5f) * size.y;
+
+	if (rotation != 0.0f)
+	{
+		const float si = glm::sin(rotation);
+		const float co = glm::cos(rotation);
+
+		RotateAround(tlX, tlY, tlX, tlY, si, co);
+		RotateAround(trX, trY, trX, trY, si, co);
+		RotateAround(brX, brY, brX, brY, si, co);
+		RotateAround(blX, blY, blX, blY, si, co);
+	}
+
+	DrawLine(vec2(tlX, tlY) + pos, vec2(trX, trY) + pos, thickness);
+	DrawLine(vec2(trX, trY) + pos, vec2(brX, brY) + pos, thickness);
+	DrawLine(vec2(brX, brY) + pos, vec2(blX, blY) + pos, thickness);
+	DrawLine(vec2(blX, blY) + pos, vec2(tlX, tlY) + pos, thickness);
+}
+
 void Renderer2D::DrawCircle(vec2 pos, const float radius, const float depth)
 {
 	if (ShouldFlush(33, 96))

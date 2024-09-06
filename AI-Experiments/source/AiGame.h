@@ -30,6 +30,4 @@ private:
 
 	Texture* m_background;
 
-	float m_worldScaleFactor;
-
 };

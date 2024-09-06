@@ -29,6 +29,7 @@ public:
 
 	// simple shape rendering
 	void DrawBox(vec2 pos, vec2 size, float rotation = 0.0f, float depth = 0.0f);
+	void DrawBoxLines(vec2 pos, vec2 size, float rotation = 0.0f, float thickness = 1.0f, float depth = 0.0f);
 	void DrawCircle(vec2 pos, float radius, float depth = 0.0f);
 	void DrawCircleLines(vec2 pos, float radius, float thickness = 1.0f, float depth = 0.0f);
 

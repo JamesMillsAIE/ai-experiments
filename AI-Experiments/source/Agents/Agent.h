@@ -13,6 +13,7 @@ using std::string;
 using glm::vec2;
 
 class Renderer2D;
+class Sprite;
 class Random;
 
 class Agent
@@ -27,6 +28,7 @@ public:
 
 	void RenderDebug(Renderer2D* renderer, EVerbosity verbosity);
 	void HandleImGui(EVerbosity verbosity);
+	void Highlight(Renderer2D* renderer);
 
 	vec2 GetPosition() const;
 
@@ -39,6 +41,8 @@ protected:
 
 	AgentManager* m_owner;
 	string m_name;
+
+	Sprite* m_sprite;
 
 private:
 	friend void AgentManager::InitialiseAgent(Agent* agent);

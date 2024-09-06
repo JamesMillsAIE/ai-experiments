@@ -1,7 +1,7 @@
 #include "AgentManager.h"
 
 #include <Core/Input.h>
-#include <Core/Rendering/Renderer2D.h>
+#include <Core/Window.h>
 #include <Core/Structures/Random.h>
 
 #include <glm/geometric.hpp>
@@ -9,7 +9,7 @@
 
 #include "Agent.h"
 
-#include "Core/Window.h"
+using Debugging::Debugger;
 
 void AgentManager::Spawn(Agent* agent)
 {
@@ -52,9 +52,12 @@ void AgentManager::Tick()
 
 void AgentManager::Render() const
 {
-	for (auto& agent : m_agents)
+	if (!Debugger::IsDebuggingEnabled())
 	{
-		agent->Render();
+		for (auto& agent : m_agents)
+		{
+			agent->Render();
+		}
 	}
 }
 
@@ -103,12 +106,14 @@ string AgentManager::DebugCategory()
 
 void AgentManager::RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity)
 {
+	for (auto& agent : m_agents)
+	{
+		agent->RenderDebug(renderer, verbosity);
+	}
+
 	if(m_selected)
 	{
-		renderer->SetRenderColour(vec3(0));
-		renderer->DrawCircleLines(m_selected->GetPosition(), 12.f, 2.f);
-
-		m_selected->RenderDebug(renderer, verbosity);
+		m_selected->Highlight(renderer);
 	}
 }
 

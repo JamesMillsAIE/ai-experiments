@@ -4,18 +4,11 @@
 
 #include <glm/vec2.hpp>
 
-class Renderer2D;
 using std::list;
 
 using glm::vec2;
 
-namespace Pathfinding
-{
-	class Node;
-}
-
-using Pathfinding::Node;
-
+class Renderer2D;
 class Random;
 class AgentManager;
 

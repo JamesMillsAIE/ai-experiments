@@ -144,6 +144,12 @@
     <ClCompile Include="source\AI\Pathfinding\AStar.cpp">
       <Filter>Project\Source Files\AI\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\PathfindingNode.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\PathfindingEdge.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -219,6 +225,15 @@
       <Filter>Core\Header Files\Structures</Filter>
     </ClInclude>
     <ClInclude Include="source\AI\Pathfinding\AStar.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\PathfindingNode.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\PathfindingEdge.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\PathfindingGraph.h">
       <Filter>Project\Header Files\AI\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>

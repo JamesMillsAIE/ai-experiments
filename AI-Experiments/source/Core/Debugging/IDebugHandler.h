@@ -25,8 +25,14 @@ namespace Debugging
 		virtual void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) = 0;
 		virtual void HandleImGui(EVerbosity verbosity) = 0;
 
+		virtual void OnEnabled();
+		virtual void OnDisabled();
+
 	private:
 		bool m_isEnabled;
+
+	private:
+		void HandleEnabledCheckbox();
 
 	};
 

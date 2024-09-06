@@ -1,5 +1,7 @@
 #include "IDebugHandler.h"
 
+#include "imgui.h"
+
 namespace Debugging
 {
 	IDebugHandler::IDebugHandler()
@@ -20,5 +22,31 @@ namespace Debugging
 #else
 		return false;
 #endif // _DEBUG
+	}
+
+	void IDebugHandler::OnEnabled()
+	{
+	}
+
+	void IDebugHandler::OnDisabled()
+	{
+	}
+
+	void IDebugHandler::HandleEnabledCheckbox()
+	{
+		bool enabled = m_isEnabled;
+		if (ImGui::Checkbox("Enabled", &enabled))
+		{
+			m_isEnabled = enabled;
+
+			if(m_isEnabled)
+			{
+				OnEnabled();
+			}
+			else
+			{
+				OnDisabled();
+			}
+		}
 	}
 }

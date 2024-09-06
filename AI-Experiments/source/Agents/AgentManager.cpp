@@ -8,7 +8,6 @@
 #include <glm/gtc/round.hpp>
 
 #include "Agent.h"
-#include "imgui_internal.h"
 
 #include "Core/Window.h"
 
@@ -115,19 +114,22 @@ void AgentManager::RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosi
 
 void AgentManager::HandleImGui(EVerbosity verbosity)
 {
-	if (Input* input = Input::Get())
+	if (IsEnabled())
 	{
-		if (input->WasMouseButtonPressed(MouseButtonLeft))
+		if (Input* input = Input::Get())
 		{
-			m_selected = nullptr;
-
-			for (auto& agent : m_agents)
+			if (input->WasMouseButtonPressed(MouseButtonLeft))
 			{
-				if (glm::distance(agent->GetPosition(), vec2(input->GetMousePos())) < 12)
-				{
-					m_selected = agent;
+				m_selected = nullptr;
 
-					break;
+				for (auto& agent : m_agents)
+				{
+					if (glm::distance(agent->GetPosition(), vec2(input->GetMousePos())) < 12)
+					{
+						m_selected = agent;
+
+						break;
+					}
 				}
 			}
 		}
@@ -137,4 +139,9 @@ void AgentManager::HandleImGui(EVerbosity verbosity)
 	{
 		m_selected->HandleImGui(verbosity);
 	}
+}
+
+void AgentManager::OnDisabled()
+{
+	m_selected = nullptr;
 }

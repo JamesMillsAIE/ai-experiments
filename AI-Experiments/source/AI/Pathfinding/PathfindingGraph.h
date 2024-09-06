@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <Core/Debugging/IDebugHandler.h>
+#include <Core/Debugging/ImGuiTools.h>
 #include <Core/Rendering/Renderer2D.h>
 #include <Core/Rendering/Texture.h>
 
@@ -20,6 +21,7 @@ using glm::vec2;
 
 using Debugging::IDebugHandler;
 using Debugging::Debugger;
+using Debugging::ImGuiTools;
 using Debugging::EVerbosity;
 
 template<class T, class U>
@@ -270,40 +272,29 @@ namespace Pathfinding
 	template <derived<PathfindingNode> NODE_TYPE>
 	void PathfindingGraph<NODE_TYPE>::HandleImGui(EVerbosity verbosity)
 	{
-		// ReSharper disable CppTooWideScopeInitStatement
-		vec3 walkableColor;
-		if (Debugger::Get(PathfindingNode::walkableColorId, walkableColor))
+		if (vec3 walkableColor; Debugger::Get(PathfindingNode::walkableColorId, walkableColor))
 		{
-			float colArray[] = { walkableColor.r, walkableColor.g, walkableColor.b };
-
-			if (ImGui::ColorEdit3("Walkable Color", colArray))
+			if(ImGuiTools::ColorEditField("Walkable Color", walkableColor))
 			{
-				Debugger::Set(PathfindingNode::walkableColorId, vec3(colArray[0], colArray[1], colArray[2]));
+				Debugger::Set(PathfindingNode::walkableColorId, walkableColor);
 			}
 		}
 
-		vec3 notWalkableColor;
-		if (Debugger::Get(PathfindingNode::notWalkableColorId, notWalkableColor))
+		if (vec3 notWalkableColor; Debugger::Get(PathfindingNode::notWalkableColorId, notWalkableColor))
 		{
-			float colArray[] = { notWalkableColor.r, notWalkableColor.g, notWalkableColor.b };
-
-			if (ImGui::ColorEdit3("Not Walkable Color", colArray))
+			if (ImGuiTools::ColorEditField("Not Walkable Color", notWalkableColor))
 			{
-				Debugger::Set(PathfindingNode::notWalkableColorId, vec3(colArray[0], colArray[1], colArray[2]));
+				Debugger::Set(PathfindingNode::notWalkableColorId, notWalkableColor);
 			}
 		}
 
-		vec3 connectionColor;
-		if (Debugger::Get(PathfindingNode::connectionColorId, connectionColor))
+		if (vec3 connectionColor; Debugger::Get(PathfindingNode::connectionColorId, connectionColor))
 		{
-			float colArray[] = { connectionColor.r, connectionColor.g, connectionColor.b };
-
-			if (ImGui::ColorEdit3("Connection Color", colArray))
+			if (ImGuiTools::ColorEditField("Connection Color", connectionColor))
 			{
-				Debugger::Set(PathfindingNode::connectionColorId, vec3(colArray[0], colArray[1], colArray[2]));
+				Debugger::Set(PathfindingNode::connectionColorId, connectionColor);
 			}
 		}
-		// ReSharper restore CppTooWideScopeInitStatement
 	}
 }
 

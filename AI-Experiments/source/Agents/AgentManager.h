@@ -27,6 +27,7 @@ protected:
 	string DebugCategory() override;
 	void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
 	void HandleImGui(EVerbosity verbosity) override;
+	void OnDisabled() override;
 
 private:
 	typedef void(AgentManager::* ListChange)(Agent*);

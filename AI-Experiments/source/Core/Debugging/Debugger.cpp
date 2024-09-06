@@ -8,6 +8,7 @@
 #include <Core/Structures/MultiValueStruct.h>
 
 #include "IDebugHandler.h"
+#include "ImGuiTools.h"
 
 using std::stringstream;
 
@@ -357,7 +358,7 @@ namespace Debugging
 		{
 			for (const auto& handler : m_handlers)
 			{
-				if(handler->IsEnabled())
+				if (handler->IsEnabled())
 				{
 					handler->RenderDebuggingTools(renderer, m_verbosity);
 				}
@@ -367,23 +368,19 @@ namespace Debugging
 			{
 				ImGui::Text("FPS: %d", GameTime::FPS());
 
-				const char* verbosityValues[] =
-				{
-					 "Basic",
-					 "Advanced"
-				};
+				ImGuiTools::EnumField("Verbosity", m_verbosity, { "Basic", "Advanced" });
 
-				int verbosity = m_verbosity;
-				ImGui::Combo("Verbosity", &verbosity, verbosityValues, 2);
-				m_verbosity = static_cast<EVerbosity>(verbosity);
-
-				for(const auto& handler : m_handlers)
+				for (const auto& handler : m_handlers)
 				{
-					if(ImGui::CollapsingHeader(handler->DebugCategory().c_str()))
+					if (ImGuiTools::CollapsingGroup(handler->DebugCategory()))
 					{
-						ImGui::Checkbox("Enabled", &handler->m_isEnabled);
+						handler->HandleEnabledCheckbox();
+
+						ImGuiTools::BeginDisabledGroup(!handler->IsEnabled());
 
 						handler->HandleImGui(m_verbosity);
+
+						ImGuiTools::EndDisabledGroup();
 					}
 				}
 

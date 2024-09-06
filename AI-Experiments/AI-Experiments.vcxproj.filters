@@ -159,6 +159,9 @@
     <ClCompile Include="source\Agents\NameGenerator.cpp">
       <Filter>Project\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Core\Debugging\ImGuiTools.cpp">
+      <Filter>Core\Source Files\Debugging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="source\Agents\NameGenerator.h">
       <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\Debugging\ImGuiTools.h">
+      <Filter>Core\Header Files\Debugging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

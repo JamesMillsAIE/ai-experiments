@@ -193,6 +193,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\AI\Pathfinding\PathfindingNode.cpp" />
     <ClCompile Include="source\Core\Debugging\Debugger.cpp" />
     <ClCompile Include="source\Core\Debugging\IDebugHandler.cpp" />
+    <ClCompile Include="source\Core\Debugging\ImGuiTools.cpp" />
     <ClCompile Include="source\Core\Game.cpp" />
     <ClCompile Include="source\Core\GameTime.cpp" />
     <ClCompile Include="source\Core\Input.cpp" />
@@ -222,6 +223,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\AI\Pathfinding\PathfindingNode.h" />
     <ClInclude Include="source\Core\Debugging\Debugger.h" />
     <ClInclude Include="source\Core\Debugging\IDebugHandler.h" />
+    <ClInclude Include="source\Core\Debugging\ImGuiTools.h" />
     <ClInclude Include="source\Core\Game.h" />
     <ClInclude Include="source\Core\GameTime.h" />
     <ClInclude Include="source\Core\Input.h" />

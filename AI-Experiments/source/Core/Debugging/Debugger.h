@@ -14,6 +14,7 @@ using std::string;
 using std::vector;
 
 class Renderer2D;
+class Window;
 
 namespace Debugging
 {
@@ -59,7 +60,7 @@ namespace Debugging
 		static bool Get(const string& key, void*& pValue);
 
 	private:
-		static void Create();
+		static void Create(Window* window);
 		static void Destroy();
 
 	private:
@@ -73,6 +74,8 @@ namespace Debugging
 
 		EVerbosity m_verbosity;
 		bool m_isEnabled;
+
+		Window* m_window;
 
 	private:
 		Debugger();

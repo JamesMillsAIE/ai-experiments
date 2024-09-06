@@ -31,7 +31,7 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 {
 	m_window = new Window(width, height, title, { 1.f, 1.f, 1.f, 1.f });
 
-	Debugger::Create();
+	Debugger::Create(m_window);
 
 	// start game loop if successfully initialised
 	if (m_window->Open() && Startup())

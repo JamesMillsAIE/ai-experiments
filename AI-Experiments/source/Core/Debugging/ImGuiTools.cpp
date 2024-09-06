@@ -4,15 +4,18 @@
 
 namespace Debugging
 {
-	bool ImGuiTools::CollapsingGroup(const string& title)
+	bool ImGuiTools::BeginCollapsingGroup(const string& title)
 	{
 		ImGui::PushID(title.c_str());
 
 		bool open = ImGui::CollapsingHeader(title.c_str());
 
-		ImGui::PopID();
-
 		return open;
+	}
+
+	void ImGuiTools::EndCollapsingGroup()
+	{
+		ImGui::PopID();
 	}
 
 	void ImGuiTools::BeginDisabledGroup(bool disabled)

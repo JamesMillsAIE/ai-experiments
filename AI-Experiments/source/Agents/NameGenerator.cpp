@@ -17,8 +17,8 @@ void NameGenerator::Load()
 
 string NameGenerator::NewName(const Random* random)
 {
-	return m_firstNames[random->Range(0, static_cast<int>(m_firstNames.size()))] + 
-		" " + m_lastNames[random->Range(0, static_cast<int>(m_lastNames.size()))];
+	return m_firstNames[random->Range(0, static_cast<int>(m_firstNames.size() - 1))] + 
+		" " + m_lastNames[random->Range(0, static_cast<int>(m_lastNames.size() - 1))];
 }
 
 void NameGenerator::LoadNames(const string& file, vector<string>& names)

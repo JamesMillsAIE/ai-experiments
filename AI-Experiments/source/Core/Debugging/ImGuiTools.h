@@ -18,7 +18,8 @@ namespace Debugging
 	class ImGuiTools
 	{
 	public:
-		static bool CollapsingGroup(const string& title);
+		static bool BeginCollapsingGroup(const string& title);
+		static void EndCollapsingGroup();
 
 		static void BeginDisabledGroup(bool disabled);
 		static void EndDisabledGroup();

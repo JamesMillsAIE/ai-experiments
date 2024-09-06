@@ -10,6 +10,8 @@
 #include "IDebugHandler.h"
 #include "ImGuiTools.h"
 
+#include "Core/Window.h"
+
 using std::stringstream;
 
 namespace Debugging
@@ -309,11 +311,12 @@ namespace Debugging
 		return false;
 	}
 
-	void Debugger::Create()
+	void Debugger::Create(Window* window)
 	{
 		if (!m_instance)
 		{
 			m_instance = new Debugger;
+			m_instance->m_window = window;
 		}
 	}
 
@@ -345,6 +348,7 @@ namespace Debugging
 			if (input->WasKeyPressed(KeyF3))
 			{
 				m_isEnabled = !m_isEnabled;
+				m_window->SetClearColor(m_isEnabled ? vec4(0.f, 0.f, 0.f, 0.f) : vec4(1.f, 1.f, 1.f, 1.f));
 			}
 		}
 #endif // _DEBUG
@@ -372,7 +376,7 @@ namespace Debugging
 
 				for (const auto& handler : m_handlers)
 				{
-					if (ImGuiTools::CollapsingGroup(handler->DebugCategory()))
+					if (ImGuiTools::BeginCollapsingGroup(handler->DebugCategory()))
 					{
 						handler->HandleEnabledCheckbox();
 
@@ -382,6 +386,7 @@ namespace Debugging
 
 						ImGuiTools::EndDisabledGroup();
 					}
+					ImGuiTools::EndCollapsingGroup();
 				}
 
 				ImGui::End();

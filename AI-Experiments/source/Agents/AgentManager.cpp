@@ -24,7 +24,7 @@ void AgentManager::Destroy(Agent* agent)
 AgentManager::AgentManager(Random* random, Window* window)
 	: m_random{ random }, m_window{ window }, m_selected{ nullptr }
 {
-
+	m_isDebuggingEnabled = true;
 }
 
 AgentManager::~AgentManager()
@@ -52,7 +52,7 @@ void AgentManager::Tick()
 
 void AgentManager::Render() const
 {
-	if (!Debugger::IsDebuggingEnabled())
+	if (!Debugger::InDebugMode())
 	{
 		for (auto& agent : m_agents)
 		{
@@ -119,7 +119,7 @@ void AgentManager::RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosi
 
 void AgentManager::HandleImGui(EVerbosity verbosity)
 {
-	if (IsEnabled())
+	if (IsDebuggingEnabled())
 	{
 		if (Input* input = Input::Get())
 		{

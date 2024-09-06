@@ -19,7 +19,10 @@ namespace Debugging
 		virtual ~IDebugHandler();
 
 	protected:
-		bool IsEnabled() const;
+		bool m_isDebuggingEnabled;
+
+	protected:
+		bool IsDebuggingEnabled() const;
 		virtual string DebugCategory() = 0;
 
 		virtual void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) = 0;
@@ -27,9 +30,6 @@ namespace Debugging
 
 		virtual void OnEnabled();
 		virtual void OnDisabled();
-
-	private:
-		bool m_isEnabled;
 
 	private:
 		void HandleEnabledCheckbox();

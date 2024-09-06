@@ -46,12 +46,12 @@ namespace Debugging
 		}
 	}
 
-	bool Debugger::IsDebuggingEnabled()
+	bool Debugger::InDebugMode()
 	{
 #if _DEBUG
 		if (m_instance)
 		{
-			return m_instance->m_isEnabled;
+			return m_instance->m_debugModeEnabled;
 		}
 #endif
 
@@ -347,8 +347,8 @@ namespace Debugging
 		{
 			if (input->WasKeyPressed(KeyF3))
 			{
-				m_isEnabled = !m_isEnabled;
-				m_window->SetClearColor(m_isEnabled ? vec4(0.f, 0.f, 0.f, 0.f) : vec4(1.f, 1.f, 1.f, 1.f));
+				m_debugModeEnabled = !m_debugModeEnabled;
+				m_window->SetClearColor(m_debugModeEnabled ? vec4(0.f, 0.f, 0.f, 0.f) : vec4(1.f, 1.f, 1.f, 1.f));
 			}
 		}
 #endif // _DEBUG
@@ -358,11 +358,11 @@ namespace Debugging
 	void Debugger::Render(Renderer2D* renderer)
 	{
 #if	_DEBUG
-		if (m_isEnabled)
+		if (m_debugModeEnabled)
 		{
 			for (const auto& handler : m_handlers)
 			{
-				if (handler->IsEnabled())
+				if (handler->IsDebuggingEnabled())
 				{
 					handler->RenderDebuggingTools(renderer, m_verbosity);
 				}
@@ -380,7 +380,7 @@ namespace Debugging
 					{
 						handler->HandleEnabledCheckbox();
 
-						ImGuiTools::BeginDisabledGroup(!handler->IsEnabled());
+						ImGuiTools::BeginDisabledGroup(!handler->IsDebuggingEnabled());
 
 						handler->HandleImGui(m_verbosity);
 

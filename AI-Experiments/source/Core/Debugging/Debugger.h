@@ -37,7 +37,7 @@ namespace Debugging
 		static void ObserveDebugTool(IDebugHandler* handler);
 		static void ForgetDebugTool(IDebugHandler* handler);
 		static void SetVerbosity(EVerbosity verbosity);
-		static bool IsDebuggingEnabled();
+		static bool InDebugMode();
 
 		static bool HasDebugValue(const string& key);
 
@@ -73,7 +73,7 @@ namespace Debugging
 		map<string, MultiValueStruct*> m_debugValues;
 
 		EVerbosity m_verbosity;
-		bool m_isEnabled;
+		bool m_debugModeEnabled;
 
 		Window* m_window;
 

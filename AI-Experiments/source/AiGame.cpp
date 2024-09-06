@@ -49,7 +49,7 @@ void AiGame::Render()
 {
 	if (Renderer2D* renderer = Renderer2D::Get())
 	{
-		if (!Debugger::IsDebuggingEnabled())
+		if (!Debugger::InDebugMode())
 		{
 			renderer->SetRenderColour(1.f, 1.f, 1.f);
 

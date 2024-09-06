@@ -5,7 +5,7 @@
 namespace Debugging
 {
 	IDebugHandler::IDebugHandler()
-		: m_isEnabled{ false }
+		: m_isDebuggingEnabled{ false }
 	{
 		Debugger::ObserveDebugTool(this);
 	}
@@ -15,10 +15,10 @@ namespace Debugging
 		Debugger::ForgetDebugTool(this);
 	}
 
-	bool IDebugHandler::IsEnabled() const
+	bool IDebugHandler::IsDebuggingEnabled() const
 	{
 #if _DEBUG
-		return m_isEnabled;
+		return m_isDebuggingEnabled;
 #else
 		return false;
 #endif // _DEBUG
@@ -34,12 +34,12 @@ namespace Debugging
 
 	void IDebugHandler::HandleEnabledCheckbox()
 	{
-		bool enabled = m_isEnabled;
+		bool enabled = m_isDebuggingEnabled;
 		if (ImGui::Checkbox("Enabled", &enabled))
 		{
-			m_isEnabled = enabled;
+			m_isDebuggingEnabled = enabled;
 
-			if(m_isEnabled)
+			if(m_isDebuggingEnabled)
 			{
 				OnEnabled();
 			}

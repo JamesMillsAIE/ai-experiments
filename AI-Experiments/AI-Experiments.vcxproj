@@ -185,6 +185,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Agents\Agent.cpp" />
     <ClCompile Include="source\Agents\AgentManager.cpp" />
+    <ClCompile Include="source\Agents\NameGenerator.cpp" />
     <ClCompile Include="source\AiGame.cpp" />
     <ClCompile Include="source\AI\AiBrain.cpp" />
     <ClCompile Include="source\AI\Pathfinding\AStar.cpp" />
@@ -212,6 +213,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="source\Agents\Agent.h" />
     <ClInclude Include="source\Agents\AgentManager.h" />
+    <ClInclude Include="source\Agents\NameGenerator.h" />
     <ClInclude Include="source\AiGame.h" />
     <ClInclude Include="source\AI\AiBrain.h" />
     <ClInclude Include="source\AI\Pathfinding\AStar.h" />
@@ -239,6 +241,10 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <Image Include="resources\textures\node_map.png" />
     <Image Include="resources\textures\obstacle_map.png" />
     <Image Include="resources\textures\world_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\configuration\first_names.txt" />
+    <Text Include="resources\configuration\last_names.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

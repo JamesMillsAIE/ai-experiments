@@ -6,6 +6,7 @@
 
 #include "Agents/Agent.h"
 #include "Agents/AgentManager.h"
+#include "Agents/NameGenerator.h"
 
 #include "AI/Pathfinding/AStar.h"
 
@@ -23,6 +24,8 @@ AiGame::~AiGame() = default;
 
 bool AiGame::Startup()
 {
+	NameGenerator::Load();
+
 	AStar::InitialiseFrom(CELL_SIZE * m_worldScaleFactor, "resources/textures/obstacle_map.png", true);
 
 	m_background = new Texture("resources/textures/world_map.png");

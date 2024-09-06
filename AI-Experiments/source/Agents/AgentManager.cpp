@@ -8,6 +8,7 @@
 #include <glm/gtc/round.hpp>
 
 #include "Agent.h"
+#include "imgui_internal.h"
 
 void AgentManager::Spawn(Agent* agent)
 {
@@ -120,5 +121,10 @@ void AgentManager::HandleImGui(EVerbosity verbosity)
 				}
 			}
 		}
+	}
+
+	if(m_selected)
+	{
+		ImGui::Text("Name: %s", m_selected->m_name.c_str());
 	}
 }

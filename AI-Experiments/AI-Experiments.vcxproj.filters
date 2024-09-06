@@ -76,6 +76,9 @@
     <Filter Include="Project\Header Files\AI\Pathfinding">
       <UniqueIdentifier>{0ca3efda-ac14-4813-9ce2-f8b1cad0bc2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Resource Files\Configuration">
+      <UniqueIdentifier>{2adcfb95-1153-4a29-ba3e-5068038e5cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AiGame.cpp">
@@ -151,6 +154,9 @@
       <Filter>Project\Source Files\AI\Pathfinding</Filter>
     </ClCompile>
     <ClCompile Include="source\AI\AiBrain.cpp">
+      <Filter>Project\Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Agents\NameGenerator.cpp">
       <Filter>Project\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -240,6 +246,9 @@
       <Filter>Project\Header Files\AI\Pathfinding</Filter>
     </ClInclude>
     <ClInclude Include="source\AI\AiBrain.h">
+      <Filter>Project\Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Agents\NameGenerator.h">
       <Filter>Project\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -258,5 +267,13 @@
     <Image Include="resources\textures\world_map.png">
       <Filter>Project\Resource Files\Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\configuration\first_names.txt">
+      <Filter>Project\Resource Files\Configuration</Filter>
+    </Text>
+    <Text Include="resources\configuration\last_names.txt">
+      <Filter>Project\Resource Files\Configuration</Filter>
+    </Text>
   </ItemGroup>
 </Project>

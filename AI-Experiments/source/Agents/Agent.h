@@ -1,10 +1,12 @@
 #pragma once
 
 #include <list>
+#include <string>
 
 #include <glm/vec2.hpp>
 
 using std::list;
+using std::string;
 
 using glm::vec2;
 
@@ -32,6 +34,7 @@ private:
 	Random* m_random;
 
 	AgentManager* m_owner;
+	string m_name;
 
 private:
 	void Initialise(vec2 position, Random* random, AgentManager* owner);

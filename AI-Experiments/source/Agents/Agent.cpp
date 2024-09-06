@@ -14,8 +14,9 @@
 
 Agent::Agent()
 	: m_position{ 0 }, m_scale{ WORLD_CELL_SIZE, WORLD_CELL_SIZE }, m_rotation{ 0 }, m_random{ nullptr },
-	m_owner{ nullptr }, m_sprite{ nullptr }, m_brain{ new AiBrain }
+	m_owner{ nullptr }, m_sprite{ nullptr }
 {
+	m_brain = new AiBrain(this);
 }
 
 Agent::~Agent() = default;
@@ -54,6 +55,7 @@ void Agent::Initialise(vec2 position, Random* random, AgentManager* owner)
 
 	if (m_brain)
 	{
+		m_brain->m_agent = this;
 		m_brain->m_window = owner->m_window;
 		m_brain->m_random = m_random;
 	}
@@ -89,4 +91,9 @@ void Agent::Highlight(Renderer2D* renderer) const
 vec2 Agent::GetPosition() const
 {
 	return m_position;
+}
+
+AiBrain* Agent::GetBrain() const
+{
+	return m_brain;
 }

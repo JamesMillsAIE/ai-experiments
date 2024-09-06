@@ -33,6 +33,8 @@ public:
 
 	vec2 GetPosition() const;
 
+	AiBrain* GetBrain() const;
+
 protected:
 	vec2 m_position;
 	vec2 m_scale;

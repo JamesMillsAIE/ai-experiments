@@ -13,18 +13,21 @@ class Behaviour;
 class Random;
 class Window;
 class Renderer2D;
+class Agent;
 
 class AiBrain
 {
 	friend class Agent;
 
 public:
-	AiBrain();
+	explicit AiBrain(Agent* agent);
 	~AiBrain();
 
 public:
 	void Run(Behaviour* behaviour);
 	void Stop(Behaviour* behaviour);
+
+	Agent* GetAgent() const;
 
 private:
 	typedef void(AiBrain::* ListChange)(Behaviour*);
@@ -35,6 +38,8 @@ private:
 
 	Random* m_random;
 	Window* m_window;
+
+	Agent* m_agent;
 
 private:
 	void Tick();

@@ -2,8 +2,8 @@
 
 #include "Behaviours/Behaviour.h"
 
-AiBrain::AiBrain()
-	: m_random{ nullptr }, m_window{ nullptr }
+AiBrain::AiBrain(Agent* agent)
+	: m_random{ nullptr }, m_window{ nullptr }, m_agent{ agent }
 {
 }
 
@@ -35,6 +35,11 @@ void AiBrain::Stop(Behaviour* behaviour)
 	}
 
 	m_changes.emplace_back(&AiBrain::RemoveBehaviour, behaviour);
+}
+
+Agent* AiBrain::GetAgent() const
+{
+	return m_agent;
 }
 
 void AiBrain::Tick()
@@ -78,6 +83,7 @@ void AiBrain::HandleImGui(const EVerbosity verbosity) const
 
 void AiBrain::AddBehaviour(Behaviour* behaviour)
 {
+	behaviour->m_owner = this;
 	m_behaviours.emplace_back(behaviour);
 }
 

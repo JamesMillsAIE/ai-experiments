@@ -8,6 +8,7 @@
 #include "Agents/AgentManager.h"
 #include "Agents/NameGenerator.h"
 
+#include "AI/AiBrain.h"
 #include "AI/Pathfinding/AStar.h"
 
 using Debugging::Debugger;
@@ -29,6 +30,7 @@ bool AiGame::Startup()
 	m_background = new Texture("resources/textures/world_map.png");
 
 	m_agentManager = new AgentManager(m_random, m_window);
+
 	m_agentManager->Spawn(new Agent);
 
 	return true;

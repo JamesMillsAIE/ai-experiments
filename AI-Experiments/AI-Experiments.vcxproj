@@ -188,6 +188,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Agents\NameGenerator.cpp" />
     <ClCompile Include="source\AiGame.cpp" />
     <ClCompile Include="source\AI\AiBrain.cpp" />
+    <ClCompile Include="source\AI\Behaviours\Behaviour.cpp" />
     <ClCompile Include="source\AI\Pathfinding\AStar.cpp" />
     <ClCompile Include="source\AI\Pathfinding\PathfindingEdge.cpp" />
     <ClCompile Include="source\AI\Pathfinding\PathfindingNode.cpp" />
@@ -218,6 +219,7 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Agents\NameGenerator.h" />
     <ClInclude Include="source\AiGame.h" />
     <ClInclude Include="source\AI\AiBrain.h" />
+    <ClInclude Include="source\AI\Behaviours\Behaviour.h" />
     <ClInclude Include="source\AI\Pathfinding\AStar.h" />
     <ClInclude Include="source\AI\Pathfinding\PathfindingEdge.h" />
     <ClInclude Include="source\AI\Pathfinding\PathfindingGraph.h" />

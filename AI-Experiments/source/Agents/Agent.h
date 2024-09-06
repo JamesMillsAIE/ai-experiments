@@ -15,6 +15,7 @@ using glm::vec2;
 class Renderer2D;
 class Sprite;
 class Random;
+class AiBrain;
 
 class Agent
 {
@@ -23,11 +24,11 @@ public:
 	~Agent();
 
 public:
-	void Tick();
+	void Tick() const;
 	void Render() const;
 
 	void RenderDebug(Renderer2D* renderer, EVerbosity verbosity) const;
-	void HandleImGui(EVerbosity verbosity);
+	void HandleImGui(EVerbosity verbosity) const;
 	void Highlight(Renderer2D* renderer) const;
 
 	vec2 GetPosition() const;
@@ -43,6 +44,7 @@ protected:
 	string m_name;
 
 	Sprite* m_sprite;
+	AiBrain* m_brain;
 
 private:
 	friend void AgentManager::InitialiseAgent(Agent* agent);

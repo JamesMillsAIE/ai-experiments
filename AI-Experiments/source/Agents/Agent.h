@@ -24,11 +24,11 @@ public:
 
 public:
 	void Tick();
-	void Render();
+	void Render() const;
 
-	void RenderDebug(Renderer2D* renderer, EVerbosity verbosity);
+	void RenderDebug(Renderer2D* renderer, EVerbosity verbosity) const;
 	void HandleImGui(EVerbosity verbosity);
-	void Highlight(Renderer2D* renderer);
+	void Highlight(Renderer2D* renderer) const;
 
 	vec2 GetPosition() const;
 

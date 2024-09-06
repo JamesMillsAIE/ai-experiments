@@ -150,6 +150,9 @@
     <ClCompile Include="source\AI\Pathfinding\PathfindingEdge.cpp">
       <Filter>Project\Source Files\AI\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="source\AI\AiBrain.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AiGame.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="source\AI\Pathfinding\PathfindingGraph.h">
       <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\AiBrain.h">
+      <Filter>Project\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

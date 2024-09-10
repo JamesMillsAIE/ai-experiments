@@ -102,8 +102,8 @@
       <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,8 +126,8 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,8 +146,8 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -170,8 +170,8 @@ xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

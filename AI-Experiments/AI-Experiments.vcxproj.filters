@@ -156,11 +156,17 @@
     <ClCompile Include="source\AI\AiBrain.cpp">
       <Filter>Project\Source Files\AI</Filter>
     </ClCompile>
-    <ClCompile Include="source\Agents\NameGenerator.cpp">
-      <Filter>Project\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Core\Debugging\ImGuiTools.cpp">
       <Filter>Core\Source Files\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Behaviours\Behaviour.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Core\Rendering\Sprite.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Agents\NameGenerator.cpp">
+      <Filter>Project\Source Files\Agents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +257,17 @@
     <ClInclude Include="source\AI\AiBrain.h">
       <Filter>Project\Header Files\AI</Filter>
     </ClInclude>
-    <ClInclude Include="source\Agents\NameGenerator.h">
-      <Filter>Project\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Core\Debugging\ImGuiTools.h">
       <Filter>Core\Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Behaviours\Behaviour.h">
+      <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Core\Rendering\Sprite.h">
+      <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Agents\NameGenerator.h">
+      <Filter>Project\Header Files\Agents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +284,9 @@
     </Image>
     <Image Include="resources\textures\world_map.png">
       <Filter>Project\Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="resources\textures\characters.png">
+      <Filter>Project\Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

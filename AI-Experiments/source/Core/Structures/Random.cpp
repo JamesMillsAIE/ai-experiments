@@ -41,8 +41,12 @@ void Random::Seed(string seed)
 {
 	if(seed.empty())
 	{
-		srand(time(nullptr));
-		seed = std::to_string(rand());
+#pragma warning(push)
+#pragma warning(disable:4244)
+		srand(time(nullptr));  // NOLINT(clang-diagnostic-shorten-64-to-32, cert-msc51-cpp)
+#pragma warning(pop)
+
+		seed = std::to_string(rand());  // NOLINT(concurrency-mt-unsafe)
 	}
 
 	m_engine = new mt19937_64(Hash(seed));

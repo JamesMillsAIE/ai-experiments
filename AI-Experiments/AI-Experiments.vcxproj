@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,7 +115,7 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,7 +137,7 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,7 +159,7 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -183,6 +183,11 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="poly2tri\common\shapes.cc" />
+    <ClCompile Include="poly2tri\sweep\advancing_front.cc" />
+    <ClCompile Include="poly2tri\sweep\cdt.cc" />
+    <ClCompile Include="poly2tri\sweep\sweep.cc" />
+    <ClCompile Include="poly2tri\sweep\sweep_context.cc" />
     <ClCompile Include="source\Agents\Agent.cpp" />
     <ClCompile Include="source\Agents\AgentManager.cpp" />
     <ClCompile Include="source\Agents\NameGenerator.cpp" />
@@ -214,6 +219,13 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="poly2tri\common\shapes.h" />
+    <ClInclude Include="poly2tri\common\utils.h" />
+    <ClInclude Include="poly2tri\poly2tri.h" />
+    <ClInclude Include="poly2tri\sweep\advancing_front.h" />
+    <ClInclude Include="poly2tri\sweep\cdt.h" />
+    <ClInclude Include="poly2tri\sweep\sweep.h" />
+    <ClInclude Include="poly2tri\sweep\sweep_context.h" />
     <ClInclude Include="source\Agents\Agent.h" />
     <ClInclude Include="source\Agents\AgentManager.h" />
     <ClInclude Include="source\Agents\NameGenerator.h" />

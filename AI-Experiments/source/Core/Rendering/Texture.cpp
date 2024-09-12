@@ -8,7 +8,7 @@
 #include <stb/stb_image.h>
 
 Texture::Texture()
-	: m_filename{ new char[] {"none"} }, m_width{ 0 }, m_height{ 0 }, m_glHandle{ 0 }, m_format{ 0 },
+	: m_width{ 0 }, m_height{ 0 }, m_glHandle{ 0 }, m_format{ 0 },
 	m_loadedPixels{ nullptr }
 {
 }
@@ -21,7 +21,7 @@ Texture::Texture(const string& filename)
 }
 
 Texture::Texture(unsigned int width, unsigned int height, EFormat format, const unsigned char* pixels)
-	: m_filename{ new char[] {"none"} }, m_width{ width }, m_height{ height }, m_format{ format },
+	: m_width{ width }, m_height{ height }, m_format{ format },
 	m_loadedPixels{ nullptr }
 {
 	Create(width, height, format, pixels);
@@ -30,7 +30,9 @@ Texture::Texture(unsigned int width, unsigned int height, EFormat format, const 
 Texture::~Texture()
 {
 	if (m_glHandle != 0)
+	{
 		glDeleteTextures(1, &m_glHandle);
+	}
 
 	if (m_loadedPixels != nullptr)
 	{
@@ -47,7 +49,7 @@ bool Texture::Load(string filename)
 		m_glHandle = 0;
 		m_width = 0;
 		m_height = 0;
-		m_filename = new char[] {"none"};
+		m_filename.clear();
 	}
 
 	int x = 0, y = 0, comp = 0;
@@ -110,7 +112,7 @@ void Texture::Create(unsigned int width, unsigned int height, EFormat format, co
 	{
 		glDeleteTextures(1, &m_glHandle);
 		m_glHandle = 0;
-		m_filename = new char[] { "none" };
+		m_filename = "none";
 	}
 
 	m_width = width;

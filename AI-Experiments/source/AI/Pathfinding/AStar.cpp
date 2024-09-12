@@ -11,8 +11,6 @@
 
 namespace Pathfinding
 {
-	PathfindingGraph<AStarNode>* AStar::m_graph = nullptr;
-
 	struct NodeComparator
 	{
 	public:
@@ -35,15 +33,60 @@ namespace Pathfinding
 		return gScore + hScore;
 	}
 
-	bool AStar::FindPath(const vec2 start, const vec2 end,const Heuristic heuristic, list<AStarNode*>& path)
+	AStar::AStar()
+		: m_graph{ nullptr }, m_heuristic{ nullptr }
+	{
+	}
+
+	AStar::~AStar()
+	{
+		if (m_graph)
+		{
+			delete m_graph;
+			m_graph = nullptr;
+		}
+	}
+
+	void AStar::InitialiseFrom(float spacing, const string& texture, bool isObstacleMap)
 	{
 		if (!m_graph)
+		{
+			Texture* nodeMap = new Texture(texture);
+
+			uint width = nodeMap->GetWidth();
+			uint height = nodeMap->GetHeight();
+
+			m_graph = new PathfindingGraph<AStarNode>(width, height, spacing);
+			m_graph->BuildFrom(nodeMap, isObstacleMap);
+
+			delete nodeMap;
+		}
+	}
+
+	void AStar::SetHeuristic(const Heuristic& heuristic)
+	{
+		m_heuristic = heuristic;
+	}
+
+	PathfindingNode* AStar::RandomNode(const Random* random) const
+	{
+		return nullptr;
+	}
+
+	PathfindingNode* AStar::GetClosestNode(const vec2& position) const
+	{
+		return m_graph->GetNearest(position);
+	}
+
+	bool AStar::FindPath(const vec2& start, const vec2& end, vector<vec2>& path)
+	{
+		if (!m_graph || !m_heuristic)
 		{
 			return false;
 		}
 
-		AStarNode* startNode = m_graph->FindNode(start);
-		AStarNode* endNode = m_graph->FindNode(end);
+		AStarNode* startNode = m_graph->GetNearest(start);
+		AStarNode* endNode = m_graph->GetNearest(end);
 
 		if (!startNode || !endNode)
 		{
@@ -75,7 +118,7 @@ namespace Pathfinding
 					if (std::ranges::find(closedList, connection->endPoint) == closedList.end())
 					{
 						const float gScore = current->gScore + connection->cost;
-						const float hScore = heuristic(current, aStarNode, m_graph);
+						const float hScore = m_heuristic(current, aStarNode, m_graph);
 						const float fScore = gScore + hScore;
 
 						if (openList.find(aStarNode) == openList.end())
@@ -103,7 +146,7 @@ namespace Pathfinding
 			AStarNode* current = endNode;
 			while (current)
 			{
-				path.emplace_back(current);
+				path.emplace_back(current->position);
 
 				current = dynamic_cast<AStarNode*>(current->previous);
 			}
@@ -114,19 +157,24 @@ namespace Pathfinding
 		return found;
 	}
 
-	void AStar::InitialiseFrom(float spacing, const string& texture, bool isObstacleMap)
+	string AStar::DebugCategory()
 	{
-		if (!m_graph)
+		return "AStar";
+	}
+
+	void AStar::RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity)
+	{
+		if(m_graph)
 		{
-			Texture* nodeMap = new Texture(texture);
+			m_graph->RenderDebuggingTools(renderer, verbosity);
+		}
+	}
 
-			uint width = nodeMap->GetWidth();
-			uint height = nodeMap->GetHeight();
-
-			m_graph = new PathfindingGraph<AStarNode>(width, height, spacing);
-			m_graph->BuildFrom(nodeMap, isObstacleMap);
-
-			delete nodeMap;
+	void AStar::HandleImGui(EVerbosity verbosity)
+	{
+		if (m_graph)
+		{
+			m_graph->HandleImGui(verbosity);
 		}
 	}
 }

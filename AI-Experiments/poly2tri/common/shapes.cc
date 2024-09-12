@@ -124,11 +124,16 @@ namespace p2t {
 	Point* Triangle::OppositePoint(Triangle& t, Point& p)
 	{
 		Point* cw = t.PointCW(p);
-		double x = cw->x;
-		double y = cw->y;
-		x = p.x;
-		y = p.y;
-		return PointCW(*cw);
+		if (cw != nullptr)
+		{
+			double x = cw->x;
+			double y = cw->y;
+			x = p.x;
+			y = p.y;
+			return PointCW(*cw);
+		}
+
+		return nullptr;
 	}
 
 	// Legalized triangle by rotating clockwise around point(0)
@@ -242,6 +247,7 @@ namespace p2t {
 			return points_[1];
 		}
 		assert(0);
+		return nullptr;
 	}
 
 	// The point counter-clockwise to given point
@@ -257,6 +263,7 @@ namespace p2t {
 			return points_[0];
 		}
 		assert(0);
+		return nullptr;
 	}
 
 	// The neighbor clockwise to given point

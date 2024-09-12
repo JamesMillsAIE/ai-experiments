@@ -90,7 +90,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -134,7 +134,7 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -195,6 +195,9 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\AI\AiBrain.cpp" />
     <ClCompile Include="source\AI\Behaviours\Behaviour.cpp" />
     <ClCompile Include="source\AI\Pathfinding\AStar.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMesh.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMeshNode.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMeshObstacle.cpp" />
     <ClCompile Include="source\AI\Pathfinding\PathfindingEdge.cpp" />
     <ClCompile Include="source\AI\Pathfinding\PathfindingNode.cpp" />
     <ClCompile Include="source\Core\Debugging\Debugger.cpp" />
@@ -203,11 +206,14 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Core\Game.cpp" />
     <ClCompile Include="source\Core\GameTime.cpp" />
     <ClCompile Include="source\Core\Input.cpp" />
+    <ClCompile Include="source\Core\Physics.cpp" />
     <ClCompile Include="source\Core\Rendering\Font.cpp" />
     <ClCompile Include="source\Core\Rendering\Renderer2D.cpp" />
     <ClCompile Include="source\Core\Rendering\Sprite.cpp" />
     <ClCompile Include="source\Core\Rendering\Texture.cpp" />
+    <ClCompile Include="source\Core\Structures\Line.cpp" />
     <ClCompile Include="source\Core\Structures\Random.cpp" />
+    <ClCompile Include="source\Core\Structures\Rectangle.cpp" />
     <ClCompile Include="source\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +239,10 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\AI\AiBrain.h" />
     <ClInclude Include="source\AI\Behaviours\Behaviour.h" />
     <ClInclude Include="source\AI\Pathfinding\AStar.h" />
+    <ClInclude Include="source\AI\Pathfinding\IPathProvider.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMesh.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMeshNode.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMeshObstacle.h" />
     <ClInclude Include="source\AI\Pathfinding\PathfindingEdge.h" />
     <ClInclude Include="source\AI\Pathfinding\PathfindingGraph.h" />
     <ClInclude Include="source\AI\Pathfinding\PathfindingNode.h" />
@@ -242,13 +252,16 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Core\Game.h" />
     <ClInclude Include="source\Core\GameTime.h" />
     <ClInclude Include="source\Core\Input.h" />
+    <ClInclude Include="source\Core\Physics.h" />
     <ClInclude Include="source\Core\Rendering\Font.h" />
     <ClInclude Include="source\Core\Rendering\Renderer2D.h" />
     <ClInclude Include="source\Core\Rendering\Sprite.h" />
     <ClInclude Include="source\Core\Rendering\Texture.h" />
+    <ClInclude Include="source\Core\Structures\Line.h" />
     <ClInclude Include="source\Core\Structures\MultiValueStruct.h" />
     <ClInclude Include="source\Core\Structures\PriorityHeap.h" />
     <ClInclude Include="source\Core\Structures\Random.h" />
+    <ClInclude Include="source\Core\Structures\Rectangle.h" />
     <ClInclude Include="source\Core\Window.h" />
     <ClInclude Include="source\Global.h" />
   </ItemGroup>

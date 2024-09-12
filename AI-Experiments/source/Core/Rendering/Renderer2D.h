@@ -12,7 +12,7 @@ class Texture;
 class Font;
 
 constexpr int TEXTURE_STACK_SIZE = 16;
-constexpr size_t MAX_SPRITES = 512;
+constexpr size_t MAX_SPRITES = 1024;
 
 // a class for rendering 2D sprites and font
 class Renderer2D
@@ -28,7 +28,7 @@ public:
 	void End();
 
 	// simple shape rendering
-	void DrawBox(vec2 pos, vec2 size, float rotation = 0.0f, float depth = 0.0f);
+	void DrawBox(vec2 pos, vec2 size, float rotation = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);
 	void DrawBoxLines(vec2 pos, vec2 size, float rotation = 0.0f, float thickness = 1.0f, float depth = 0.0f);
 	void DrawCircle(vec2 pos, float radius, float depth = 0.0f);
 	void DrawCircleLines(vec2 pos, float radius, float thickness = 1.0f, float depth = 0.0f);

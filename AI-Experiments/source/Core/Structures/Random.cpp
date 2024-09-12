@@ -43,7 +43,7 @@ void Random::Seed(string seed)
 	{
 #pragma warning(push)
 #pragma warning(disable:4244)
-		srand(time(nullptr));  // NOLINT(clang-diagnostic-shorten-64-to-32, cert-msc51-cpp)
+		srand(/*time(nullptr)*/42);  // NOLINT(clang-diagnostic-shorten-64-to-32, cert-msc51-cpp)
 #pragma warning(pop)
 
 		seed = std::to_string(rand());  // NOLINT(concurrency-mt-unsafe)

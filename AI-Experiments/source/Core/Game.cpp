@@ -33,11 +33,11 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 
 	Debugger::Create(m_window);
 
+	m_random->Seed("");
+
 	// start game loop if successfully initialised
 	if (m_window->Open() && Startup())
 	{
-		m_random->Seed("");
-
 		Input::Create();
 		GameTime::Init();
 
@@ -64,13 +64,13 @@ void Game::Run(const char* title, const int width, const int height, const bool 
 
 			m_window->NewFrame();
 
-			Render();
-
 			if (Debugger* debugger = Debugger::m_instance)
 			{
 				debugger->Tick();
 				debugger->Render(Renderer2D::Get());
 			}
+
+			Render();
 
 			m_window->EndFrame();
 		}

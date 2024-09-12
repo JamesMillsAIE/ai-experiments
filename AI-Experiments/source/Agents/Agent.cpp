@@ -19,7 +19,11 @@ Agent::Agent()
 	m_brain = new AiBrain(this);
 }
 
-Agent::~Agent() = default;
+Agent::~Agent()
+{
+	delete m_brain;
+	delete m_sprite;
+}
 
 void Agent::Tick() const
 {

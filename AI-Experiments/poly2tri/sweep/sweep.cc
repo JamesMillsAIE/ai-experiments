@@ -796,6 +796,7 @@ namespace p2t {
 		else {
 			//throw new RuntimeException("[Unsupported] Opposing point on constrained edge");
 			assert(0);
+			return eq;
 		}
 	}
 #pragma warning(pop)

@@ -198,9 +198,9 @@ void Renderer2D::End()
 	m_renderBegun = false;
 }
 
-void Renderer2D::DrawBox(vec2 pos, vec2 size, const float rotation, const float depth)
+void Renderer2D::DrawBox(vec2 pos, vec2 size, const float rotation, const float depth, const float xOrigin, const float yOrigin)
 {
-	DrawSprite(nullptr, pos, size, rotation, depth);
+	DrawSprite(nullptr, pos, size, rotation, depth, xOrigin, yOrigin);
 }
 
 void Renderer2D::DrawBoxLines(vec2 pos, vec2 size, float rotation, float thickness, float depth)

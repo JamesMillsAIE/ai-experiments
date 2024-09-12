@@ -1,7 +1,9 @@
 #pragma once
 
 #include <functional>
+#include <imgui.h>
 #include <iostream>
+#include <vector>
 
 #include <Core/Debugging/IDebugHandler.h>
 #include <Core/Debugging/ImGuiTools.h>
@@ -12,10 +14,12 @@
 #include <glm/vec2.hpp>
 
 #include "Global.h"
-#include "imgui.h"
 #include "PathfindingNode.h"
 
+#include "Core/Physics.h"
+
 using std::function;
+using std::vector;
 
 using glm::vec2;
 
@@ -30,39 +34,29 @@ concept derived = std::is_base_of_v<U, T>;
 namespace Pathfinding
 {
 	template<derived<PathfindingNode> NODE_TYPE>
-	class PathfindingGraph final : public IDebugHandler
+	class PathfindingGraph
 	{
 	public:
 		PathfindingGraph(uint width, uint height, float spacing);
-		~PathfindingGraph() override;
+		~PathfindingGraph();
 
 	public:
-		void Build() const;
-		void BuildFrom(const Texture* texture, bool isObstacleMap = false) const;
+		void BuildFrom(const Texture* texture, bool isObstacleMap = false);
+		void BuildFrom(vector<NODE_TYPE*> nodes);
 		void BuildConnections() const;
 
-		NODE_TYPE* FindNode(vec2 location) const;
+		NODE_TYPE* GetNearest(const vec2& position);
 
-		uint Width() const;
-		uint Height() const;
 		float Spacing() const;
-		bool InsideBounds(vec2 location) const;
-
 		int GetNearbyNodes(vec2 location, list<NODE_TYPE*>& nodes, float searchRadius = 100.f) const;
 
-		void ForEach(function<void(NODE_TYPE*, uint, uint)> predicate) const;
+		void ForEach(function<void(NODE_TYPE*)> predicate) const;
 
-		string DebugCategory() override;
-
-	protected:
-		void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity) override;
-		void HandleImGui(EVerbosity verbosity) override;
+		void RenderDebuggingTools(Renderer2D* renderer, EVerbosity verbosity);
+		void HandleImGui(EVerbosity verbosity);
 
 	private:
-		NODE_TYPE*** m_graph;
-
-		uint m_width;
-		uint m_height;
+		vector<NODE_TYPE*> m_graph;
 
 		float m_spacing;
 
@@ -70,21 +64,21 @@ namespace Pathfinding
 
 	template <derived<PathfindingNode> NODE_TYPE>
 	PathfindingGraph<NODE_TYPE>::PathfindingGraph(uint width, uint height, float spacing)
-		: m_graph{ new NODE_TYPE**[height]}, m_width{width}, m_height{height}, m_spacing{spacing}
+		: m_spacing{ spacing }
 	{
+		m_graph.reserve(height * width);
+
 		for (uint y = 0; y < height; ++y)
 		{
-			m_graph[y] = new NODE_TYPE * [width];
-
 			for (uint x = 0; x < width; ++x)
 			{
-				m_graph[y][x] = nullptr;
+				m_graph.emplace_back(nullptr);
 			}
 		}
 
-		PathfindingNode::walkableColorId = MakeId(PathfindingGraph::DebugCategory(), { "node", "walkable", "color" });
-		PathfindingNode::notWalkableColorId = MakeId(PathfindingGraph::DebugCategory(), { "node", "not", "walkable", "color" });
-		PathfindingNode::connectionColorId = MakeId(PathfindingGraph::DebugCategory(), { "node", "connection", "color" });
+		PathfindingNode::walkableColorId = MakeId("Pathfinding", { "node", "walkable", "color" });
+		PathfindingNode::notWalkableColorId = MakeId("Pathfinding", { "node", "not", "walkable", "color" });
+		PathfindingNode::connectionColorId = MakeId("Pathfinding", { "node", "connection", "color" });
 
 		Debugger::Set(PathfindingNode::walkableColorId, vec3{ .9f, .9f, .9f });
 		Debugger::Set(PathfindingNode::notWalkableColorId, vec3{ .9f, 0.f, 0.f });
@@ -94,51 +88,27 @@ namespace Pathfinding
 	template <derived<PathfindingNode> NODE_TYPE>
 	PathfindingGraph<NODE_TYPE>::~PathfindingGraph()
 	{
-		for (uint y = 0; y < m_height; ++y)
+		for (const auto& node : m_graph)
 		{
-			for (uint x = 0; x < m_width; ++x)
-			{
-				delete m_graph[y][x];
-			}
-
-			delete[] m_graph[y];
+			delete node;
 		}
-
-		delete[] m_graph;
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
-	void PathfindingGraph<NODE_TYPE>::Build() const
+	void PathfindingGraph<NODE_TYPE>::BuildFrom(const Texture* texture, bool isObstacleMap)
 	{
 		const uint uSpacing = static_cast<uint>(m_spacing);
 		const uint halfSpacing = uSpacing / 2;
 
-		for (uint y = 0; y < m_height; ++y)
+		for (uint y = 0; y < texture->GetHeight(); ++y)
 		{
-			for (uint x = 0; x < m_width; ++x)
+			for (uint x = 0; x < texture->GetWidth(); ++x)
 			{
-				m_graph[y][x] = new NODE_TYPE({ x * uSpacing + halfSpacing, y * uSpacing + halfSpacing });
-			}
-		}
-
-		BuildConnections();
-	}
-
-	template <derived<PathfindingNode> NODE_TYPE>
-	void PathfindingGraph<NODE_TYPE>::BuildFrom(const Texture* texture, bool isObstacleMap) const
-	{
-		const uint uSpacing = static_cast<uint>(m_spacing);
-		const uint halfSpacing = uSpacing / 2;
-
-		for (uint y = 0; y < m_height; ++y)
-		{
-			for (uint x = 0; x < m_width; ++x)
-			{
-				m_graph[y][x] = new NODE_TYPE({ x * uSpacing + halfSpacing, y * uSpacing + halfSpacing });
+				m_graph[y * texture->GetWidth() + x] = new NODE_TYPE({ x * uSpacing + halfSpacing, y * uSpacing + halfSpacing });
 
 				if (isObstacleMap && texture)
 				{
-					m_graph[y][x]->walkable = texture->GetPixelAt(x, y) != 0xff0000ff;
+					m_graph[y * texture->GetWidth() + x]->walkable = texture->GetPixelAt(x, y) != 0xff0000ff;
 				}
 			}
 		}
@@ -147,9 +117,21 @@ namespace Pathfinding
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
+	void PathfindingGraph<NODE_TYPE>::BuildFrom(vector<NODE_TYPE*> nodes)
+	{
+		for (const auto& node : m_graph)
+		{
+			delete node;
+		}
+
+		m_graph.clear();
+		m_graph = nodes;
+	}
+
+	template <derived<PathfindingNode> NODE_TYPE>
 	void PathfindingGraph<NODE_TYPE>::BuildConnections() const
 	{
-		ForEach([this](NODE_TYPE* node, uint, uint)
+		ForEach([this](NODE_TYPE* node)
 			{
 				if (!node->walkable)
 				{
@@ -171,26 +153,22 @@ namespace Pathfinding
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
-	NODE_TYPE* PathfindingGraph<NODE_TYPE>::FindNode(vec2 location) const
+	NODE_TYPE* PathfindingGraph<NODE_TYPE>::GetNearest(const vec2& position)
 	{
-		if (!InsideBounds(location))
+		NODE_TYPE* closestNode = nullptr;
+		float closestDist = FLT_MAX;
+
+		for (const auto& node : m_graph)
 		{
-			return nullptr;
+			float dist = glm::distance(node->position, position);
+			if (dist < closestDist)
+			{
+				closestNode = node;
+				closestDist = dist;
+			}
 		}
 
-		return m_graph[static_cast<uint>(location.y / m_spacing)][static_cast<uint>(location.x / m_spacing)];
-	}
-
-	template <derived<PathfindingNode> NODE_TYPE>
-	uint PathfindingGraph<NODE_TYPE>::Width() const
-	{
-		return m_width;
-	}
-
-	template <derived<PathfindingNode> NODE_TYPE>
-	uint PathfindingGraph<NODE_TYPE>::Height() const
-	{
-		return m_height;
+		return closestNode;
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
@@ -200,22 +178,9 @@ namespace Pathfinding
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
-	bool PathfindingGraph<NODE_TYPE>::InsideBounds(vec2 location) const
-	{
-		return location.x >= 0.f && location.x < static_cast<float>(m_width) * m_spacing &&
-			location.y >= 0.f && location.y < static_cast<float>(m_height) * m_spacing;
-	}
-
-	template <derived<PathfindingNode> NODE_TYPE>
 	int PathfindingGraph<NODE_TYPE>::GetNearbyNodes(vec2 location, list<NODE_TYPE*>& nodes, float searchRadius) const
 	{
-		if (!InsideBounds(location))
-		{
-			nodes.clear();
-			return -1;
-		}
-
-		ForEach([&nodes, searchRadius, location](NODE_TYPE* node, uint, uint) -> void
+		ForEach([&nodes, searchRadius, location](NODE_TYPE* node) -> void
 			{
 				if (glm::distance(node->position, location) < searchRadius)
 				{
@@ -227,21 +192,12 @@ namespace Pathfinding
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
-	void PathfindingGraph<NODE_TYPE>::ForEach(function<void(NODE_TYPE*, uint, uint)> predicate) const
+	void PathfindingGraph<NODE_TYPE>::ForEach(function<void(NODE_TYPE*)> predicate) const
 	{
-		for (uint y = 0; y < m_height; ++y)
+		for (const auto& node : m_graph)
 		{
-			for (uint x = 0; x < m_width; ++x)
-			{
-				std::invoke(predicate, m_graph[y][x], x, y);
-			}
+			predicate(node);
 		}
-	}
-
-	template <derived<PathfindingNode> NODE_TYPE>
-	string PathfindingGraph<NODE_TYPE>::DebugCategory()
-	{
-		return "Pathfinding Graph";
 	}
 
 	template <derived<PathfindingNode> NODE_TYPE>
@@ -257,12 +213,12 @@ namespace Pathfinding
 
 			renderer->SetRenderColour(connectionColor);
 
-			ForEach([renderer](const PathfindingNode* node, uint, uint)
+			ForEach([renderer](const PathfindingNode* node)
 				{
 					node->RenderConnections(renderer);
 				});
 
-			ForEach([renderer](const PathfindingNode* node, uint, uint)
+			ForEach([renderer](const PathfindingNode* node)
 				{
 					node->Render(renderer);
 				});
@@ -274,7 +230,7 @@ namespace Pathfinding
 	{
 		if (vec3 walkableColor; Debugger::Get(PathfindingNode::walkableColorId, walkableColor))
 		{
-			if(ImGuiTools::ColorEditField("Walkable Color", walkableColor))
+			if (ImGuiTools::ColorEditField("Walkable Color", walkableColor))
 			{
 				Debugger::Set(PathfindingNode::walkableColorId, walkableColor);
 			}

@@ -1,6 +1,7 @@
 #include "Debugger.h"
 
 #include <imgui.h>
+#include <ranges>
 #include <sstream>
 
 #include <Core/GameTime.h>
@@ -331,7 +332,15 @@ namespace Debugging
 
 	Debugger::Debugger() = default;
 
-	Debugger::~Debugger() = default;
+	Debugger::~Debugger()
+	{
+		for(auto& value : m_debugValues | std::views::values)
+		{
+			delete value;
+		}
+
+		m_debugValues.clear();
+	}
 
 	void Debugger::Tick()
 	{

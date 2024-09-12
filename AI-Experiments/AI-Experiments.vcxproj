@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0331e423-e054-4002-92a6-9516729ad6bd}</ProjectGuid>
-    <RootNamespace>AIPlayground</RootNamespace>
+    <ProjectGuid>{4c5dce6e-5205-4cc9-a877-5f037fdef8d0}</ProjectGuid>
+    <RootNamespace>SampleGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,39 +71,40 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Builds\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Builds\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Builds\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Builds\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;Bootstrap2D.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /q /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +116,8 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,31 +125,32 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;Bootstrap2D.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /q /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;Bootstrap2D.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /q /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +162,8 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;$(SolutionDir)Dependencies\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(ProjectDir)source\;$(ProjectDir)imgui\;$(ProjectDir)poly2tri\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,11 +171,11 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;assimp-vc143-mt.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3dll.lib;opengl32.lib;Bootstrap2D.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /q "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
-xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
+      <Command>xcopy /q /Y "$(SolutionDir)Dependencies\lib\dll" "$(OutDir)"
+xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -188,33 +192,7 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="poly2tri\sweep\cdt.cc" />
     <ClCompile Include="poly2tri\sweep\sweep.cc" />
     <ClCompile Include="poly2tri\sweep\sweep_context.cc" />
-    <ClCompile Include="source\Agents\Agent.cpp" />
-    <ClCompile Include="source\Agents\AgentManager.cpp" />
-    <ClCompile Include="source\Agents\NameGenerator.cpp" />
-    <ClCompile Include="source\AiGame.cpp" />
-    <ClCompile Include="source\AI\AiBrain.cpp" />
-    <ClCompile Include="source\AI\Behaviours\Behaviour.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\AStar.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMesh.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMeshNode.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavMeshObstacle.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\PathfindingEdge.cpp" />
-    <ClCompile Include="source\AI\Pathfinding\PathfindingNode.cpp" />
-    <ClCompile Include="source\Core\Debugging\Debugger.cpp" />
-    <ClCompile Include="source\Core\Debugging\IDebugHandler.cpp" />
-    <ClCompile Include="source\Core\Debugging\ImGuiTools.cpp" />
-    <ClCompile Include="source\Core\Game.cpp" />
-    <ClCompile Include="source\Core\GameTime.cpp" />
-    <ClCompile Include="source\Core\Input.cpp" />
-    <ClCompile Include="source\Core\Physics.cpp" />
-    <ClCompile Include="source\Core\Rendering\Font.cpp" />
-    <ClCompile Include="source\Core\Rendering\Renderer2D.cpp" />
-    <ClCompile Include="source\Core\Rendering\Sprite.cpp" />
-    <ClCompile Include="source\Core\Rendering\Texture.cpp" />
-    <ClCompile Include="source\Core\Structures\Line.cpp" />
-    <ClCompile Include="source\Core\Structures\Random.cpp" />
-    <ClCompile Include="source\Core\Structures\Rectangle.cpp" />
-    <ClCompile Include="source\Core\Window.cpp" />
+    <ClCompile Include="source\AiApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui.h" />
@@ -232,51 +210,24 @@ xcopy /Y /s /q "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="poly2tri\sweep\cdt.h" />
     <ClInclude Include="poly2tri\sweep\sweep.h" />
     <ClInclude Include="poly2tri\sweep\sweep_context.h" />
-    <ClInclude Include="source\Agents\Agent.h" />
-    <ClInclude Include="source\Agents\AgentManager.h" />
-    <ClInclude Include="source\Agents\NameGenerator.h" />
-    <ClInclude Include="source\AiGame.h" />
-    <ClInclude Include="source\AI\AiBrain.h" />
-    <ClInclude Include="source\AI\Behaviours\Behaviour.h" />
-    <ClInclude Include="source\AI\Pathfinding\AStar.h" />
-    <ClInclude Include="source\AI\Pathfinding\IPathProvider.h" />
-    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMesh.h" />
-    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMeshNode.h" />
-    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavMeshObstacle.h" />
-    <ClInclude Include="source\AI\Pathfinding\PathfindingEdge.h" />
-    <ClInclude Include="source\AI\Pathfinding\PathfindingGraph.h" />
-    <ClInclude Include="source\AI\Pathfinding\PathfindingNode.h" />
-    <ClInclude Include="source\Core\Debugging\Debugger.h" />
-    <ClInclude Include="source\Core\Debugging\IDebugHandler.h" />
-    <ClInclude Include="source\Core\Debugging\ImGuiTools.h" />
-    <ClInclude Include="source\Core\Game.h" />
-    <ClInclude Include="source\Core\GameTime.h" />
-    <ClInclude Include="source\Core\Input.h" />
-    <ClInclude Include="source\Core\Physics.h" />
-    <ClInclude Include="source\Core\Rendering\Font.h" />
-    <ClInclude Include="source\Core\Rendering\Renderer2D.h" />
-    <ClInclude Include="source\Core\Rendering\Sprite.h" />
-    <ClInclude Include="source\Core\Rendering\Texture.h" />
-    <ClInclude Include="source\Core\Structures\Line.h" />
-    <ClInclude Include="source\Core\Structures\MultiValueStruct.h" />
-    <ClInclude Include="source\Core\Structures\PriorityHeap.h" />
-    <ClInclude Include="source\Core\Structures\Random.h" />
-    <ClInclude Include="source\Core\Structures\Rectangle.h" />
-    <ClInclude Include="source\Core\Window.h" />
-    <ClInclude Include="source\Global.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\font\consolas.ttf" />
+    <ClInclude Include="source\AiApplication.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png" />
     <Image Include="resources\textures\node_map.png" />
     <Image Include="resources\textures\obstacle_map.png" />
     <Image Include="resources\textures\world_map.png" />
+    <Image Include="resources\tiled\roguelikeSheet_transparent.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\configuration\first_names.txt" />
     <Text Include="resources\configuration\last_names.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\tiled\world_map.tmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\font\consolas.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

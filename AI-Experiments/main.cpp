@@ -4,19 +4,19 @@
 
 #include <cstdlib>
 
-#include "AiGame.h"
+#include "AiApplication.h"
 
 int main()
 {
 #ifdef _DEBUG
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
 
-    AiGame* game = new AiGame;
+	AiApplication* app = new AiApplication;
 
-    game->Run("AI Playground", 912, 840, false);
+	app->Run();
 
-    delete game;
+	delete app;
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

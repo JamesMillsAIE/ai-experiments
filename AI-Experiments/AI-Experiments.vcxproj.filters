@@ -61,6 +61,18 @@
     <Filter Include="Project\Resource Files\Tiled">
       <UniqueIdentifier>{b7b36b18-4756-408b-98e0-9de2a1adc373}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Header Files\Physics">
+      <UniqueIdentifier>{b540068e-d46e-42bb-a2ff-1871aa0ed35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\Physics">
+      <UniqueIdentifier>{cc5ee607-48ed-4eec-ae63-0cdc5d3879f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\Physics\Shapes">
+      <UniqueIdentifier>{1381405b-530a-4bd6-83e3-405d53c47209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\Physics\Shapes">
+      <UniqueIdentifier>{b6f6e9a3-281d-47e3-9cf4-ea8fae092db2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,6 +118,15 @@
       <Filter>Project\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Debugging\ImGuiAdapter.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Physics\Collision.cpp">
+      <Filter>Project\Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Global.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Physics\Shapes\Line.cpp">
       <Filter>Project\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -159,6 +180,15 @@
       <Filter>Project\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Debugging\ImGuiAdapter.h">
+      <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Physics\Collision.h">
+      <Filter>Project\Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Global.h">
+      <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Physics\Shapes\Line.h">
       <Filter>Project\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

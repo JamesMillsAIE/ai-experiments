@@ -196,7 +196,9 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Debugging\ImGuiAdapter.cpp" />
     <ClCompile Include="source\Global.cpp" />
     <ClCompile Include="source\Physics\Collision.cpp" />
+    <ClCompile Include="source\Physics\Shapes\Circle.cpp" />
     <ClCompile Include="source\Physics\Shapes\Line.cpp" />
+    <ClCompile Include="source\Physics\Shapes\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui.h" />
@@ -218,7 +220,9 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Debugging\ImGuiAdapter.h" />
     <ClInclude Include="source\Global.h" />
     <ClInclude Include="source\Physics\Collision.h" />
+    <ClInclude Include="source\Physics\Shapes\Circle.h" />
     <ClInclude Include="source\Physics\Shapes\Line.h" />
+    <ClInclude Include="source\Physics\Shapes\Triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png" />

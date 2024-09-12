@@ -10,14 +10,20 @@ using glm::vec2;
 
 namespace Physics
 {
+	class Circle;
+	class Line;
+	class Triangle;
+
 	class Collision
 	{
 	public:
-		static bool CheckCollisionLines(const vec2& start1, const vec2& end1, const vec2& start2, const vec2& end2, vec2* collisionPoint);
-		static bool CheckCollisionPointTriangle(const vec2& point, const vec2& p1, const vec2& p2, const vec2& p3);
-
+		static bool CheckCollisionPointTriangle(const vec2& point, const Triangle& tri);
 		static bool CheckCollisionPointRec(const vec2& point, const Rectangle& rect);
+		static bool CheckCollisionPointCircle(const vec2& point, const Circle& circle);
+
+		static bool CheckCollisionLines(const Line& a, const Line& b, vec2* collisionPoint);
 		static bool CheckCollisionRecs(const Rectangle& a, const Rectangle& b);
+		static bool CheckCollisionCircles(const Circle& a, const Circle& b);
 
 	};
 }

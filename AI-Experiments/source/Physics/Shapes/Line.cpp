@@ -59,7 +59,7 @@ namespace Physics
 	{
 		vec2* intersection = new vec2;
 
-		if (Collision::CheckCollisionLines(start, end, line.start, line.end, intersection))
+		if (Collision::CheckCollisionLines(*this, line, intersection))
 		{
 			return intersection;
 		}

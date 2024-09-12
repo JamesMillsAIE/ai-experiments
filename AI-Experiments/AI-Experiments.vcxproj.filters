@@ -127,7 +127,13 @@
       <Filter>Project\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Physics\Shapes\Line.cpp">
-      <Filter>Project\Source Files</Filter>
+      <Filter>Project\Source Files\Physics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Physics\Shapes\Triangle.cpp">
+      <Filter>Project\Source Files\Physics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Physics\Shapes\Circle.cpp">
+      <Filter>Project\Source Files\Physics\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +195,13 @@
       <Filter>Project\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Physics\Shapes\Line.h">
-      <Filter>Project\Header Files</Filter>
+      <Filter>Project\Header Files\Physics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Physics\Shapes\Triangle.h">
+      <Filter>Project\Header Files\Physics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Physics\Shapes\Circle.h">
+      <Filter>Project\Header Files\Physics\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

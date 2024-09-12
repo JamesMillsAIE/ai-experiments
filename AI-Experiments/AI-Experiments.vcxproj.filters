@@ -105,6 +105,9 @@
     <ClCompile Include="source\AiApplication.cpp">
       <Filter>Project\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Debugging\ImGuiAdapter.cpp">
+      <Filter>Project\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui_impl_opengl3.h">
@@ -153,6 +156,9 @@
       <Filter>ThirdParty\poly2tri\Header Files\Sweep</Filter>
     </ClInclude>
     <ClInclude Include="source\AiApplication.h">
+      <Filter>Project\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Debugging\ImGuiAdapter.h">
       <Filter>Project\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

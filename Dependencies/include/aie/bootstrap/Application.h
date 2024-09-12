@@ -27,6 +27,7 @@ namespace aie
 	public:
 		Application() = delete;
 		Application(int width, int height, const char* title, Color clrColor);
+		Application(int width, int height, const char* title, Color clrColor, const string& randomSeed);
 		virtual ~Application();
 
 	public:

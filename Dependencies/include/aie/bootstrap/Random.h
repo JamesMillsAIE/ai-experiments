@@ -11,16 +11,14 @@ namespace aie
 {
 	class DLL Random
 	{
-	public:
-		Random();
-		~Random();
+		friend class Application;
 
+	public:
+		Random() = delete;
 		Random(const Random&) = delete;
 		Random(Random&&) = delete;
 
 	public:
-		void Seed(string seed);
-
 		bool Boolean() const;
 		unsigned char Byte() const;
 		unsigned short UShort() const;
@@ -63,6 +61,11 @@ namespace aie
 
 	private:
 		mt19937_64* m_engine;
+
+	private:
+		explicit Random(string seed);
+		~Random();
+
 	};
 }
 

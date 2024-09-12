@@ -4,6 +4,8 @@
 
 using aie::Application;
 
+class ImGuiAdapter;
+
 class AiApplication final : public Application
 {
 public:
@@ -14,6 +16,9 @@ protected:
 	void Tick() override;
 	void Render() override;
 	void Shutdown() override;
+
+private:
+	ImGuiAdapter* m_imGui;
 
 };
 

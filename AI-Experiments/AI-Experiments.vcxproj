@@ -193,6 +193,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="poly2tri\sweep\sweep.cc" />
     <ClCompile Include="poly2tri\sweep\sweep_context.cc" />
     <ClCompile Include="source\AiApplication.cpp" />
+    <ClCompile Include="source\Debugging\ImGuiAdapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui.h" />
@@ -211,6 +212,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="poly2tri\sweep\sweep.h" />
     <ClInclude Include="poly2tri\sweep\sweep_context.h" />
     <ClInclude Include="source\AiApplication.h" />
+    <ClInclude Include="source\Debugging\ImGuiAdapter.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png" />

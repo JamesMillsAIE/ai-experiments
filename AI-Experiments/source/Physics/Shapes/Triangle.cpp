@@ -7,4 +7,13 @@ namespace Physics
 	{
 
 	}
+
+	vec2 Triangle::GetCenter() const
+	{
+		vec2 center = vertexA + vertexB + vertexC;
+
+		center /= 3;
+
+		return center;
+	}
 }

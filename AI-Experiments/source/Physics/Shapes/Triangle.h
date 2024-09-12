@@ -16,5 +16,8 @@ namespace Physics
 	public:
 		Triangle(const vec2& a, const vec2& b, const vec2& c);
 
+	public:
+		vec2 GetCenter() const;
+
 	};
 }

@@ -73,6 +73,15 @@
     <Filter Include="Project\Source Files\Physics\Shapes">
       <UniqueIdentifier>{b6f6e9a3-281d-47e3-9cf4-ea8fae092db2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Header Files\Debugging">
+      <UniqueIdentifier>{9ee41a5e-f6d0-4d24-a670-d69109e1e57d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\Debugging">
+      <UniqueIdentifier>{0f1bbf42-605f-4c3f-aaf9-cd9b282a015d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\Structures">
+      <UniqueIdentifier>{be2a9949-5f7b-4703-b70b-b86df1343a44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,9 +126,6 @@
     <ClCompile Include="source\AiApplication.cpp">
       <Filter>Project\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Debugging\ImGuiAdapter.cpp">
-      <Filter>Project\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Physics\Collision.cpp">
       <Filter>Project\Source Files\Physics</Filter>
     </ClCompile>
@@ -134,6 +140,15 @@
     </ClCompile>
     <ClCompile Include="source\Physics\Shapes\Circle.cpp">
       <Filter>Project\Source Files\Physics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Debugging\ImGuiAdapter.cpp">
+      <Filter>Project\Source Files\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Debugging\IDebugHandler.cpp">
+      <Filter>Project\Source Files\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Debugging\Debugger.cpp">
+      <Filter>Project\Source Files\Debugging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +200,6 @@
     <ClInclude Include="source\AiApplication.h">
       <Filter>Project\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Debugging\ImGuiAdapter.h">
-      <Filter>Project\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Physics\Collision.h">
       <Filter>Project\Header Files\Physics</Filter>
     </ClInclude>
@@ -202,6 +214,21 @@
     </ClInclude>
     <ClInclude Include="source\Physics\Shapes\Circle.h">
       <Filter>Project\Header Files\Physics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Debugging\ImGuiAdapter.h">
+      <Filter>Project\Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Debugging\IDebugHandler.h">
+      <Filter>Project\Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Debugging\Debugger.h">
+      <Filter>Project\Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Structures\MultiValueStruct.h">
+      <Filter>Project\Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Structures\PriorityHeap.h">
+      <Filter>Project\Header Files\Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

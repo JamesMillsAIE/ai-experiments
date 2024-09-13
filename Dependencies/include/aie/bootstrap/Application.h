@@ -43,6 +43,9 @@ namespace aie
 		void Quit() const;
 
 	protected:
+		static Application* m_instance;
+
+	protected:
 		Window* m_window;
 		Random* m_random;
 
@@ -53,9 +56,6 @@ namespace aie
 		virtual void Render() = 0;
 
 		virtual void Shutdown() = 0;
-
-	private:
-		static Application* m_instance;
 
 	};
 }

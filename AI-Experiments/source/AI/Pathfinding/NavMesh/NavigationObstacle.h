@@ -2,12 +2,14 @@
 
 #include <vector>
 
+#include <aie/bootstrap/Color.h>
+
 #include <glm/vec2.hpp>
 
 #include "Global.h"
 
-#include "Physics/Shapes/Circle.h"
-#include "Physics/Shapes/Circle.h"
+#include "Debugging/Debugger.h"
+
 #include "Physics/Shapes/Line.h"
 
 using std::vector;
@@ -15,6 +17,9 @@ using std::vector;
 using glm::vec2;
 
 using Physics::Line;
+using Debugging::EVerbosity;
+
+using aie::Color;
 
 namespace p2t
 {
@@ -36,6 +41,8 @@ namespace Pathfinding
 
 	class NavigationObstacle
 	{
+		friend class NavigationMesh;
+
 	public:
 		explicit NavigationObstacle(float padding);
 		~NavigationObstacle();
@@ -47,7 +54,17 @@ namespace Pathfinding
 		vector<vec2> GetVertices();
 		size_t GetNumVertices() const;
 		vec2* GetVertex(size_t index);
+
+		vector<vec2> GetHullVertices();
+		size_t GetNumHullVertices() const;
+		vec2* GetHullVertex(size_t index);
+
+		vector<vec2> GetPaddedVertices();
+		size_t GetNumPaddedVertices() const;
+		vec2* GetPaddedVertex(size_t index);
+
 		float GetPadding() const;
+		bool IsConvexHull() const;
 
 		void Build(EObstacleBuildFlags flags);
 
@@ -55,11 +72,17 @@ namespace Pathfinding
 
 	private:
 		float m_padding;
+		bool m_hasHull;
 
 		vector<vec2> m_vertices;
+		vector<vec2> m_hullVertices;
+		vector<vec2> m_paddedVertices;
 
 	private:
 		vector<Line> GetEdges() const;
+
+		void RenderDebuggingTools(Renderer* renderer, EVerbosity verbosity) const;
+		void RenderVertexGroup(Renderer* renderer, vector<vec2> group, Color color) const;
 
 	};
 }

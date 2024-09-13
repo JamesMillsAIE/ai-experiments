@@ -27,5 +27,7 @@ namespace Pathfinding
 		static vec2 NextToTop(stack<vec2>& s);
 		static void Swap(vec2& p1, vec2& p2);
 
+		static vec2 NormalFor(const vec2& target, const vec2& left, const vec2& right);
+
 	};
 }

@@ -47,7 +47,7 @@ void AiApplication::Init()
 
 	navigationMesh = new NavigationMesh(m_window->GetWidth(), m_window->GetHeight());
 
-	NavigationObstacle* obstacle = new NavigationObstacle(10.f);
+	NavigationObstacle* obstacle = new NavigationObstacle(20.f);
 
 	obstacle->AddVertex({ 200, 200 });
 	obstacle->AddVertex({ 200, 400 });
@@ -55,24 +55,11 @@ void AiApplication::Init()
 	obstacle->AddVertex({ 400, 800 });
 	obstacle->AddVertex({ 800, 400 });
 
-	NavigationObstacle* obstacleBuilt = new NavigationObstacle(10.f);
-
-	obstacleBuilt->AddVertex({ 200, 200 });
-	obstacleBuilt->AddVertex({ 200, 400 });
-	obstacleBuilt->AddVertex({ 400, 400 });
-	obstacleBuilt->AddVertex({ 400, 800 });
-	obstacleBuilt->AddVertex({ 800, 400 });
-
-	obstacleBuilt->Build(EObstacleBuildFlags::GenerateConvexHull | EObstacleBuildFlags::AddPaddingToHull);
+	obstacle->Build(EObstacleBuildFlags::GenerateConvexHull | EObstacleBuildFlags::AddPaddingToHull);
 
 	if(!navigationMesh->AddObstacle(obstacle))
 	{
 		delete obstacle;
-	}
-
-	if(!navigationMesh->AddObstacle(obstacleBuilt))
-	{
-		delete obstacleBuilt;
 	}
 
 	navigationMesh->Build();
@@ -96,8 +83,6 @@ void AiApplication::Render()
 	}
 
 	m_imGui->ImGuiRender();
-
-	
 }
 
 void AiApplication::Shutdown()

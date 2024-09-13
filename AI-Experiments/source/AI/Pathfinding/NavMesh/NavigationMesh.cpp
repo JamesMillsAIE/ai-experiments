@@ -59,7 +59,7 @@ namespace Pathfinding
 		m_obstacles.emplace_back(obstacle);
 
 		m_polygons.emplace_back();
-		for(auto& v : obstacle->GetVertices())
+		for(auto& v : obstacle->GetPaddedVertices())
 		{
 			m_polygons.back().emplace_back(new Point(v.x, v.y));
 		}
@@ -172,26 +172,7 @@ namespace Pathfinding
 			// draw obstacles
 			for (const auto& o : m_obstacles)
 			{
-				for (size_t i = 0; i < o->GetNumVertices() - 1; ++i)
-				{
-					vec2* a = o->GetVertex(i);
-					vec2* b = o->GetVertex(i + 1);
-
-					renderer->DrawLine(
-						{ a->x, a->y },
-						{ b->x, b->y }, 
-						3.f, { 255, 0, 0, 255 }
-					);
-				}
-
-				vec2* a = o->GetVertex(0);
-				vec2* b = o->GetVertex(o->GetNumVertices() - 1);
-
-				renderer->DrawLine(
-					{ a->x, a->y },
-					{ b->x, b->y },
-					3.f, { 255, 0, 0, 255 }
-				);
+				o->RenderDebuggingTools(renderer, verbosity);
 			}
 		}
 	}

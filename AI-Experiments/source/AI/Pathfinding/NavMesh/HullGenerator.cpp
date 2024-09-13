@@ -20,7 +20,7 @@ namespace Pathfinding
 		{
 			float y = points[i].y;
 
-			if(y < yMin || (all(equal(scalar(yMin), scalar(y))) && points[i].x < points[min].x))
+			if(y < yMin || (fabsf(yMin - y) < FLT_EPSILON && points[i].x < points[min].x))
 			{
 				yMin = points[i].y;
 				min = i;
@@ -81,17 +81,18 @@ namespace Pathfinding
 		vec2 normB = normalize(hull[1] - hull.front());
 
 		vec2 normal = normalize(lerp(normA, normB, .5f));
-		newHull.emplace_back(hull.front() + normal * padding);
+		newHull.emplace_back(hull.front() - normal * padding);
 
 		for(size_t i = 1; i < hull.size() - 1; ++i)
 		{
-			normA = normalize(hull[i - 1] - hull[i]);
-			normB = normalize(hull[i + 1] - hull[i]);
+			normal = NormalFor(hull[i], hull[i - 1], hull[i + 1]);
 
-			normal = normalize(lerp(normA, normB, .5f));
-
-			newHull.emplace_back(hull[i] + normal * padding);
+			newHull.emplace_back(hull[i] - normal * padding);
 		}
+
+		normal = NormalFor(hull.back(), hull.front(), hull[hull.size() - 2]);
+
+		newHull.emplace_back(hull.back() - normal * padding);
 
 		hull.clear();
 		hull = newHull;
@@ -141,5 +142,13 @@ namespace Pathfinding
 		vec2 temp = p1;
 		p1 = p2;
 		p2 = temp;
+	}
+
+	vec2 HullGenerator::NormalFor(const vec2& target, const vec2& left, const vec2& right)
+	{
+		vec2 normA = normalize(left - target);
+		vec2 normB = normalize(right - target);
+
+		return normalize(lerp(normA, normB, .5f));
 	}
 }

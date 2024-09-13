@@ -193,13 +193,14 @@ namespace Pathfinding
 
 	vector<Line> NavigationObstacle::GetEdges() const
 	{
+		vector<vec2> verts = m_hasHull ? m_hullVertices : m_paddedVertices;
 		vector<Line> edges;
 
-		edges.emplace_back(m_vertices[0], m_vertices[m_vertices.size() - 1]);
+		edges.emplace_back(verts[0], verts[verts.size() - 1]);
 
-		for (size_t i = 0; i < m_vertices.size() - 1; ++i)
+		for (size_t i = 0; i < verts.size() - 1; ++i)
 		{
-			edges.emplace_back(m_vertices[i], m_vertices[i + 1]);
+			edges.emplace_back(verts[i], verts[i + 1]);
 		}
 
 		return edges;

@@ -82,6 +82,24 @@
     <Filter Include="Project\Header Files\Structures">
       <UniqueIdentifier>{be2a9949-5f7b-4703-b70b-b86df1343a44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Header Files\AI">
+      <UniqueIdentifier>{869deff3-aecc-4e4a-8055-66549091a94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\AI">
+      <UniqueIdentifier>{62ee0c11-6acd-4cac-b94e-25cd9d80ada5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\AI\Pathfinding">
+      <UniqueIdentifier>{78d80f49-4f97-404f-9acc-6e14313007d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\AI\Pathfinding">
+      <UniqueIdentifier>{99daec88-9c21-4f4c-8990-1958db9ecd51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\AI\Pathfinding\NavMesh">
+      <UniqueIdentifier>{5fd1c31e-60bd-4206-ab91-b4b83794aff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\AI\Pathfinding\NavMesh">
+      <UniqueIdentifier>{a7445d22-082f-42e4-a72e-572128e5bf57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -149,6 +167,27 @@
     </ClCompile>
     <ClCompile Include="source\Debugging\Debugger.cpp">
       <Filter>Project\Source Files\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\Node.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\Edge.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\INavigatable.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationMesh.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationMeshNode.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationObstacle.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\HullGenerator.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding\NavMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +268,27 @@
     </ClInclude>
     <ClInclude Include="source\Structures\PriorityHeap.h">
       <Filter>Project\Header Files\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\Node.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\Edge.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\INavigatable.h">
+      <Filter>Project\Header Files\AI\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationMesh.h">
+      <Filter>Project\Header Files\AI\Pathfinding\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationMeshNode.h">
+      <Filter>Project\Header Files\AI\Pathfinding\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationObstacle.h">
+      <Filter>Project\Header Files\AI\Pathfinding\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\HullGenerator.h">
+      <Filter>Project\Header Files\AI\Pathfinding\NavMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

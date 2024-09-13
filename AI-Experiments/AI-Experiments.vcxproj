@@ -193,6 +193,13 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="poly2tri\sweep\sweep.cc" />
     <ClCompile Include="poly2tri\sweep\sweep_context.cc" />
     <ClCompile Include="source\AiApplication.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\Edge.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\INavigatable.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\HullGenerator.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationMesh.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationMeshNode.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\NavMesh\NavigationObstacle.cpp" />
+    <ClCompile Include="source\AI\Pathfinding\Node.cpp" />
     <ClCompile Include="source\Debugging\Debugger.cpp" />
     <ClCompile Include="source\Debugging\IDebugHandler.cpp" />
     <ClCompile Include="source\Debugging\ImGuiAdapter.cpp" />
@@ -219,6 +226,13 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="poly2tri\sweep\sweep.h" />
     <ClInclude Include="poly2tri\sweep\sweep_context.h" />
     <ClInclude Include="source\AiApplication.h" />
+    <ClInclude Include="source\AI\Pathfinding\Edge.h" />
+    <ClInclude Include="source\AI\Pathfinding\INavigatable.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\HullGenerator.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationMesh.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationMeshNode.h" />
+    <ClInclude Include="source\AI\Pathfinding\NavMesh\NavigationObstacle.h" />
+    <ClInclude Include="source\AI\Pathfinding\Node.h" />
     <ClInclude Include="source\Debugging\Debugger.h" />
     <ClInclude Include="source\Debugging\IDebugHandler.h" />
     <ClInclude Include="source\Debugging\ImGuiAdapter.h" />

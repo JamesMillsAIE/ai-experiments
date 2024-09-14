@@ -3,21 +3,11 @@
 #include <numbers>
 
 #include <aie/bootstrap/Renderer.h>
-#include <aie/bootstrap/Window.h>
-
-#include "AI/Pathfinding/NavMesh/NavigationMesh.h"
-#include "AI/Pathfinding/NavMesh/NavigationObstacle.h"
 
 #include "Debugging/Debugger.h"
 #include "Debugging/ImGuiAdapter.h"
 
 using Debugging::Debugger;
-
-using Pathfinding::NavigationMesh;
-using Pathfinding::NavigationObstacle;
-using Pathfinding::EObstacleBuildFlags;
-
-NavigationMesh* navigationMesh = nullptr;
 
 ImGuiAdapter* GetImGuiAdapter()
 {
@@ -44,25 +34,6 @@ void AiApplication::Init()
 	m_imGui->InitImGui();
 
 	Debugger::Create(m_window);
-
-	navigationMesh = new NavigationMesh(m_window->GetWidth(), m_window->GetHeight());
-
-	NavigationObstacle* obstacle = new NavigationObstacle(20.f);
-
-	obstacle->AddVertex({ 200, 200 });
-	obstacle->AddVertex({ 200, 400 });
-	obstacle->AddVertex({ 400, 400 });
-	obstacle->AddVertex({ 400, 800 });
-	obstacle->AddVertex({ 800, 400 });
-
-	obstacle->Build(EObstacleBuildFlags::GenerateConvexHull | EObstacleBuildFlags::AddPaddingToHull);
-
-	if(!navigationMesh->AddObstacle(obstacle))
-	{
-		delete obstacle;
-	}
-
-	navigationMesh->Build();
 }
 
 void AiApplication::Tick()

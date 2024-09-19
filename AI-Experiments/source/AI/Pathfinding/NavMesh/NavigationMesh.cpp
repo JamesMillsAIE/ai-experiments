@@ -17,8 +17,8 @@ using Debugging::Debugger;
 
 namespace Pathfinding
 {
-	NavigationMesh::NavigationMesh(const float width, const float height)
-		: m_extents{ width, height }
+	NavigationMesh::NavigationMesh(const float width, const float height, int maxPathSmoothing)
+		: m_extents{ width, height }, m_maxPathSmoothing{ maxPathSmoothing }
 	{
 		m_polygons.emplace_back();
 		m_polygons[0].emplace_back(new Point(0.f, 0.f));
@@ -46,9 +46,9 @@ namespace Pathfinding
 
 	bool NavigationMesh::AddObstacle(NavigationObstacle* obstacle)
 	{
-		for(const auto& ob : m_obstacles)
+		for (const auto& ob : m_obstacles)
 		{
-			if(ob->Intersects(obstacle))
+			if (ob->Intersects(obstacle))
 			{
 				return false;
 			}
@@ -57,7 +57,7 @@ namespace Pathfinding
 		m_obstacles.emplace_back(obstacle);
 
 		m_polygons.emplace_back();
-		for(const auto& v : obstacle->GetPaddedVertices())
+		for (const auto& v : obstacle->GetPaddedVertices())
 		{
 			m_polygons.back().emplace_back(new Point(v.x, v.y));
 		}
@@ -70,9 +70,9 @@ namespace Pathfinding
 	void NavigationMesh::AddRandomObstacles(int num, float width, float height, const Random* random)
 	{
 		// random obstacles
-		for (int i = 0; i < num; ++i) 
+		for (int i = 0; i < num; ++i)
 		{
-			do 
+			do
 			{
 				float x = (random->Range(0.f, 1.f) * .75f + .125f) * m_extents.x;
 				float y = (random->Range(0.f, 1.f) * .75f + .125f) * m_extents.y;
@@ -85,7 +85,7 @@ namespace Pathfinding
 
 				newObstacle->Build(EObstacleBuildFlags::AddPaddingToHull);
 
-				if(const bool safe = AddObstacle(newObstacle); !safe)
+				if (const bool safe = AddObstacle(newObstacle); !safe)
 				{
 					delete newObstacle;
 					break;
@@ -177,36 +177,103 @@ namespace Pathfinding
 		return { m_nodes.size(), dynamic_cast<Node*>(*m_nodes.data()) };
 	}
 
-	vector<Node*> NavigationMesh::SmoothPath(const vector<Node*>& path)
+	vector<vec2> NavigationMesh::SmoothPath(const vector<Node*>& path, vec2* start, vec2* end)
 	{
-		if(path.empty())
+		vector<vec2> smoothed;
+
+		if (path.empty())
 		{
-			return path;
-		}
+			if (start != nullptr)
+			{
+				smoothed.emplace_back(*start);
+			}
 
-		vector<Node*> smoothed;
+			if (end != nullptr)
+			{
+				smoothed.emplace_back(*end);
+			}
 
-		smoothed.emplace_back(path.front());
-
-		if(path.size() == 2)
-		{
-			smoothed.emplace_back(path.back());
 			return smoothed;
 		}
 
-		size_t index = 2;
+		vec2* portals = new vec2[(path.size() + 1) * 2];
+		int index = 0;
 
-		while(index < path.size())
+		if(start != nullptr)
 		{
-			if(!IsVisibleFrom(path.back()->position, path[index]->position))
-			{
-				smoothed.emplace_back(path[index]);
-			}
-
-			++index;
+			portals[index++] = *start;
+		}
+		else
+		{
+			portals[index++] = path.front()->position;
 		}
 
-		smoothed.emplace_back(path.back());
+		portals[index++] = path.front()->position;
+
+		NavigationMeshNode* prev = nullptr;
+		for (auto& n : path)
+		{
+			NavigationMeshNode* node = dynamic_cast<NavigationMeshNode*>(n);
+
+			if (prev)
+			{
+				vec2 adj[2];
+				prev->GetAdjacentVertices(node, adj);
+
+				const vec2 fromPrev =
+				{
+					node->position.x - prev->position.x,
+					node->position.y - prev->position.y
+				};
+
+				const vec2 toAdj0 =
+				{
+					adj[0].x - prev->position.x,
+					adj[0].y - prev->position.y
+				};
+
+				if (fromPrev.x * toAdj0.y - toAdj0.x * fromPrev.y > 0)
+				{
+					portals[index++] = adj[0];
+					portals[index++] = adj[1];
+				}
+				else
+				{
+					portals[index++] = adj[1];
+					portals[index++] = adj[0];
+				}
+			}
+
+			prev = node;
+		}
+
+		portals[index++] = path.back()->position;
+		if (end != nullptr)
+		{
+			portals[index++] = *end;
+		}
+		else
+		{
+			portals[index++] = path.back()->position;
+		}
+
+		vec2* out = new vec2[m_maxPathSmoothing];
+		const int count = StringPull(portals, index / 2, out, m_maxPathSmoothing);
+
+		smoothed.reserve(count);
+
+		for (int i = 0; i < count; ++i)
+		{
+			smoothed.emplace_back(out[i]);
+		}
+
+		delete[] portals;
+		delete[] out;
+
+		if (end != nullptr)
+		{
+			smoothed.emplace_back(*end);
+		}
 
 		return smoothed;
 	}
@@ -249,6 +316,69 @@ namespace Pathfinding
 		{
 			Debugger::Set("navmesh.obstacles.visible", showObstacles);
 		}
+	}
+
+	int NavigationMesh::StringPull(const vec2* portals, const int numPortals, vec2* pts, const int maxPoints)
+	{
+		int numPoints = 0;
+
+		vec2 portalApex = portals[0], portalLeft = portals[0], portalRight = portals[1];
+
+		pts[numPoints++] = portalApex;
+
+		auto triArea = [](vec2 a, vec2 b, vec2 c)
+			{
+				return Triangle(a, b, c).Area();
+			};
+
+		for (int i = 1; i < numPortals && numPoints < maxPoints; ++i)
+		{
+			const vec2 left = portals[i * 2];  // NOLINT(bugprone-implicit-widening-of-multiplication-result)
+			const vec2 right = portals[i * 2 + 1];  // NOLINT(bugprone-implicit-widening-of-multiplication-result)
+
+			if (triArea(portalApex, portalRight, right) <= 0.f)
+			{
+				if (portalApex == portalRight || triArea(portalApex, portalLeft, right) > 0.f)
+				{
+					portalRight = right;
+				}
+				else
+				{
+					pts[numPoints++] = portalLeft;
+
+					portalApex = portalLeft;
+
+					portalLeft = portalApex;
+					portalRight = portalApex;
+
+					continue;
+				}
+			}
+
+			if(triArea(portalApex, portalLeft, left) >= 0.f)
+			{
+				if(portalApex == portalLeft || triArea(portalApex, portalRight, left) < 0.f)
+				{
+					portalLeft = left;
+				}
+				else
+				{
+					pts[numPoints++] = portalRight;
+
+					portalApex = portalRight;
+
+					portalLeft = portalApex;
+					portalRight = portalApex;
+				}
+			}
+		}
+
+		if(numPoints < maxPoints)
+		{
+			pts[numPoints] = portals[numPortals - 1];
+		}
+
+		return numPoints;
 	}
 
 	bool NavigationMesh::IsVisibleFrom(const vec2 start, const vec2 end) const

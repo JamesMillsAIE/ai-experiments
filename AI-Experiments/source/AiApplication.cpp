@@ -29,7 +29,7 @@ NavigationMesh* navMesh;
 bool firstClick = false;
 vec2 firstPos;
 
-vector<Node*> path;
+vector<vec2> path;
 
 float Heuristic(Node* a, Node* b)
 {
@@ -63,7 +63,7 @@ void AiApplication::Init()
 
 	Debugger::Create(m_window);
 
-	navMesh = new NavigationMesh(m_window->GetWidth(), m_window->GetHeight());
+	navMesh = new NavigationMesh(m_window->GetWidth(), m_window->GetHeight(), 100);
 	navMesh->AddRandomObstacles(12, 60, 60, m_random);
 
 	navMesh->Build();
@@ -88,10 +88,13 @@ void AiApplication::Tick()
 			}
 			else
 			{
-				if(AStar::FindPath(firstPos, AieToGlm(input->GetMousePos()), navMesh, &Heuristic, path))
+				vector<Node*> p;
+				vec2 end = AieToGlm(input->GetMousePos());
+
+				if(AStar::FindPath(firstPos, end, navMesh, &Heuristic, p))
 				{
 					std::cout << "Found path!\n";
-					path = navMesh->SmoothPath(path);
+					path = navMesh->SmoothPath(p, &firstPos, &end);
 				}
 				else
 				{
@@ -119,8 +122,8 @@ void AiApplication::Render()
 		{
 			for(size_t i = 1; i < path.size(); ++i)
 			{
-				Vector2 start = GlmToAie(path[i]->position);
-				Vector2 end = GlmToAie(path[i - 1]->position);
+				Vector2 start = GlmToAie(path[i]);
+				Vector2 end = GlmToAie(path[i - 1]);
 
 				renderer->DrawLine(start, end, 2.f, { 255, 255, 0, 255 });
 			}

@@ -30,7 +30,7 @@ namespace Pathfinding
 	class NavigationMesh final : public INavigatable
 	{
 	public:
-		NavigationMesh(float width, float height);
+		NavigationMesh(float width, float height, int maxPathSmoothing);
 		~NavigationMesh() override;
 
 	public:
@@ -43,12 +43,15 @@ namespace Pathfinding
 		Node* RandomNode(Random* random) override;
 		vector<Node*> GetNodes() override;
 
-		vector<Node*> SmoothPath(const vector<Node*>& path) override;
+		vector<vec2> SmoothPath(const vector<Node*>& path, vec2* start = nullptr, vec2* end = nullptr) override;
 
 	protected:
 		string DebugCategory() override;
 		void RenderDebuggingTools(Renderer* renderer, EVerbosity verbosity) override;
 		void HandleImGui(EVerbosity verbosity) override;
+
+	private:
+		static int StringPull(const vec2* portals, int numPortals, vec2* pts, int maxPoints);
 
 	private:
 		vector<NavigationMeshNode*> m_nodes;
@@ -58,9 +61,11 @@ namespace Pathfinding
 		vector<vector<Point*>> m_polygons;
 
 		vec2 m_extents;
-
+		int m_maxPathSmoothing;
+			
 	private:
 		bool IsVisibleFrom(vec2 start, vec2 end) const;
+
 
 	};
 }

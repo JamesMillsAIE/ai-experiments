@@ -35,7 +35,7 @@ namespace Pathfinding
 		virtual Node* RandomNode(Random* random) = 0;
 		virtual vector<Node*> GetNodes() = 0;
 
-		virtual vector<Node*> SmoothPath(const vector<Node*>& path) = 0;
+		virtual vector<vec2> SmoothPath(const vector<Node*>& path, vec2* start = nullptr, vec2* end = nullptr) = 0;
 
 	};
 }

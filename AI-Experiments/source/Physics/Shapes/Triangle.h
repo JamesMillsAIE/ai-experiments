@@ -18,6 +18,7 @@ namespace Physics
 
 	public:
 		vec2 GetCenter() const;
+		float Area() const;
 
 	};
 }

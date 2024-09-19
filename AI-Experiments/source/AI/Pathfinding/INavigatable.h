@@ -33,6 +33,7 @@ namespace Pathfinding
 
 		virtual Node* ClosestNode(vec2 worldPos) = 0;
 		virtual Node* RandomNode(Random* random) = 0;
+		virtual vector<Node*> GetNodes() = 0;
 
 		virtual vector<Node*> SmoothPath(const vector<Node*>& path) = 0;
 

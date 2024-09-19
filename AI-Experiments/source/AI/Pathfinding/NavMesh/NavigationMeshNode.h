@@ -24,6 +24,7 @@ namespace Pathfinding
 		void AddVertices(Triangle& tri);
 
 		vec2* GetVertex(size_t index);
+		size_t GetAdjacentVertices(const NavigationMeshNode* other, vec2* adjacent) const;
 
 	private:
 		vector<vec2> m_vertices;

@@ -100,6 +100,12 @@
     <Filter Include="Project\Source Files\AI\Pathfinding\NavMesh">
       <UniqueIdentifier>{a7445d22-082f-42e4-a72e-572128e5bf57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Header Files\AI\Pathfinding\Algorithms">
+      <UniqueIdentifier>{350c34b8-0b9d-4fb3-a2d4-d7e74311cb17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Source Files\AI\Pathfinding\Algorithms">
+      <UniqueIdentifier>{522d8acb-691a-4ebf-80b1-24aa7544afec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -188,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="source\AI\Pathfinding\NavMesh\HullGenerator.cpp">
       <Filter>Project\Source Files\AI\Pathfinding\NavMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Pathfinding\Algorithms\AStar.cpp">
+      <Filter>Project\Source Files\AI\Pathfinding\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="source\AI\Pathfinding\NavMesh\HullGenerator.h">
       <Filter>Project\Header Files\AI\Pathfinding\NavMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Pathfinding\Algorithms\AStar.h">
+      <Filter>Project\Header Files\AI\Pathfinding\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

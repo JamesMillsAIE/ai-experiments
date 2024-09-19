@@ -1,5 +1,7 @@
 #include "NavigationMeshNode.h"
 
+#include <glm/ext/vector_relational.hpp>
+
 #include "Physics/Shapes/Triangle.h"
 
 namespace Pathfinding
@@ -26,5 +28,24 @@ namespace Pathfinding
 		}
 
 		return nullptr;
+	}
+
+	size_t NavigationMeshNode::GetAdjacentVertices(const NavigationMeshNode* other, vec2* adjacent) const
+	{
+		size_t count = 0;
+
+		for(auto& v : m_vertices)
+		{
+			for(auto& otherV : other->m_vertices)
+			{
+				if(all(equal(v, otherV)))
+				{
+					adjacent[count++] = v;
+					break;
+				}
+			}
+		}
+
+		return count;
 	}
 }

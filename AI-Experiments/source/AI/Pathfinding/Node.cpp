@@ -5,7 +5,7 @@
 namespace Pathfinding
 {
 	Node::Node(const vec2 position)
-		: position{ position }, flags{ -1 }, previous{ nullptr }
+		: position{ position }, flags{ -1 }
 	{
 	}
 

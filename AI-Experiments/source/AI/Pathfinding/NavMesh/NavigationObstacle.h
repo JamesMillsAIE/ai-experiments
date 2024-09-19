@@ -69,6 +69,7 @@ namespace Pathfinding
 		void Build(EObstacleBuildFlags flags);
 
 		bool Intersects(const NavigationObstacle* other) const;
+		bool Intersects(Line line) const;
 
 	private:
 		float m_padding;

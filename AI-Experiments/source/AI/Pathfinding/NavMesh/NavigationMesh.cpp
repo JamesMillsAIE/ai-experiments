@@ -20,13 +20,11 @@ namespace Pathfinding
 	NavigationMesh::NavigationMesh(const float width, const float height)
 		: m_extents{ width, height }
 	{
-		constexpr float padding = 1.f;
-
 		m_polygons.emplace_back();
-		m_polygons[0].emplace_back(new Point(-padding, padding));
-		m_polygons[0].emplace_back(new Point(-padding, height + padding));
-		m_polygons[0].emplace_back(new Point(width + padding, height + padding));
-		m_polygons[0].emplace_back(new Point(width + padding, -padding));
+		m_polygons[0].emplace_back(new Point(0.f, 0.f));
+		m_polygons[0].emplace_back(new Point(0.f, height));
+		m_polygons[0].emplace_back(new Point(width, height));
+		m_polygons[0].emplace_back(new Point(width, 0.f));
 
 		m_cdt = new CDT(m_polygons[0]);
 	}
@@ -59,7 +57,7 @@ namespace Pathfinding
 		m_obstacles.emplace_back(obstacle);
 
 		m_polygons.emplace_back();
-		for(auto& v : obstacle->GetPaddedVertices())
+		for(const auto& v : obstacle->GetPaddedVertices())
 		{
 			m_polygons.back().emplace_back(new Point(v.x, v.y));
 		}
@@ -67,6 +65,34 @@ namespace Pathfinding
 		m_cdt->AddHole(m_polygons.back());
 
 		return true;
+	}
+
+	void NavigationMesh::AddRandomObstacles(int num, float width, float height, const Random* random)
+	{
+		// random obstacles
+		for (int i = 0; i < num; ++i) 
+		{
+			do 
+			{
+				float x = (random->Range(0.f, 1.f) * .75f + .125f) * m_extents.x;
+				float y = (random->Range(0.f, 1.f) * .75f + .125f) * m_extents.y;
+
+				NavigationObstacle* newObstacle = new NavigationObstacle(10.f);
+				newObstacle->AddVertex({ x, y });
+				newObstacle->AddVertex({ x, y + height });
+				newObstacle->AddVertex({ x + width, y + height });
+				newObstacle->AddVertex({ x + width, y });
+
+				newObstacle->Build(EObstacleBuildFlags::AddPaddingToHull);
+
+				if(const bool safe = AddObstacle(newObstacle); !safe)
+				{
+					delete newObstacle;
+					break;
+				}
+
+			} while (true);
+		}
 	}
 
 	void NavigationMesh::Build()
@@ -91,7 +117,7 @@ namespace Pathfinding
 			m_nodes.emplace_back(node);
 		}
 
-		/*for (const auto& node : m_nodes)
+		for (const auto& node : m_nodes)
 		{
 			for (const auto& node2 : m_nodes)
 			{
@@ -107,7 +133,7 @@ namespace Pathfinding
 					node2->ConnectTo(node, distance);
 				}
 			}
-		}*/
+		}
 
 		for (auto& p : m_polygons)
 		{
@@ -146,9 +172,43 @@ namespace Pathfinding
 		return m_nodes[random->Range(0, static_cast<int>(m_nodes.size()))];
 	}
 
+	vector<Node*> NavigationMesh::GetNodes()
+	{
+		return { m_nodes.size(), dynamic_cast<Node*>(*m_nodes.data()) };
+	}
+
 	vector<Node*> NavigationMesh::SmoothPath(const vector<Node*>& path)
 	{
-		return { };
+		if(path.empty())
+		{
+			return path;
+		}
+
+		vector<Node*> smoothed;
+
+		smoothed.emplace_back(path.front());
+
+		if(path.size() == 2)
+		{
+			smoothed.emplace_back(path.back());
+			return smoothed;
+		}
+
+		size_t index = 2;
+
+		while(index < path.size())
+		{
+			if(!IsVisibleFrom(path.back()->position, path[index]->position))
+			{
+				smoothed.emplace_back(path[index]);
+			}
+
+			++index;
+		}
+
+		smoothed.emplace_back(path.back());
+
+		return smoothed;
 	}
 
 	string NavigationMesh::DebugCategory()
@@ -189,5 +249,20 @@ namespace Pathfinding
 		{
 			Debugger::Set("navmesh.obstacles.visible", showObstacles);
 		}
+	}
+
+	bool NavigationMesh::IsVisibleFrom(const vec2 start, const vec2 end) const
+	{
+		// Does this line collide with one of the sides of the obstacle
+		for (auto& obstacle : m_obstacles)
+		{
+			// if any of the line collision detections return true, there was a collision, the ray is not clear
+			if (obstacle->Intersects(Line(start, end)))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

@@ -18,8 +18,6 @@ namespace Pathfinding
 		vec2 position;
 		int flags;
 
-		Node* previous;
-
 	public:
 		explicit Node(vec2 position);
 		virtual ~Node();

@@ -6,6 +6,7 @@
 
 #include "HullGenerator.h"
 
+#include "Physics/Collision.h"
 #include "Physics/Shapes/Line.h"
 
 using Physics::Line;
@@ -150,6 +151,21 @@ namespace Pathfinding
 		}
 
 		return didIntersect;
+	}
+
+	bool NavigationObstacle::Intersects(const Line line) const
+	{
+		bool intersected = false;
+
+		for (size_t i = 1; i < m_paddedVertices.size(); ++i)
+		{
+			const vec2 a = m_paddedVertices[i];
+			const vec2 b = m_paddedVertices[i - 1];
+
+			intersected |= Physics::Collision::CheckCollisionLines(line, Line(a, b), nullptr);
+		}
+
+		return intersected;
 	}
 
 	void NavigationObstacle::RenderDebuggingTools(Renderer* renderer, const EVerbosity verbosity) const

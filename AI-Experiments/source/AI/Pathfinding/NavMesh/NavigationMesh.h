@@ -20,6 +20,8 @@ using p2t::Point;
 using Debugging::IDebugHandler;
 using Debugging::EVerbosity;
 
+class Random;
+
 namespace Pathfinding
 {
 	class NavigationMeshNode;
@@ -33,11 +35,14 @@ namespace Pathfinding
 
 	public:
 		bool AddObstacle(NavigationObstacle* obstacle);
+		void AddRandomObstacles(int num, float width, float height, const Random* random);
 
 		void Build();
 
 		Node* ClosestNode(vec2 worldPos) override;
 		Node* RandomNode(Random* random) override;
+		vector<Node*> GetNodes() override;
+
 		vector<Node*> SmoothPath(const vector<Node*>& path) override;
 
 	protected:
@@ -53,6 +58,9 @@ namespace Pathfinding
 		vector<vector<Point*>> m_polygons;
 
 		vec2 m_extents;
+
+	private:
+		bool IsVisibleFrom(vec2 start, vec2 end) const;
 
 	};
 }

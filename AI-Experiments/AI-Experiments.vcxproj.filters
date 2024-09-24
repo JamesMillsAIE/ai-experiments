@@ -112,6 +112,9 @@
     <Filter Include="Project\Header Files\Actors">
       <UniqueIdentifier>{a17099e1-ee9b-4b42-a0b8-b6af14131836}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Header Files\Utilities">
+      <UniqueIdentifier>{1eaea528-cfbf-4a32-9e01-526a65657e14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="source\Actors\ActorManager.cpp">
       <Filter>Project\Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AI\Agent.cpp">
+      <Filter>Project\Source Files\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +326,12 @@
     <ClInclude Include="source\Actors\ActorManager.h">
       <Filter>Project\Header Files\Actors</Filter>
     </ClInclude>
+    <ClInclude Include="source\Utilities\JsonAdls.h">
+      <Filter>Project\Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AI\Agent.h">
+      <Filter>Project\Header Files\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png">
@@ -339,14 +351,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\configuration\first_names.txt">
-      <Filter>Project\Resource Files\Configuration</Filter>
-    </Text>
-    <Text Include="resources\configuration\last_names.txt">
-      <Filter>Project\Resource Files\Configuration</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <Font Include="resources\font\consolas.ttf">
       <Filter>Project\Resource Files\Font</Filter>
     </Font>
@@ -354,6 +358,9 @@
   <ItemGroup>
     <None Include="resources\tiled\world_map.tmx">
       <Filter>Project\Resource Files\Tiled</Filter>
+    </None>
+    <None Include="resources\configuration\AgentConfig.json">
+      <Filter>Project\Resource Files\Configuration</Filter>
     </None>
   </ItemGroup>
 </Project>

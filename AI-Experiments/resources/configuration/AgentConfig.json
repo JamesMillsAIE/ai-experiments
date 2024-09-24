@@ -1,0 +1,65 @@
+{
+  "names": {
+    "first": [
+      "James",
+      "Jarrod",
+      "Lara",
+      "Claire",
+      "George",
+      "Josh",
+      "Toby",
+      "Jun",
+      "Brad",
+      "Sam",
+      "Quinn"
+    ],
+    "last": [
+      "Mills",
+      "Aubin",
+      "Bannerman",
+      "Domeny",
+      "Giokas",
+      "Hodgetts",
+      "Jing",
+      "June",
+      "Keddie",
+      "Newman",
+      "Taylor"
+    ]
+  },
+  "agents": [
+    {
+      "speed": 5.0,
+      "size": 10.0,
+      "type": "Barbarian",
+      "color": {
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      }
+    },
+    {
+      "speed": 5.0,
+      "size": 10.0,
+      "type": "Civilian",
+      "color": {
+        "r": 0,
+        "g": 255,
+        "b": 0,
+        "a": 255
+      }
+    },
+    {
+      "speed": 5.0,
+      "size": 10.0,
+      "type": "Guard",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 255,
+        "a": 255
+      }
+    }
+  ]
+}

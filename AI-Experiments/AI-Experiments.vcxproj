@@ -195,6 +195,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="source\Actors\Actor.cpp" />
     <ClCompile Include="source\Actors\ActorManager.cpp" />
     <ClCompile Include="source\AiApplication.cpp" />
+    <ClCompile Include="source\AI\Agent.cpp" />
     <ClCompile Include="source\AI\Pathfinding\Algorithms\AStar.cpp" />
     <ClCompile Include="source\AI\Pathfinding\Edge.cpp" />
     <ClCompile Include="source\AI\Pathfinding\INavigatable.cpp" />
@@ -231,6 +232,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Actors\Actor.h" />
     <ClInclude Include="source\Actors\ActorManager.h" />
     <ClInclude Include="source\AiApplication.h" />
+    <ClInclude Include="source\AI\Agent.h" />
     <ClInclude Include="source\AI\Pathfinding\Algorithms\AStar.h" />
     <ClInclude Include="source\AI\Pathfinding\Edge.h" />
     <ClInclude Include="source\AI\Pathfinding\INavigatable.h" />
@@ -249,6 +251,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="source\Physics\Shapes\Triangle.h" />
     <ClInclude Include="source\Structures\MultiValueStruct.h" />
     <ClInclude Include="source\Structures\PriorityHeap.h" />
+    <ClInclude Include="source\Utilities\JsonAdls.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png" />
@@ -258,10 +261,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <Image Include="resources\tiled\roguelikeSheet_transparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\configuration\first_names.txt" />
-    <Text Include="resources\configuration\last_names.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="resources\configuration\AgentConfig.json" />
     <None Include="resources\tiled\world_map.tmx" />
   </ItemGroup>
   <ItemGroup>

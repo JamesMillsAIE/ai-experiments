@@ -1,5 +1,7 @@
 #include "Collision.h"
 
+#include <corecrt_math.h>
+
 #include "Shapes/Circle.h"
 #include "Shapes/Line.h"
 #include "Shapes/Triangle.h"

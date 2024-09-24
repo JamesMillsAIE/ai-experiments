@@ -106,6 +106,12 @@
     <Filter Include="Project\Source Files\AI\Pathfinding\Algorithms">
       <UniqueIdentifier>{522d8acb-691a-4ebf-80b1-24aa7544afec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Source Files\Actors">
+      <UniqueIdentifier>{ae281324-e4cd-4692-b089-0dc01dc7bf6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\Actors">
+      <UniqueIdentifier>{a17099e1-ee9b-4b42-a0b8-b6af14131836}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -197,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="source\AI\Pathfinding\Algorithms\AStar.cpp">
       <Filter>Project\Source Files\AI\Pathfinding\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Actors\Actor.cpp">
+      <Filter>Project\Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Actors\ActorManager.cpp">
+      <Filter>Project\Source Files\Actors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="source\AI\Pathfinding\Algorithms\AStar.h">
       <Filter>Project\Header Files\AI\Pathfinding\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Actors\Actor.h">
+      <Filter>Project\Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Actors\ActorManager.h">
+      <Filter>Project\Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,8 +2,6 @@
 
 #include <aie/bootstrap/Renderer.h>
 
-#include "AI/Agent.h"
-
 #include "Debugging/Debugger.h"
 #include "Debugging/ImGuiAdapter.h"
 

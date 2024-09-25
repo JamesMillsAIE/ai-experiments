@@ -6,15 +6,18 @@ using aie::Application;
 
 class ImGuiAdapter;
 class ActorManager;
+class LevelManager;
 
 extern ImGuiAdapter* GetImGuiAdapter();
 extern ActorManager* GetActorManager();
+extern LevelManager* GetLevelManager();
 
 class AiApplication final : public Application
 {
 public:
 	friend ImGuiAdapter* ::GetImGuiAdapter();
 	friend ActorManager* ::GetActorManager();
+	friend LevelManager* ::GetLevelManager();
 
 public:
 	AiApplication();
@@ -32,6 +35,7 @@ protected:
 private:
 	ImGuiAdapter* m_imGui;
 	ActorManager* m_actorManager;
+	LevelManager* m_levelManager;
 
 };
 

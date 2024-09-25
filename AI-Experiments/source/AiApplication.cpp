@@ -9,6 +9,8 @@
 #include "Debugging/Debugger.h"
 #include "Debugging/ImGuiAdapter.h"
 
+#include "Levels/LevelManager.h"
+
 using Debugging::Debugger;
 
 ImGuiAdapter* GetImGuiAdapter()
@@ -21,9 +23,14 @@ ActorManager* GetActorManager()
 	return AiApplication::GetInstance()->m_actorManager;
 }
 
+LevelManager* GetLevelManager()
+{
+	return AiApplication::GetInstance()->m_levelManager;
+}
+
 AiApplication::AiApplication()
 	: Application{ 912, 840, "AI Playground", { 255, 255, 255, 255 } }, m_imGui{ new ImGuiAdapter },
-	m_actorManager{ new ActorManager }
+	m_actorManager{ new ActorManager }, m_levelManager{ new LevelManager }
 {
 }
 
@@ -48,6 +55,7 @@ void AiApplication::Tick()
 {
 	m_imGui->ImGuiNewFrame();
 
+	m_levelManager->Tick();
 	m_actorManager->Tick();
 
 	if (Debugger* debugger = Debugger::m_instance)
@@ -58,6 +66,7 @@ void AiApplication::Tick()
 
 void AiApplication::Render()
 {
+	m_levelManager->Render(Renderer::Get());
 	m_actorManager->Render(Renderer::Get());
 
 	if (Debugger* debugger = Debugger::m_instance)
@@ -72,6 +81,7 @@ void AiApplication::Shutdown()
 {
 	Debugger::Destroy();
 
+	delete m_levelManager;
 	delete m_actorManager;
 
 	m_imGui->ShutdownImGui();

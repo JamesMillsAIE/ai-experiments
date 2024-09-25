@@ -115,6 +115,12 @@
     <Filter Include="Project\Header Files\Utilities">
       <UniqueIdentifier>{1eaea528-cfbf-4a32-9e01-526a65657e14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Source Files\Levels">
+      <UniqueIdentifier>{cc09e23b-0c43-448f-906b-ce71205b1e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Header Files\Levels">
+      <UniqueIdentifier>{1ad31cdf-9b42-41fe-a260-ba685626defe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -215,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="source\AI\Agent.cpp">
       <Filter>Project\Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Levels\Level.cpp">
+      <Filter>Project\Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Levels\LevelManager.cpp">
+      <Filter>Project\Source Files\Levels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="source\AI\Agent.h">
       <Filter>Project\Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Levels\Level.h">
+      <Filter>Project\Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Levels\LevelManager.h">
+      <Filter>Project\Header Files\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

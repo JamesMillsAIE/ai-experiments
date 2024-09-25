@@ -50,4 +50,7 @@ public:
 	Agent() = delete;
 	Agent(AgentAttributes attributes, string name);
 
+protected:
+	void Render(Renderer* renderer) override;
+
 };

@@ -194,6 +194,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClCompile Include="poly2tri\sweep\sweep_context.cc" />
     <ClCompile Include="source\Actors\Actor.cpp" />
     <ClCompile Include="source\Actors\ActorManager.cpp" />
+    <ClCompile Include="source\Actors\NameGenerator.cpp" />
     <ClCompile Include="source\AiApplication.cpp" />
     <ClCompile Include="source\AI\Agent.cpp" />
     <ClCompile Include="source\AI\Pathfinding\Algorithms\AStar.cpp" />
@@ -234,6 +235,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
     <ClInclude Include="poly2tri\sweep\sweep_context.h" />
     <ClInclude Include="source\Actors\Actor.h" />
     <ClInclude Include="source\Actors\ActorManager.h" />
+    <ClInclude Include="source\Actors\NameGenerator.h" />
     <ClInclude Include="source\AiApplication.h" />
     <ClInclude Include="source\AI\Agent.h" />
     <ClInclude Include="source\AI\Pathfinding\Algorithms\AStar.h" />
@@ -268,6 +270,7 @@ xcopy /q /Y /s "$(ProjectDir)resources" "$(OutDir)resources\"</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\configuration\AgentConfig.json" />
+    <None Include="resources\configuration\Names.json" />
     <None Include="resources\tiled\world_map.tmx" />
   </ItemGroup>
   <ItemGroup>

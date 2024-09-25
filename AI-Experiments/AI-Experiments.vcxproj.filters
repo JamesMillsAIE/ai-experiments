@@ -231,6 +231,9 @@
     <ClCompile Include="source\Levels\MainLevel.cpp">
       <Filter>Project\Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="source\Actors\NameGenerator.cpp">
+      <Filter>Project\Source Files\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui_impl_opengl3.h">
@@ -356,6 +359,9 @@
     <ClInclude Include="source\Levels\MainLevel.h">
       <Filter>Project\Header Files\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="source\Actors\NameGenerator.h">
+      <Filter>Project\Header Files\Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\characters.png">
@@ -384,6 +390,9 @@
       <Filter>Project\Resource Files\Tiled</Filter>
     </None>
     <None Include="resources\configuration\AgentConfig.json">
+      <Filter>Project\Resource Files\Configuration</Filter>
+    </None>
+    <None Include="resources\configuration\Names.json">
       <Filter>Project\Resource Files\Configuration</Filter>
     </None>
   </ItemGroup>

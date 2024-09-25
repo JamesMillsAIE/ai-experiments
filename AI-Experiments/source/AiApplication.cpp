@@ -1,24 +1,13 @@
 #include "AiApplication.h"
 
-#include <fstream>
-
-#include <aie/bootstrap/Random.h>
 #include <aie/bootstrap/Renderer.h>
-
-#include <glm/geometric.hpp>
 
 #include "AI/Agent.h"
 
 #include "Debugging/Debugger.h"
 #include "Debugging/ImGuiAdapter.h"
 
-#include "Utilities/JsonAdls.h"
-
 using Debugging::Debugger;
-
-using std::fstream;
-
-vector<Agent*> agents;
 
 ImGuiAdapter* GetImGuiAdapter()
 {

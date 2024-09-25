@@ -228,6 +228,9 @@
     <ClCompile Include="source\Levels\LevelManager.cpp">
       <Filter>Project\Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="source\Levels\MainLevel.cpp">
+      <Filter>Project\Source Files\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui_impl_opengl3.h">
@@ -348,6 +351,9 @@
       <Filter>Project\Header Files\Levels</Filter>
     </ClInclude>
     <ClInclude Include="source\Levels\LevelManager.h">
+      <Filter>Project\Header Files\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Levels\MainLevel.h">
       <Filter>Project\Header Files\Levels</Filter>
     </ClInclude>
   </ItemGroup>

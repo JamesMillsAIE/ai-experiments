@@ -22,7 +22,7 @@ void LevelManager::Open(const string& name)
 	}
 
 	Level* level = m_levels[name];
-	if(std::ranges::find(m_activeLevels, level) == m_activeLevels.end())
+	if(std::ranges::find(m_activeLevels, level) != m_activeLevels.end())
 	{
 		return;
 	}
@@ -32,7 +32,7 @@ void LevelManager::Open(const string& name)
 
 void LevelManager::Close(Level* level)
 {
-	if (std::ranges::find(m_activeLevels, level) != m_activeLevels.end())
+	if (std::ranges::find(m_activeLevels, level) == m_activeLevels.end())
 	{
 		return;
 	}

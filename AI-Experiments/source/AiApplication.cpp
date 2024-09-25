@@ -2,6 +2,8 @@
 
 #include <aie/bootstrap/Renderer.h>
 
+#include "Global.h"
+
 #include "Actors/ActorManager.h"
 
 #include "AI/Agent.h"
@@ -10,6 +12,7 @@
 #include "Debugging/ImGuiAdapter.h"
 
 #include "Levels/LevelManager.h"
+#include "Levels/MainLevel.h"
 
 using Debugging::Debugger;
 
@@ -47,6 +50,9 @@ AiApplication* AiApplication::GetInstance()
 void AiApplication::Init()
 {
 	m_imGui->InitImGui();
+
+	m_levelManager->AddLevel(new MainLevel);
+	m_levelManager->Open(MAIN_LEVEL);
 
 	Debugger::Create(m_window);
 }

@@ -24,12 +24,12 @@ public:
 	string Name();
 
 protected:
-	virtual void BeginPlay();
+	virtual void BeginPlay() = 0;
 
 	virtual void Tick();
 	virtual void Render(Renderer* renderer);
 
-	virtual void EndPlay();
+	virtual void EndPlay() = 0;
 
 private:
 	string m_name;
